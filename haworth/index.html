@@ -153,7 +153,7 @@ p { margin: 0; }
 .svc-cta-inner h3 { font: 700 1.375rem/1.25 var(--serif); color: var(--white); }
 .svc-cta-inner p { color: #EAF1F8; max-width: 26ch; }
 .frame.about-photo { position: sticky; top: calc(var(--nav-h) + 24px); }
-@media (max-width: 900px) { .frame.about-photo { position: relative ; top: auto; } }
+@media (max-width: 900px) { .frame.about-photo { position: relative; top: auto; } }
 @media (max-width: 1080px) { .svc-cta { grid-column: 1 / -1; } .svc-cta-inner { padding-block: 36px; } }
 
 /* two-column feature rows */
@@ -273,6 +273,20 @@ footer a { color: var(--navy-deep); font-weight: 700; }
   .carriers { overflow-x: auto; }
   .carriers img { width: 760px; max-width: none; }
   .form .actions .btn { width: 100%; }
+}
+
+/* ---------- mobile sticky action bar ---------- */
+.dock { display: none; }
+@media (max-width: 760px) {
+  .dock { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    padding: 10px max(14px, env(safe-area-inset-left, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-right, 0px));
+    background: rgba(6, 28, 52, .94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid rgba(255, 255, 255, .18);
+    transform: translateY(110%); transition: transform .5s cubic-bezier(.2, .7, .2, 1); }
+  .dock.show { transform: none; }
+  .dock a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 999px; font: 700 1rem/1 var(--sans); text-decoration: none; }
+  .dock .d-call { background: var(--white); color: var(--navy); }
+  .dock .d-book { background: var(--slate); color: #06213D; }
+  body { padding-bottom: 76px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 </style>
@@ -489,7 +503,7 @@ footer a { color: var(--navy-deep); font-weight: 700; }
         <div class="contact">
           <div><h3>Phone</h3><a class="tel" href="tel:+12013841717">(201) 384-1717</a></div>
           <div><h3>Insurance questions</h3><a class="tel" href="tel:+15515002031" style="font-size:1.4rem">(551) 500-2031</a></div>
-          <div><h3>Location</h3><p>141 Terrace St<br>Haworth, NJ 07641</p></div>
+          <div><h3>Location</h3><p>141 Terrace St<br>Haworth, NJ 07641</p><p><a class="tel" style="font-size:1.05rem" href="https://www.google.com/maps/search/?api=1&amp;query=Haworth+Dental+141+Terrace+St+Haworth+NJ+07641" target="_blank" rel="noopener">Get directions</a></p></div>
         </div>
       </div>
       <div class="panel">
@@ -542,6 +556,11 @@ footer a { color: var(--navy-deep); font-weight: 700; }
   </div>
 </footer>
 
+<nav class="dock" id="dock" aria-label="Quick actions">
+  <a class="d-call" href="tel:+12013841717">Call now</a>
+  <a class="d-book" href="#book">Book a visit</a>
+</nav>
+
 <script>
 (() => {
   const $ = (s, r = document) => r.querySelector(s);
@@ -563,6 +582,15 @@ footer a { color: var(--navy-deep); font-weight: 700; }
     form.hidden = true; done.hidden = false;
   });
   $('#again').addEventListener('click', () => { done.hidden = true; form.hidden = false; $('#name').focus(); });
+})();
+
+(function () {
+  var d = document.getElementById('dock'), hero = document.querySelector('.hero'), book = document.getElementById('book');
+  if (!d || !hero || !('IntersectionObserver' in window)) { if (d) d.classList.add('show'); return; }
+  var heroGone = false, bookSeen = false;
+  function upd() { d.classList.toggle('show', heroGone && !bookSeen); }
+  new IntersectionObserver(function (e) { heroGone = !e[0].isIntersecting; upd(); }, { threshold: 0.35 }).observe(hero);
+  if (book) new IntersectionObserver(function (e) { bookSeen = e[0].isIntersecting; upd(); }, { threshold: 0.15 }).observe(book);
 })();
 </script>
 </body>
