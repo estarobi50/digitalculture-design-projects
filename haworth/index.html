@@ -107,6 +107,20 @@ p { margin: 0; }
 .hero .hero-hello::before { content: ""; width: 38px; height: 1px; background: currentColor; opacity: .7; }
 @media (max-width: 760px) { .hero .hero-hello { font-size: .75rem; letter-spacing: .18em; } }
 @media (prefers-reduced-motion: reduce) { .hero .hero-hello { animation: none; opacity: 1; transform: none; } }
+/* ---------- hero depth: layered parallax ---------- */
+.hero { --mx: 0; --my: 0; --sy: 0; }
+.hero-bg .bgblur { translate: calc(var(--mx) * -10px) calc(var(--my) * -7px + var(--sy) * .08px); }
+.hero-bg .fg { right: -44px; width: calc(66% + 44px);
+  translate: calc(var(--mx) * -30px) calc(var(--my) * -18px + var(--sy) * .2px); }
+.hero-copy { translate: calc(var(--mx) * 9px) calc(var(--my) * 6px - var(--sy) * .07px); }
+  translate: calc(var(--mx) * 46px) calc(var(--my) * 28px + var(--sy) * -.12px); }
+  filter: blur(2px); opacity: .0; animation: float 14s ease-in-out infinite, fadein 2.4s 1.2s forwards; }
+.hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22%; z-index: 0; pointer-events: none;
+  background: linear-gradient(0deg, rgba(3, 14, 28, .55), transparent); }
+@media (max-width: 760px) {
+  .hero-bg .fg { right: auto; left: -12px; width: calc(100% + 24px); translate: calc(var(--mx) * -9px) calc(var(--my) * -6px + var(--sy) * .1px); }
+}
+@media (prefers-reduced-motion: reduce) { .hero-bg .fg, .hero-bg .bgblur, .hero-copy { translate: none; } }
 /* letterbox bars that open at the start, like a title card */
 .hero .bar { position: absolute; left: 0; right: 0; height: 12vh; background: #040F1E; z-index: 3; pointer-events: none; animation: bars 1.5s .25s cubic-bezier(.7, 0, .2, 1) forwards; }
 .hero .bar.top { top: 0; transform-origin: top; }
@@ -622,6 +636,26 @@ footer a { color: var(--navy-deep); font-weight: 700; }
     if (document.hidden) return;
     slides[i].classList.remove('on'); i = (i + 1) % slides.length; slides[i].classList.add('on');
   }, 7000);
+})();
+
+(function () {
+  var hero = document.querySelector('.hero');
+  if (!hero || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var tx = 0, ty = 0, cx = 0, cy = 0, sy = 0, csy = 0, live = false, t0 = performance.now(), touchOnly = !window.matchMedia('(hover: hover)').matches;
+  function clamp(v) { return Math.max(-1, Math.min(1, v)); }
+  if (!touchOnly) window.addEventListener('pointermove', function (e) { tx = clamp((e.clientX / innerWidth - .5) * 2); ty = clamp((e.clientY / innerHeight - .5) * 2); }, { passive: true });
+  window.addEventListener('deviceorientation', function (e) { if (e.gamma == null) return; touchOnly = false; tx = clamp(e.gamma / 25); ty = clamp(((e.beta || 45) - 45) / 25); }, { passive: true });
+  window.addEventListener('scroll', function () { sy = Math.min(scrollY, innerHeight * 1.2); }, { passive: true });
+  var vis = true, running = false; new IntersectionObserver(function (e) { vis = e[0].isIntersecting; if (vis && !running) tick(); }).observe(hero);
+  function tick() {
+    if (!vis) { running = false; return; }
+    running = true;
+    if (touchOnly) { var t = (performance.now() - t0) / 1000; tx = Math.sin(t / 3.2) * .7; ty = Math.cos(t / 4.1) * .5; }
+    cx += (tx - cx) * .06; cy += (ty - cy) * .06; csy += (sy - csy) * .12;
+    hero.style.setProperty('--mx', cx.toFixed(3)); hero.style.setProperty('--my', cy.toFixed(3)); hero.style.setProperty('--sy', csy.toFixed(1));
+    requestAnimationFrame(tick);
+  }
+  tick();
 })();
 </script>
 </body>
