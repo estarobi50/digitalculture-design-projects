@@ -69,8 +69,16 @@ p { margin: 0; }
 .hero { position: relative; isolation: isolate; overflow: hidden; background: #061C34; color: var(--white);
   min-height: clamp(560px, calc(100svh - var(--nav-h)), 860px); display: flex; align-items: flex-end; }
 .hero-bg { position: absolute; inset: 0; z-index: -4; overflow: hidden; }
-.hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 72% 38%; transform-origin: 78% 40%;
-  filter: saturate(.92) contrast(1.06) brightness(.9); animation: push 26s ease-out forwards; }
+.hero-bg .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.8s ease-in-out; }
+.hero-bg .slide.on { opacity: 1; z-index: 1; }
+.hero-bg .main { width: 100%; height: 100%; object-fit: cover; object-position: 72% 38%; transform-origin: 78% 40%;
+  filter: saturate(.92) contrast(1.06) brightness(.9); }
+.hero-bg .slide.on .main { animation: push 26s ease-out forwards; }
+.hero-bg .bgblur { position: absolute; inset: -6%; width: 112%; height: 112%; object-fit: cover; filter: blur(26px) saturate(1.05) brightness(.5); }
+.hero-bg .fg { position: absolute; top: 0; right: 0; height: 100%; width: 66%; object-fit: cover; object-position: 50% 28%; transform-origin: 60% 40%;
+  filter: saturate(.95) contrast(1.05) brightness(.92);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 34%); mask-image: linear-gradient(90deg, transparent 0%, #000 34%); }
+.hero-bg .slide.on .fg { animation: push 22s ease-out forwards; }
 @keyframes push { from { transform: scale(1); } to { transform: scale(1.04); } }
 .hero-grade { position: absolute; inset: 0; z-index: -3;
   background: linear-gradient(90deg, rgba(5, 24, 46, .94) 0%, rgba(5, 24, 46, .78) 34%, rgba(5, 24, 46, .26) 64%, rgba(5, 24, 46, .05) 100%),
@@ -105,13 +113,16 @@ p { margin: 0; }
 @media (max-width: 760px) {
   .hero { min-height: 92svh; }
   .hero-bg { bottom: 34%; }
-  .hero-bg img { object-position: 84% 46%; }
+  .hero-bg .main { object-position: 84% 46%; }
   .hero-grade { background: linear-gradient(0deg, #061C34 0%, #061C34 40%, rgba(6, 28, 52, .75) 52%, rgba(6, 28, 52, 0) 72%); }
   .hero-inner { padding-block: 44vh 52px; }
   .hero .actions .btn { width: 100%; }
   .hero .cue { display: none; }
   /* mobile: the photo is a smaller stage, so the camera move is more visible */
-  .hero-bg img { transform-origin: 80% 45%; animation: pushm 20s ease-out forwards; }
+  .hero-bg .main { transform-origin: 80% 45%; }
+  .hero-bg .slide.on .main, .hero-bg .slide.on .fg { animation: pushm 20s ease-out forwards; }
+  .hero-bg .fg { width: 100%; height: 100%; object-position: 50% 22%;
+    -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent 100%); mask-image: linear-gradient(180deg, #000 62%, transparent 100%); }
   .hero .bar { height: 9vh; }
   .hero-light { inset: -5% -60%; animation: sweepm 3s .9s cubic-bezier(.4, 0, .2, 1) forwards; }
   .hero-bg::after { content: ""; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
@@ -121,7 +132,8 @@ p { margin: 0; }
 @keyframes sweepm { 0% { opacity: 0; transform: translateX(-50%); } 15% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; transform: translateX(50%); } }
 @keyframes breathe { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
-  .hero-bg img, .hero-light, .hero .bar, .hero .cue i, .hero-bg::after { animation: none; }
+  .hero-bg .slide .main, .hero-bg .slide .fg, .hero-light, .hero .bar, .hero .cue i, .hero-bg::after { animation: none !important; }
+  .hero-bg .slide { transition-duration: .01s; }
   .hero-light, .hero .bar { display: none; }
   .hero h1 .ln > span { animation: none; transform: none; }
   .hero .lede, .hero .actions, .hero .fine, .hero .cue { animation: none; opacity: 1; transform: none; }
@@ -317,7 +329,9 @@ footer a { color: var(--navy-deep); font-weight: 700; }
 
 <main id="main">
   <section class="hero" aria-labelledby="h1">
-    <div class="hero-bg"><img src="img/hero-procedure.jpg" alt="A smiling patient having an exam, beside an illustration of a tooth wearing a stethoscope" width="1920" height="1080"></div>
+    <div class="hero-bg" id="heroBg">
+      <div class="slide on"><img class="bgblur" src="img/seat.jpg" alt=""><img class="fg" src="img/seat.jpg" alt="A calm, modern treatment room at Haworth Dental with a reclined patient chair and overhead light" width="800" height="533" style="object-position:30% 50%"></div>
+    </div>
     <div class="hero-grade" aria-hidden="true"></div>
     <div class="hero-light" aria-hidden="true"></div>
     <div class="hero-vig" aria-hidden="true"></div>
@@ -591,6 +605,15 @@ footer a { color: var(--navy-deep); font-weight: 700; }
   function upd() { d.classList.toggle('show', heroGone && !bookSeen); }
   new IntersectionObserver(function (e) { heroGone = !e[0].isIntersecting; upd(); }, { threshold: 0.35 }).observe(hero);
   if (book) new IntersectionObserver(function (e) { bookSeen = e[0].isIntersecting; upd(); }, { threshold: 0.15 }).observe(book);
+})();
+
+(function () {
+  var slides = document.querySelectorAll('#heroBg .slide'), i = 0;
+  if (slides.length < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  setInterval(function () {
+    if (document.hidden) return;
+    slides[i].classList.remove('on'); i = (i + 1) % slides.length; slides[i].classList.add('on');
+  }, 7000);
 })();
 </script>
 </body>
