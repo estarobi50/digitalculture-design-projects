@@ -121,13 +121,15 @@ p { margin: 0; }
   /* mobile: the photo is a smaller stage, so the camera move is more visible */
   .hero-bg .main { transform-origin: 80% 45%; }
   .hero-bg .slide.on .main, .hero-bg .slide.on .fg { animation: pushm 20s ease-out forwards; }
-  .hero-bg .fg { width: 100%; height: 100%; object-position: 50% 22%;
-    -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent 100%); mask-image: linear-gradient(180deg, #000 62%, transparent 100%); }
+  .hero-bg .fg { width: 100%; height: auto; aspect-ratio: 3 / 2; top: 14px; object-position: 50% 50% !important;
+    -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent 100%); mask-image: linear-gradient(180deg, #000 70%, transparent 100%); }
+  .hero-bg .slide.on .fg { animation: pushf 20s ease-out forwards; }
   .hero .bar { height: 9vh; }
   .hero-light { inset: -5% -60%; animation: sweepm 3s .9s cubic-bezier(.4, 0, .2, 1) forwards; }
   .hero-bg::after { content: ""; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
     background: radial-gradient(60% 55% at 78% 40%, rgba(150, 205, 255, .30), transparent 70%); animation: breathe 7s 1s ease-in-out infinite; opacity: 0; }
 }
+@keyframes pushf { from { transform: scale(1.0); } to { transform: scale(1.05); } }
 @keyframes pushm { from { transform: scale(1) translate3d(0, 0, 0); } to { transform: scale(1.09) translate3d(-2.5%, -1.5%, 0); } }
 @keyframes sweepm { 0% { opacity: 0; transform: translateX(-50%); } 15% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; transform: translateX(50%); } }
 @keyframes breathe { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
