@@ -102,6 +102,11 @@ p { margin: 0; }
 .hero .fine { margin-top: 1.3rem; font-size: .9375rem; color: #B9CCE0; animation-delay: 1.35s; }
 .hero .fine a { color: var(--white); }
 @keyframes rise { to { opacity: 1; transform: none; } }
+.hero .hero-hello { margin: 0 0 1rem; font: 700 .8125rem/1.2 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: #BFD6EC;
+  display: flex; align-items: center; gap: 14px; opacity: 0; transform: translateY(12px); animation: rise 1s .15s cubic-bezier(.2, .7, .2, 1) forwards; }
+.hero .hero-hello::before { content: ""; width: 38px; height: 1px; background: currentColor; opacity: .7; }
+@media (max-width: 760px) { .hero .hero-hello { font-size: .75rem; letter-spacing: .18em; } }
+@media (prefers-reduced-motion: reduce) { .hero .hero-hello { animation: none; opacity: 1; transform: none; } }
 /* letterbox bars that open at the start, like a title card */
 .hero .bar { position: absolute; left: 0; right: 0; height: 12vh; background: #040F1E; z-index: 3; pointer-events: none; animation: bars 1.5s .25s cubic-bezier(.7, 0, .2, 1) forwards; }
 .hero .bar.top { top: 0; transform-origin: top; }
@@ -339,8 +344,9 @@ footer a { color: var(--navy-deep); font-weight: 700; }
     <div class="hero-vig" aria-hidden="true"></div>
     <div class="wrap hero-inner">
       <div class="hero-copy">
-        <h1 id="h1"><span class="ln"><span>Every kind of dental care,</span></span> <span class="ln"><span>under one roof in Haworth.</span></span></h1>
-        <p class="lede">Family dentistry since 1966. Children's care, braces, root canals, implants and cosmetic work, all in one office where the people treating you know your history.</p>
+        <p class="hero-hello">Smile! You&rsquo;re at Haworth Dental</p>
+        <h1 id="h1"><span class="ln"><span>Your family&rsquo;s dentist,</span></span> <span class="ln"><span>all under one roof.</span></span></h1>
+        <p class="lede">Family dentistry in Haworth since 1966. Children&rsquo;s care, braces, root canals, implants and cosmetic work, with people who know your history.</p>
         <div class="actions">
           <a class="btn btn-light" href="#book">Book a visit</a>
           <a class="btn btn-line" href="tel:+12013841717">Call (201) 384-1717</a>
