@@ -121,6 +121,22 @@ p { margin: 0; }
   .hero-bg .fg { right: auto; left: -26px; width: calc(100% + 52px); max-width: none; translate: none; }
 }
 @media (prefers-reduced-motion: reduce) { .hero-bg .fg, .hero-bg .bgblur, .hero-copy { translate: none; } }
+/* ---------- map ---------- */
+.map-band { background: var(--mist); padding-block: clamp(48px, 7vw, 88px); }
+.map-wrap { position: relative; }
+.map-frame { position: relative; border: 0; width: 100%; height: clamp(340px, 46vw, 480px); display: block; background: #DCE6F1 center / cover;
+  box-shadow: 14px 14px 0 var(--navy); }
+.map-card { position: absolute; left: clamp(16px, 3vw, 36px); top: clamp(16px, 3vw, 36px); background: var(--white); padding: 22px 26px; max-width: 300px;
+  box-shadow: 0 10px 30px rgba(10, 49, 87, .22); }
+.map-card h3 { font-size: 1.15rem; margin-bottom: .4rem; }
+.map-card p { margin: 0 0 .9rem; font-size: .98rem; line-height: 1.5; }
+.map-card a.btn { padding: 12px 20px; font-size: .95rem; }
+@media (max-width: 760px) {
+  .map-frame { height: 320px; box-shadow: 8px 8px 0 var(--navy); }
+  .map-card { position: static; max-width: none; box-shadow: none; padding: 20px 4px 0; background: transparent; }
+  .map-wrap { display: flex; flex-direction: column-reverse; gap: 14px; }
+  .map-card { padding-bottom: 6px; }
+}
 /* letterbox bars that open at the start, like a title card */
 .hero .bar { position: absolute; left: 0; right: 0; height: 12vh; background: #040F1E; z-index: 3; pointer-events: none; animation: bars 1.5s .25s cubic-bezier(.7, 0, .2, 1) forwards; }
 .hero .bar.top { top: 0; transform-origin: top; }
@@ -572,6 +588,19 @@ footer a { color: var(--navy-deep); font-weight: 700; }
           <h3>Request ready.</h3>
           <p id="doneText"></p>
           <button class="btn btn-outline" type="button" id="again">Edit request</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="map-band" id="find-us" aria-labelledby="map-h">
+    <div class="wrap">
+      <div class="map-wrap">
+        <iframe class="map-frame" title="Map showing Haworth Dental at 141 Terrace St, Haworth, NJ" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+          src="https://www.google.com/maps?q=141+Terrace+St,+Haworth,+NJ+07641&amp;output=embed"></iframe>
+        <div class="map-card">
+          <h3 id="map-h">Find us</h3>
+          <p>Haworth Dental<br>141 Terrace St<br>Haworth, NJ 07641</p>
+          <a class="btn btn-navy" href="https://www.google.com/maps/search/?api=1&amp;query=Haworth+Dental+141+Terrace+St+Haworth+NJ+07641" target="_blank" rel="noopener">Get directions</a>
         </div>
       </div>
     </div>
