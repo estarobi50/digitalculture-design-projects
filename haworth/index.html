@@ -126,6 +126,43 @@ p { margin: 0; }
   .hero-grade { background: linear-gradient(90deg, rgba(5, 24, 46, .92) 0%, rgba(5, 24, 46, .7) 32%, rgba(5, 24, 46, .08) 58%, rgba(5, 24, 46, 0) 100%),
                             linear-gradient(180deg, rgba(5, 24, 46, .55) 0%, rgba(5, 24, 46, 0) 45%); }
 }
+/* ---------- services: card deck ---------- */
+.deck-wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 56px); align-items: center; }
+.deck { position: relative; width: min(58%, 330px); aspect-ratio: 4 / 5; margin-left: clamp(0px, 2vw, 28px); }
+.dcard { --x: 0%; --y: 0%; --r: 0deg; --s: 1; --z: 1; --o: 1;
+  position: absolute; inset: 0; padding: 0; border: 0; background: var(--navy-deep); overflow: hidden; cursor: pointer; color: var(--white); font: inherit; text-align: center;
+  transform-origin: 50% 92%; transform: translate(var(--x), var(--y)) rotate(var(--r)) scale(var(--s)); z-index: var(--z); opacity: var(--o);
+  box-shadow: 0 18px 40px rgba(10, 49, 87, .28), 0 2px 6px rgba(10, 49, 87, .2);
+  transition: transform .8s cubic-bezier(.2, .8, .2, 1), opacity .55s ease; }
+.dcard img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; max-width: none; }
+.dcard::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(10, 49, 87, 0) 45%, rgba(10, 49, 87, .78)); }
+.dcard::after { content: ""; position: absolute; inset: 14px; z-index: 2; border: 1px solid rgba(255, 255, 255, .9); pointer-events: none; }
+.dtitle { position: absolute; z-index: 3; left: 24px; right: 24px; bottom: 34px; font: 700 clamp(1.1rem, 1.7vw, 1.4rem)/1.25 var(--serif); text-shadow: 0 1px 10px rgba(0, 0, 0, .5); }
+.dcard:focus-visible { outline: 3px solid #F2B84B; outline-offset: 4px; }
+.dcard[data-d="0"] { cursor: default; }
+.dcard.gone, .dcard.hidden { pointer-events: none; }
+.deck-info { min-width: 0; }
+.deck-count { font: 700 .8125rem/1 var(--sans); letter-spacing: .22em; color: var(--slate-deep); margin: 0 0 1.1rem; }
+.deck-text { transition: opacity .25s ease; }
+.deck-text.swap { opacity: 0; }
+.deck-text h3 { font: 400 clamp(1.7rem, 3vw, 2.4rem)/1.2 var(--serif); color: var(--ink); margin: 0 0 1rem; }
+.deck-text p { font-size: 1.125rem; max-width: 44ch; }
+.deck-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 1.8rem; }
+.deck-nav { display: inline-flex; gap: 10px; }
+.deck-nav button { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--navy); background: transparent; color: var(--navy); font: 400 1.25rem/1 var(--sans); cursor: pointer; transition: background .2s, color .2s; }
+.deck-nav button:hover { background: var(--navy); color: var(--white); }
+.deck-hint { margin-top: 1.4rem; font-size: .9375rem; color: #5B6B7B; }
+@media (max-width: 900px) {
+  .deck-wrap { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .deck { width: min(60vw, 300px); margin-left: clamp(0px, 3vw, 20px); margin-bottom: 70px; }
+}
+@media (prefers-reduced-motion: reduce) { .dcard, .deck-text { transition-duration: .01s; } }
+/* ---------- team banner beside reviews ---------- */
+.team-split { align-items: center; }
+.frame.team-banner { max-width: 300px; margin-inline: auto 0; background: #7C7C7C; }
+.team-banner img { aspect-ratio: 320 / 600; }
+.quotes.one { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 900px) { .frame.team-banner { max-width: 260px; margin-inline: auto; } }
 /* ---------- map ---------- */
 .map-band { background: var(--mist); padding-block: clamp(48px, 7vw, 88px); }
 .map-wrap { position: relative; }
@@ -401,42 +438,35 @@ footer a { color: var(--navy-deep); font-weight: 700; }
         <hr class="rule">
         <p>Pediatric, orthodontic, restorative, implant and cosmetic dentistry in one Haworth practice.</p>
       </div>
-      <div class="services">
-        <article class="svc">
-          <div class="svc-photo"><img src="img/kids.jpg" alt="A child in the dental chair with a smiling hygienist" loading="lazy" style="object-position:50% 55%"><h3>Pediatric dentistry</h3></div>
-          <p class="svc-body">Good dental habits are best fostered early. Routine check-ups, cleanings, fillings and caps for children, in a welcoming environment.</p>
-        </article>
-        <article class="svc">
-          <div class="svc-photo"><img src="img/braces.jpg" alt="Miniature dentists adjusting braces on a giant set of teeth" loading="lazy" style="object-position:50% 55%"><h3>Orthodontics</h3></div>
-          <p class="svc-body">Braces, retainers and Invisalign for crooked teeth and improper bites.</p>
-        </article>
-        <article class="svc">
-          <div class="svc-photo"><img src="img/cluster.jpg" alt="A model molar with dental instruments on a blue background" loading="lazy"><h3>Root canals</h3></div>
-          <p class="svc-body">When a filling or a cap cannot fix decay, a root canal saves the natural tooth.</p>
-        </article>
-        <article class="svc">
-          <div class="svc-photo"><img src="img/implant.jpg" alt="Cutaway illustration of a dental implant beside a natural tooth in the jawbone" loading="lazy" style="object-position:50% 42%"><h3>Dental implants</h3></div>
-          <p class="svc-body">Metal rods placed in the jawbone that anchor bridges and dentures on a stable foundation.</p>
-        </article>
-        <article class="svc">
-          <div class="svc-photo"><img src="img/cosmetic-smile.jpg" alt="A close-up of a bright, even smile in a modern treatment room" loading="lazy" style="object-position:30% 30%"><h3>Cosmetic dentistry</h3></div>
-          <p class="svc-body">Teeth straightening, whitening, porcelain crowns and porcelain veneers.</p>
-        </article>
-        <article class="svc">
-          <div class="svc-photo"><img src="img/seat.jpg" alt="A treatment room with a reclined dental chair, overhead light and instrument tray" loading="lazy" style="object-position:34% 50%"><h3>Check-ups, cleanings and fillings</h3></div>
-          <p class="svc-body">Routine exams, cleanings, fillings and caps for the whole family.</p>
-        </article>
-        <article class="svc">
-          <div class="svc-photo"><img src="img/sleep-appliance.jpg" alt="A patient placing a clear dental appliance over her teeth" loading="lazy" style="object-position:50% 35%"><h3>Sleep apnea therapy</h3></div>
-          <p class="svc-body">Dental therapy for sleep apnea, offered alongside general care. Call to ask whether it fits you.</p>
-        </article>
-        <article class="svc svc-cta">
-          <div class="svc-cta-inner">
-            <h3>Book a visit</h3>
-            <p>Tell us what you need and when suits you. The office will call to confirm.</p>
-            <a class="btn btn-light" href="#book">Request a visit</a>
+      <div class="deck-wrap" id="deck">
+        <div class="deck" id="deckStack" role="group" aria-label="Services, shown as a stack of cards. Choose a card to bring it to the front.">
+          <button type="button" class="dcard" data-i="0" data-title="Pediatric dentistry" data-reason="kids" data-text="Good dental habits are best fostered early. Routine check-ups, cleanings, fillings and caps for children, in a welcoming environment.">
+            <img src="img/kids.jpg" alt="" loading="lazy" style="object-position:50% 55%"><span class="dtitle">Pediatric dentistry</span></button>
+          <button type="button" class="dcard" data-i="1" data-title="Orthodontics" data-reason="ortho" data-text="Braces, retainers and Invisalign for crooked teeth and improper bites.">
+            <img src="img/braces.jpg" alt="" loading="lazy" style="object-position:50% 55%"><span class="dtitle">Orthodontics</span></button>
+          <button type="button" class="dcard" data-i="2" data-title="Root canals" data-reason="root" data-text="When a filling or a cap cannot fix decay, a root canal saves the natural tooth.">
+            <img src="img/cluster.jpg" alt="" loading="lazy"><span class="dtitle">Root canals</span></button>
+          <button type="button" class="dcard" data-i="3" data-title="Dental implants" data-reason="implant" data-text="Metal rods placed in the jawbone that anchor bridges and dentures on a stable foundation.">
+            <img src="img/implant.jpg" alt="" loading="lazy" style="object-position:50% 42%"><span class="dtitle">Dental implants</span></button>
+          <button type="button" class="dcard" data-i="4" data-title="Cosmetic dentistry" data-reason="cosmetic" data-text="Teeth straightening, whitening, porcelain crowns and porcelain veneers.">
+            <img src="img/cosmetic-smile.jpg" alt="" loading="lazy" style="object-position:30% 30%"><span class="dtitle">Cosmetic dentistry</span></button>
+          <button type="button" class="dcard" data-i="5" data-title="Check-ups, cleanings and fillings" data-reason="checkup" data-text="Routine exams, cleanings, fillings and caps for the whole family.">
+            <img src="img/seat.jpg" alt="" loading="lazy" style="object-position:34% 50%"><span class="dtitle">Check-ups, cleanings and fillings</span></button>
+          <button type="button" class="dcard" data-i="6" data-title="Sleep apnea therapy" data-reason="sleep" data-text="Dental therapy for sleep apnea, offered alongside general care. Call to ask whether it fits you.">
+            <img src="img/sleep-appliance.jpg" alt="" loading="lazy" style="object-position:50% 35%"><span class="dtitle">Sleep apnea therapy</span></button>
+        </div>
+        <div class="deck-info">
+          <p class="deck-count" id="deckCount" aria-hidden="true">1 / 7</p>
+          <div class="deck-text" id="deckText" aria-live="polite">
+            <h3 id="deckTitle">Pediatric dentistry</h3>
+            <p id="deckBody">Good dental habits are best fostered early. Routine check-ups, cleanings, fillings and caps for children, in a welcoming environment.</p>
           </div>
-        </article>
+          <div class="deck-actions">
+            <a class="btn btn-navy" id="deckBook" href="#book" data-reason="kids">Book a visit</a>
+            <span class="deck-nav"><button type="button" id="deckPrev" aria-label="Previous service">&larr;</button><button type="button" id="deckNext" aria-label="Next service">&rarr;</button></span>
+          </div>
+          <p class="deck-hint">Choose a card to bring it forward, or use the arrows.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -512,9 +542,12 @@ footer a { color: var(--navy-deep); font-weight: 700; }
         <h2 id="team-h">What patients say about Dr. Lebel.</h2>
         <hr class="rule">
       </div>
-      <div class="quotes">
+      <div class="split team-split">
+        <figure class="frame offset team-banner"><img src="img/trust-banner.gif" alt="Animated banner reading The dental team Bergen County families trust, with smiling people appearing beneath it" width="320" height="600" loading="lazy"></figure>
+      <div class="quotes one">
         <figure class="quote"><blockquote>This is the real doctor, extremely skillful, courteous, not a &lsquo;business&rsquo; doctor.</blockquote><figcaption>Nadezhda U.</figcaption></figure>
         <figure class="quote"><blockquote>&hellip;during a procedure you are not feeling a discomfort, but you feel calm and relaxed.</blockquote><figcaption>Yelizaveta G.</figcaption></figure>
+      </div>
       </div>
       <h3 class="subhead" id="art-h">Recent articles</h3>
       <div class="quotes" id="articles">
@@ -673,6 +706,47 @@ footer a { color: var(--navy-deep); font-weight: 700; }
   }, 7000);
 })();
 
+
+(function () {
+  var stack = document.getElementById('deckStack'); if (!stack) return;
+  var cards = [].slice.call(stack.querySelectorAll('.dcard')), n = cards.length, active = 0;
+  var title = document.getElementById('deckTitle'), body = document.getElementById('deckBody'), count = document.getElementById('deckCount'),
+      book = document.getElementById('deckBook'), box = document.getElementById('deckText');
+  var POS = [
+    { x: '0%', y: '0%', r: 0, s: 1, o: 1 },
+    { x: '15%', y: '3%', r: 5, s: .96, o: 1 },
+    { x: '28%', y: '6%', r: 10, s: .92, o: 1 },
+    { x: '39%', y: '9%', r: 14, s: .88, o: .9 }
+  ];
+  var BACK = { x: '39%', y: '9%', r: 14, s: .86, o: 0 }, OUT = { x: '-72%', y: '-4%', r: -14, s: .96, o: 0 };
+  function layout() {
+    cards.forEach(function (c, i) {
+      var d = (i - active + n) % n, p = d < POS.length ? POS[d] : (d === n - 1 ? OUT : BACK);
+      c.style.setProperty('--x', p.x); c.style.setProperty('--y', p.y); c.style.setProperty('--r', p.r + 'deg');
+      c.style.setProperty('--s', p.s); c.style.setProperty('--o', p.o); c.style.setProperty('--z', n - d);
+      c.dataset.d = d; var live = d < POS.length;
+      c.classList.toggle('hidden', !live); c.tabIndex = live ? 0 : -1;
+      c.setAttribute('aria-hidden', live ? 'false' : 'true');
+      c.setAttribute('aria-label', c.dataset.title + (d === 0 ? ' (showing)' : ', bring to front'));
+    });
+  }
+  function show(i, instant) {
+    active = (i + n) % n; layout();
+    var c = cards[active];
+    function fill() { title.textContent = c.dataset.title; body.textContent = c.dataset.text; count.textContent = (active + 1) + ' / ' + n; book.dataset.reason = c.dataset.reason; box.classList.remove('swap'); }
+    if (instant) { fill(); return; }
+    box.classList.add('swap'); setTimeout(fill, 220);
+  }
+  cards.forEach(function (c, i) { c.addEventListener('click', function () { show(i === active ? active + 1 : i); }); });
+  document.getElementById('deckNext').addEventListener('click', function () { show(active + 1); });
+  document.getElementById('deckPrev').addEventListener('click', function () { show(active - 1); });
+  stack.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { show(active + 1); e.preventDefault(); } if (e.key === 'ArrowLeft') { show(active - 1); e.preventDefault(); } });
+  var sx = null;
+  stack.addEventListener('pointerdown', function (e) { sx = e.clientX; });
+  stack.addEventListener('pointerup', function (e) { if (sx !== null && Math.abs(e.clientX - sx) > 50) { show(e.clientX < sx ? active + 1 : active - 1); stack.dataset.swiped = '1'; setTimeout(function () { delete stack.dataset.swiped; }, 50); } sx = null; });
+  stack.addEventListener('click', function (e) { if (stack.dataset.swiped) e.stopPropagation(); }, true);
+  show(0, true);
+})();
 </script>
 </body>
 </html>
