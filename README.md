@@ -1,2 +1,2 @@
 # digitalculture-design-projects
-Showcase of web design projects by Eric Starobinsky
+Showcase of web design projects by Eric Starobinsky @Digitacultureit
