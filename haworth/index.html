@@ -54,7 +54,7 @@ p { margin: 0; }
 
 /* ---------- header ---------- */
 .site-head { position: sticky; top: 0; z-index: 50; display: flex; background: var(--navy); box-shadow: 0 2px 14px rgba(10, 49, 87, .25); }
-.logo-block { flex: none; display: grid; place-items: center; background: var(--white); border-left: 12px solid var(--navy-deep); padding: 12px 28px; width: clamp(230px, 24vw, 300px); }
+.logo-block { flex: none; display: grid; place-items: center; background: var(--white); padding: 12px 28px; width: clamp(230px, 24vw, 300px); }
 .logo-block img { width: 100%; height: auto; max-height: 76px; object-fit: contain; }
 .head-main { flex: 1; min-width: 0; display: grid; align-content: center; padding: 8px clamp(16px, 3vw, 44px); color: var(--white); }
 .head-info { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, .35); font: 700 .9rem/1.3 var(--sans); }
@@ -360,7 +360,7 @@ footer .legal a { font-weight: 400; }
 }
 @media (max-width: 900px) {
   :root { --nav-h: 76px; }
-  .logo-block { width: 190px; padding: 8px 14px; border-left-width: 8px; }
+  .logo-block { width: 190px; padding: 8px 14px; }
   .logo-block img { max-height: 54px; }
   .head-main { flex-direction: row; display: flex; align-items: center; justify-content: flex-end; padding: 8px 14px; }
   .head-info { border: 0; padding: 0; }
@@ -551,7 +551,6 @@ footer .legal a { font-weight: 400; }
           <li>Dental consultant for major motion pictures.</li>
           <li>Referral dentist for the US Olympic team.</li>
         </ul>
-        <a class="btn btn-navy" href="#book">Book a visit</a>
       </div>
     </div>
   </section>
@@ -584,7 +583,6 @@ footer .legal a { font-weight: 400; }
             </ul>
           </div>
         </div>
-        <a class="btn btn-navy" href="#book">Book a visit with Dr. Lebel</a>
       </div>
     </div>
   </section>
@@ -637,7 +635,6 @@ footer .legal a { font-weight: 400; }
           <div><dt>Fillings and caps. </dt><dd>Treatment when a child needs it.</dd></div>
           <div><dt>Experienced dentists. </dt><dd>Dr. Lebel has plenty of experience with little smiles.</dd></div>
         </dl>
-        <a class="btn btn-navy" href="#book" data-reason="kids">Book a children's visit</a>
       </div>
     </div>
   </section>
@@ -733,7 +730,7 @@ footer .legal a { font-weight: 400; }
     </div>
     <div class="f-col"><h3>Visit</h3><p>141 Terrace St<br>Haworth, NJ 07641</p></div>
     <div class="f-col"><h3>Call</h3><p><a href="tel:+12013841717">(201) 384-1717</a><br>Insurance: <a href="tel:+15515002031">(551) 500-2031</a></p></div>
-    <div class="f-col"><h3>Explore</h3><p><a href="#care">Services</a> &middot; <a href="#about">Dr. Lebel</a><br><a href="#insurance">Insurance</a> &middot; <a href="#book">Book a visit</a></p></div>
+    <div class="f-col"><h3>Explore</h3><p><a href="#care">Services</a> &middot; <a href="#about">Dr. Lebel</a><br><a href="#insurance">Insurance</a> &middot; <a href="#team">Reviews</a></p></div>
   </div>
   <p class="legal wrap">Design concept by <a href="https://digitalcultureit.com" target="_blank" rel="noopener">Digital Culture IT Solutions</a> &middot; shared for review only, not for reuse. Practice name, details and imagery belong to their respective owners.</p>
 </footer>
