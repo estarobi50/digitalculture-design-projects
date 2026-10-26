@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@400;500;600&display=swap">
+<script>document.documentElement.classList.add("js")</script>
 <style>
 /* Layout inspired by classic navy-and-white family-practice sites: white logo block on a navy header,
    a full-width photo, navy statement bands, photo-topped service columns, navy contact band, slate footer. */
@@ -28,6 +29,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 8px); }
 body { margin: 0; font: 400 1.0625rem/1.7 var(--sans); color: var(--text); background: var(--white); -webkit-font-smoothing: antialiased; }
+html, body { overflow-x: clip; }
 img { max-width: 100%; display: block; }
 a { color: var(--navy); }
 h1, h2, h3 { margin: 0; color: var(--ink); text-wrap: balance; }
@@ -337,12 +339,17 @@ p { margin: 0; }
 .done .btn { margin-top: 1.4rem; }
 
 /* footer */
-footer { background: var(--slate); color: var(--navy-deep); padding-block: 30px calc(30px + env(safe-area-inset-bottom, 0px)); }
-footer .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 40px; font-size: .9375rem; }
-footer img { height: 48px; width: auto; background: var(--white); padding: 8px 14px; }
-footer p + p { margin-top: 2px; }
-footer a { color: var(--navy-deep); font-weight: 700; }
-.legal { font-size: .8125rem; opacity: .85; }
+footer { background: linear-gradient(180deg, var(--navy-deep), #072544); color: #C9D8E8; padding-block: clamp(44px, 6vw, 72px) calc(26px + env(safe-area-inset-bottom, 0px)); position: relative; }
+footer::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); }
+footer .wrap { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 28px 40px; font-size: .9375rem; line-height: 1.7; }
+footer img { height: 52px; width: auto; background: var(--white); padding: 8px 14px; border-radius: 2px; }
+footer .f-brand p { margin-top: 14px; max-width: 28ch; color: #9FB6CE; }
+footer h3 { font: 500 .75rem/1 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: #8FB0D3; margin-bottom: 12px; }
+footer a { color: var(--white); font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.25); }
+footer a:hover { border-bottom-color: var(--white); }
+footer .legal { display: block; margin-top: clamp(28px, 4vw, 44px); padding-top: 20px; border-top: 1px solid rgba(255,255,255,.14); font-size: .78rem; color: #8DA5BE; }
+footer .legal a { font-weight: 400; }
+@media (max-width: 860px) { footer .wrap { grid-template-columns: 1fr 1fr; } footer .f-brand { grid-column: 1 / -1; } }
 
 /* ---------- responsive ---------- */
 @media (max-width: 1080px) {
@@ -390,10 +397,50 @@ footer a { color: var(--navy-deep); font-weight: 700; }
   body { padding-bottom: 76px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+/* ---------- polish & depth ---------- */
+.progress { position: fixed; left: 0; top: 0; height: 3px; width: 100%; z-index: 80; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, #7DB5E6, #F2B84B); pointer-events: none; }
+.js [data-r] { opacity: 0; transform: translateY(26px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0s); }
+.js [data-r].in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .js [data-r] { opacity: 1; transform: none; transition: none; } .progress { display: none; } }
+/* stats band */
+.stats { background: linear-gradient(180deg, #0A3157, #0E4271); color: var(--white); position: relative; overflow: hidden; }
+.stats::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 140% at 85% 0%, rgba(125,181,230,.22), transparent 60%); pointer-events: none; }
+.stats-row { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); padding-block: clamp(30px, 4.4vw, 52px); }
+.stat { padding: 6px clamp(14px, 2.4vw, 34px); text-align: center; }
+.stat + .stat { border-left: 1px solid rgba(255,255,255,.18); }
+.stat b { display: block; font: 500 clamp(2.2rem, 4.2vw, 3.4rem)/1.05 var(--serif); letter-spacing: -.01em; }
+.stat span { display: block; margin-top: 10px; font: 400 .875rem/1.45 var(--sans); letter-spacing: .04em; color: #B9CCE0; }
+@media (max-width: 760px) { .stats-row { grid-template-columns: 1fr 1fr; row-gap: 22px; } .stat:nth-child(3) { border-left: 0; } }
+/* first visit */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2.4vw, 30px); counter-reset: s; position: relative; }
+.steps li { position: relative; background: var(--white); padding: clamp(26px, 3vw, 40px); box-shadow: 0 10px 34px rgba(14,66,113,.08); border-top: 3px solid var(--navy); transition: transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s; }
+.steps li:hover { transform: translateY(-6px); box-shadow: 0 22px 48px rgba(14,66,113,.16); }
+.steps .n { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--navy); color: var(--white); font: 600 1.35rem/1 var(--serif); margin-bottom: 18px; }
+.steps h3 { font: 600 1.7rem/1.15 var(--serif); margin-bottom: 8px; }
+@media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+/* review card replaces photo */
+.frame.qcard { aspect-ratio: 4 / 5; max-width: 300px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 10px; padding: 28px;
+  background: radial-gradient(90% 70% at 30% 20%, #1B5A94, #0A3157); color: var(--white); }
+.frame.qcard::after { border-color: rgba(255,255,255,.35); }
+.qcard .qmark { font: 600 7rem/.7 var(--serif); color: #7DB5E6; height: 4.2rem; }
+.qcard .qtxt { font: 500 2.1rem/1.1 var(--serif); }
+.qcard .qline { width: 44px; height: 1px; background: rgba(255,255,255,.6); margin: 6px 0; }
+.qcard .qsub { font: 400 .78rem/1.5 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: #B9CCE0; max-width: 18ch; }
+/* depth */
+.frame { transition: transform .7s cubic-bezier(.2,.7,.2,1), box-shadow .7s; }
+.frame.offset:hover { transform: translate(-4px,-4px); box-shadow: 18px 18px 0 var(--navy); }
+.quote { transition: transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s; }
+.quote:hover { transform: translateY(-5px); box-shadow: 0 18px 44px rgba(14,66,113,.16); }
+.btn { transition: transform .3s, background .3s, color .3s, box-shadow .3s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(10,49,87,.22); }
+.frame img[data-par] { will-change: transform; transform: scale(1.08); }
+.pwrap { overflow: hidden; display: block; }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
 <header class="site-head" id="top">
   <a class="logo-block" href="#top" aria-label="Haworth Dental, home"><img src="img/logo-brand.png" alt="Haworth Dental" width="416" height="104"></a>
@@ -443,9 +490,18 @@ footer a { color: var(--navy-deep); font-weight: 700; }
   </section>
   </div>
 
+  <section class="stats" aria-label="Haworth Dental at a glance">
+    <div class="wrap stats-row">
+      <div class="stat" data-r><b data-count="1966" data-plain="1">1966</b><span>Caring for Haworth families</span></div>
+      <div class="stat" data-r><b data-count="5">5</b><span>Years in a row in America&rsquo;s Top Dentists guide</span></div>
+      <div class="stat" data-r><b data-count="7">7</b><span>Specialties under one roof</span></div>
+      <div class="stat" data-r><b>Invisalign</b><span>Certified provider</span></div>
+    </div>
+  </section>
+
   <section class="section" id="care" aria-labelledby="care-h">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-r>
         <h2 id="care-h">Multi-specialty care, under one roof.</h2>
         <hr class="rule">
         <p>Pediatric, orthodontic, restorative, implant and cosmetic dentistry in one Haworth practice.</p>
@@ -453,7 +509,7 @@ footer a { color: var(--navy-deep); font-weight: 700; }
       <div class="deck-wrap" id="deck">
         <div class="deck" id="deckStack" role="group" aria-label="Services, shown as a stack of cards. Choose a card to bring it to the front.">
           <button type="button" class="dcard" data-i="0" data-title="Pediatric dentistry" data-reason="kids" data-text="Good dental habits are best fostered early. Routine check-ups, cleanings, fillings and caps for children, in a welcoming environment.">
-            <img src="img/kids.jpg" alt="" loading="lazy" style="object-position:50% 55%"><span class="dtitle">Pediatric dentistry</span></button>
+            <img src="img/kids-tooth.svg" alt="" loading="lazy" style="object-position:50% 50%"><span class="dtitle">Pediatric dentistry</span></button>
           <button type="button" class="dcard" data-i="1" data-title="Orthodontics" data-reason="ortho" data-text="Braces, retainers and Invisalign for crooked teeth and improper bites.">
             <img src="img/braces.jpg" alt="" loading="lazy" style="object-position:50% 55%"><span class="dtitle">Orthodontics</span></button>
           <button type="button" class="dcard" data-i="2" data-title="Root canals" data-reason="root" data-text="When a filling or a cap cannot fix decay, a root canal saves the natural tooth.">
@@ -534,7 +590,7 @@ footer a { color: var(--navy-deep); font-weight: 700; }
 
   <section class="section alt" id="insurance" aria-labelledby="ins-h">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-r>
         <h2 id="ins-h">Most major plans, accepted.</h2>
         <hr class="rule">
         <p>We file the claims for you, and there are payment options if you don't have coverage.</p>
@@ -550,28 +606,28 @@ footer a { color: var(--navy-deep); font-weight: 700; }
 
   <section class="section" id="team" aria-labelledby="team-h">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-r>
         <h2 id="team-h">What patients say about Dr. Lebel.</h2>
         <hr class="rule">
       </div>
       <div class="split team-split">
-        <figure class="frame offset team-banner"><img src="img/trust-banner.gif" alt="Animated banner reading The dental team Bergen County families trust, with smiling people appearing beneath it" width="320" height="600" loading="lazy"></figure>
+        <figure class="frame offset team-banner qcard" aria-hidden="true"><span class="qmark">&ldquo;</span><span class="qtxt">In their<br>own words.</span><span class="qline"></span><span class="qsub">Families in Haworth &amp; Bergen County</span></figure>
       <div class="quotes one">
-        <figure class="quote"><blockquote>This is the real doctor, extremely skillful, courteous, not a &lsquo;business&rsquo; doctor.</blockquote><figcaption>Nadezhda U.</figcaption></figure>
-        <figure class="quote"><blockquote>&hellip;during a procedure you are not feeling a discomfort, but you feel calm and relaxed.</blockquote><figcaption>Yelizaveta G.</figcaption></figure>
+        <figure class="quote" data-r><blockquote>This is the real doctor, extremely skillful, courteous, not a &lsquo;business&rsquo; doctor.</blockquote><figcaption>Nadezhda U.</figcaption></figure>
+        <figure class="quote" data-r><blockquote>&hellip;during a procedure you are not feeling a discomfort, but you feel calm and relaxed.</blockquote><figcaption>Yelizaveta G.</figcaption></figure>
       </div>
       </div>
       <h3 class="subhead" id="art-h">Recent articles</h3>
       <div class="quotes" id="articles">
-        <figure class="quote"><blockquote><a href="https://www.haworthdental.com/" target="_blank" rel="noopener">What should your daily dental routine consist of?</a></blockquote><figcaption>Read on haworthdental.com</figcaption></figure>
-        <figure class="quote"><blockquote><a href="https://www.haworthdental.com/" target="_blank" rel="noopener">What can I expect from cosmetic dentistry?</a></blockquote><figcaption>Read on haworthdental.com</figcaption></figure>
+        <figure class="quote" data-r><blockquote><a href="https://www.haworthdental.com/" target="_blank" rel="noopener">What should your daily dental routine consist of?</a></blockquote><figcaption>Read on haworthdental.com</figcaption></figure>
+        <figure class="quote" data-r><blockquote><a href="https://www.haworthdental.com/" target="_blank" rel="noopener">What can I expect from cosmetic dentistry?</a></blockquote><figcaption>Read on haworthdental.com</figcaption></figure>
       </div>
     </div>
   </section>
 
   <section class="section alt" id="kids" aria-labelledby="kids-h">
     <div class="wrap split">
-      <figure class="frame kids-art"><img src="img/kids.jpg" alt="Illustration of a child in the dental chair with a smiling hygienist" width="882" height="906" loading="lazy"></figure>
+      <figure class="frame kids-art"><img src="img/kids-tooth.svg" alt="" width="882" height="906" loading="lazy"></figure>
       <div class="copy">
         <h2 id="kids-h">Little smiles, early habits.</h2>
         <p>Good dental habits are best fostered and maintained early. Families are welcome to bring their children in to our comfortable office.</p>
@@ -585,9 +641,20 @@ footer a { color: var(--navy-deep); font-weight: 700; }
     </div>
   </section>
 
+  <section class="section alt" id="visit" aria-labelledby="visit-h">
+    <div class="wrap">
+      <div class="section-head" data-r><h2 id="visit-h">Your first visit, made simple.</h2><hr class="rule"><p>No surprises, no rush. Here is what to expect.</p></div>
+      <ol class="steps">
+        <li data-r><span class="n">1</span><h3>Call or request a time</h3><p>Tell us what you need and when suits you. The front desk confirms by phone.</p></li>
+        <li data-r><span class="n">2</span><h3>Meet Dr. Lebel</h3><p>An unhurried exam and a conversation about your goals, your history and any worries.</p></li>
+        <li data-r><span class="n">3</span><h3>Leave with a clear plan</h3><p>Your options in plain language. We file your insurance claims and discuss payment plans.</p></li>
+      </ol>
+    </div>
+  </section>
+
   <section class="section" id="faq" aria-labelledby="faq-h">
     <div class="wrap">
-      <div class="section-head"><h2 id="faq-h">Before you book.</h2><hr class="rule"></div>
+      <div class="section-head" data-r><h2 id="faq-h">Before you book.</h2><hr class="rule"></div>
       <div class="faq">
         <details><summary>Do you accept my insurance?</summary><p>We accept every major insurance plan in the area, and we file the paperwork for you.</p></details>
         <details><summary>What if I don't have insurance?</summary><p>Low-interest payment plans are available through CareCredit.</p></details>
@@ -659,17 +726,15 @@ footer a { color: var(--navy-deep); font-weight: 700; }
 
 <footer>
   <div class="wrap">
-    <div>
+    <div class="f-brand">
       <img src="img/logo-brand.png" alt="Haworth Dental" width="416" height="104">
-      <p style="margin-top:12px">141 Terrace St, Haworth, NJ 07641</p>
-      <p><a href="tel:+12013841717">(201) 384-1717</a></p>
+      <p>Family dentistry in Haworth since 1966.</p>
     </div>
-    <div>
-      <p>Questions about your visit? Call (201) 384-1717.</p>
-      <p>Website design and code &copy; 2026 Digital Culture IT Solutions. All rights reserved.</p>
-      <p class="legal">Designed by <a href="https://digitalcultureit.com" target="_blank" rel="noopener">Digital Culture IT Solutions</a>. Website design concept shared for review only; not licensed for copying, reuse, or redistribution. Practice name, details, and imagery belong to their respective owners.</p>
-    </div>
+    <div class="f-col"><h3>Visit</h3><p>141 Terrace St<br>Haworth, NJ 07641</p></div>
+    <div class="f-col"><h3>Call</h3><p><a href="tel:+12013841717">(201) 384-1717</a><br>Insurance: <a href="tel:+15515002031">(551) 500-2031</a></p></div>
+    <div class="f-col"><h3>Explore</h3><p><a href="#care">Services</a> &middot; <a href="#about">Dr. Lebel</a><br><a href="#insurance">Insurance</a> &middot; <a href="#book">Book a visit</a></p></div>
   </div>
+  <p class="legal wrap">Design concept by <a href="https://digitalcultureit.com" target="_blank" rel="noopener">Digital Culture IT Solutions</a> &middot; shared for review only, not for reuse. Practice name, details and imagery belong to their respective owners.</p>
 </footer>
 
 <nav class="dock" id="dock" aria-label="Quick actions">
@@ -783,6 +848,41 @@ footer a { color: var(--navy-deep); font-weight: 700; }
   });
   v.addEventListener('error', function () { k += 1; if (k < srcs.length) { v.src = srcs[k]; v.load(); } });
   v.src = srcs[0]; v.load();
+})();
+
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* scroll progress */
+  var bar = document.getElementById('progress');
+  function prog() { var h = document.documentElement; var m = h.scrollHeight - h.clientHeight; if (bar && m > 0) bar.style.transform = 'scaleX(' + Math.min(1, h.scrollTop / m) + ')'; }
+  addEventListener('scroll', prog, { passive: true }); prog();
+  /* reveals with stagger inside siblings */
+  var els = [].slice.call(document.querySelectorAll('[data-r]'));
+  els.forEach(function (el) { var sib = [].slice.call(el.parentNode.children).filter(function (c) { return c.hasAttribute('data-r'); }); el.style.setProperty('--d', (sib.indexOf(el) * 0.12) + 's'); });
+  if (!('IntersectionObserver' in window) || reduce) { els.forEach(function (e) { e.classList.add('in'); }); }
+  else {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+    els.forEach(function (e) { io.observe(e); });
+  }
+  /* count-up */
+  var cnt = [].slice.call(document.querySelectorAll('[data-count]'));
+  function run(el) {
+    var to = +el.dataset.count, from = el.dataset.plain ? to - 60 : 0, t0 = null, d = 1400;
+    function f(t) { if (!t0) t0 = t; var p = Math.min(1, (t - t0) / d), e = 1 - Math.pow(1 - p, 3); el.textContent = Math.round(from + (to - from) * e); if (p < 1) requestAnimationFrame(f); }
+    requestAnimationFrame(f);
+  }
+  if ('IntersectionObserver' in window && !reduce) {
+    var io2 = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { run(e.target); io2.unobserve(e.target); } }); }, { threshold: 0.6 });
+    cnt.forEach(function (c) { io2.observe(c); });
+  }
+  /* gentle image parallax inside frames */
+  var pars = [].slice.call(document.querySelectorAll('.frame:not(.qcard) > img')).filter(function (i) { return !i.closest('.hero, .dcard, .about-photo'); });
+  if (!reduce && pars.length) {
+    pars.forEach(function (i) { i.setAttribute('data-par', ''); var w = document.createElement('div'); w.className = 'pwrap'; i.parentNode.insertBefore(w, i); w.appendChild(i); });
+    var tick = false;
+    function par() { tick = false; var vh = innerHeight; pars.forEach(function (i) { var r = i.parentNode.getBoundingClientRect(); if (r.bottom < 0 || r.top > vh) return; var c = (r.top + r.height / 2 - vh / 2) / vh; i.style.transform = 'scale(1.08) translateY(' + (c * -18).toFixed(1) + 'px)'; }); }
+    addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(par); } }, { passive: true }); par();
+  }
 })();
 </script>
 </body>
