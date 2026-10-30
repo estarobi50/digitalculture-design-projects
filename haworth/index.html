@@ -437,10 +437,90 @@ footer .legal a { font-weight: 400; }
 .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(10,49,87,.22); }
 .frame img[data-par] { will-change: transform; transform: scale(1.08); }
 .pwrap { overflow: hidden; display: block; }
+
+/* =====================================================================
+   OPENING SEQUENCE (from index-original.html): curtain split, logo reveal,
+   "Enter" gate with synthesized ocean sound, Skip intro. Keeps its own dark
+   palette, scoped on #intro so it does not touch the site theme.
+   ===================================================================== */
+#intro {
+  --ink: #050B16; --enamel: #EAF2F8; --mist: #9FB3C7; --azure: #62B4F5; --glow: #B6E0FF;
+  --line-strong: rgba(168, 216, 255, .34); --line: rgba(168, 216, 255, .16);
+  --font-display: var(--serif); --font-body: var(--sans);
+}
+html.intro-pending { overflow: hidden; }
+#intro { display: none; }
+html.intro-pending #intro { display: block; position: fixed; inset: 0; z-index: 100; }
+#intro.skip { opacity: 0; transition: opacity .55s ease; pointer-events: none; }
+.i-half { position: absolute; left: 0; right: 0; height: 50.2%; background: #000; z-index: 1; }
+.i-top { top: 0; animation: iopen-t 1.35s 3.45s cubic-bezier(.77, 0, .18, 1) forwards; }
+.i-bot { bottom: 0; animation: iopen-b 1.35s 3.45s cubic-bezier(.77, 0, .18, 1) forwards; }
+@keyframes iopen-t { to { transform: translateY(-101%); } }
+@keyframes iopen-b { to { transform: translateY(101%); } }
+.i-line { position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; z-index: 2; background: linear-gradient(90deg, transparent, var(--azure) 25%, #fff 50%, var(--azure) 75%, transparent); box-shadow: 0 0 24px rgba(98, 180, 245, .7); transform: scale(0, 1); animation: iline 1.4s .3s cubic-bezier(.2, .7, .2, 1) forwards, iflare .75s 3s cubic-bezier(.5, 0, 1, .6) forwards, ifade .5s 3.65s ease forwards; }
+@keyframes iline { to { transform: scale(1, 1); } }
+@keyframes iflare { from { transform: scale(1, 1); } to { transform: scale(1, 16); } }
+@keyframes ifade { to { opacity: 0; } }
+.i-flash { position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0; background: radial-gradient(60% 50% at 50% 50%, rgba(220, 240, 255, .95), rgba(98, 180, 245, .35) 45%, transparent 75%); animation: iflash 1s 3.05s ease-out forwards; }
+@keyframes iflash { 0% { opacity: 0; } 40% { opacity: .85; } 100% { opacity: 0; } }
+.i-mid { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; animation: imid .85s 3.25s cubic-bezier(.5, 0, .9, .5) forwards; }
+@keyframes imid { to { opacity: 0; transform: scale(1.4); filter: blur(10px); } }
+.i-logo { width: 64px; height: 64px; margin-bottom: 22px; color: var(--enamel); overflow: visible; }
+.i-logo * { stroke-dasharray: 1; stroke-dashoffset: 1; animation: idraw 1.1s cubic-bezier(.5, 0, .2, 1) forwards; }
+.i-logo circle { animation-delay: 1s; }
+.i-logo path:nth-of-type(1) { animation-delay: 1.5s; }
+.i-logo path:nth-of-type(2) { animation-delay: 1.7s; }
+@keyframes idraw { to { stroke-dashoffset: 0; } }
+.i-name { font-family: var(--font-display); font-size: clamp(4rem, 12vw, 9rem); line-height: 1; color: #fff; letter-spacing: .4em; padding-left: .4em; opacity: 0; filter: blur(14px); animation: iname 1.6s 1.3s cubic-bezier(.16, .8, .2, 1) forwards; text-shadow: 0 0 60px rgba(98, 180, 245, .45); }
+@keyframes iname { to { opacity: 1; letter-spacing: .04em; padding-left: .04em; filter: blur(0); } }
+.i-sub { margin-top: 8px; font-size: .875rem; font-weight: 600; letter-spacing: .6em; padding-left: .6em; text-transform: uppercase; color: var(--glow); opacity: 0; animation: ifadein .9s 2.1s ease forwards; }
+.i-tag { margin-top: 30px; font-size: .75rem; letter-spacing: .3em; padding-left: .3em; text-transform: uppercase; color: #7F95AB; opacity: 0; animation: ifadein .9s 2.5s ease forwards; }
+@keyframes ifadein { to { opacity: 1; } }
+.i-skip { position: absolute; right: max(24px, env(safe-area-inset-right, 0px)); bottom: max(24px, env(safe-area-inset-bottom, 0px)); z-index: 6; background: none; border: 1px solid var(--line-strong); color: var(--mist); font: 600 .75rem var(--font-body); letter-spacing: .24em; text-transform: uppercase; padding: 12px 18px; min-height: 44px; border-radius: 999px; cursor: pointer; opacity: 0; animation: ifadein .6s 1s ease forwards; transition: color .2s, border-color .2s; }
+.i-skip:hover, .i-skip:focus-visible { color: #fff; border-color: var(--glow); outline: none; }
+/* hold the hero's own entrance until the curtains are opening */
+html.intro-pending .hero *, html.intro-pending .hero *::before, html.intro-pending .hero *::after { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) { html.intro-pending #intro { display: none; } html.intro-pending { overflow: auto; } }
+@media (max-width: 680px) { .i-skip { right: 16px; bottom: max(20px, env(safe-area-inset-bottom, 0px)); } .i-name { letter-spacing: .3em; padding-left: .3em; } }
+#intro.gated *, #intro.gated *::before, #intro.gated *::after { animation-play-state: paused !important; }
+.i-enter { position: absolute; left: 50%; top: 50%; z-index: 7; transform: translate(-50%, -50%); display: grid; justify-items: center; gap: 14px; background: none; border: 0; color: var(--enamel); cursor: pointer; padding: 28px 40px; font-family: var(--font-body); opacity: 0; animation: ifadein .9s .2s ease forwards; transition: opacity .5s ease, transform .5s ease; }
+#intro.gated .i-enter, #intro.gated .i-enter *, #intro.gated .i-enter *::before, #intro.gated .i-enter *::after { animation-play-state: running !important; }
+.ie-ring { width: 112px; height: 112px; border-radius: 50%; border: 1px solid rgba(168, 216, 255, .5); box-shadow: 0 0 40px rgba(98, 180, 245, .22), inset 0 0 24px rgba(98, 180, 245, .12); display: grid; place-items: center; position: relative; animation: ibeat 2.8s ease-in-out infinite; transition: border-color .3s; }
+.ie-ring::before, .ie-ring::after { content: none; animation: iripple 2.8s cubic-bezier(.2, .6, .3, 1) infinite; pointer-events: none; }
+.ie-ring::after { animation-delay: 1.4s; }
+@keyframes ibeat { 0%, 100% { transform: scale(1); box-shadow: 0 0 36px rgba(98, 180, 245, .2), inset 0 0 22px rgba(98, 180, 245, .1); } 50% { box-shadow: 0 0 56px rgba(98, 180, 245, .34), inset 0 0 28px rgba(98, 180, 245, .16); } }
+@keyframes iripple { 0% { transform: scale(1); opacity: .3; } 100% { transform: scale(1.7); opacity: 0; } }
+.ie-t { font: 400 1.6rem var(--font-display); letter-spacing: .02em; }
+.ie-s { font-size: .72rem; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; color: var(--mist); }
+#intro.gated .i-line, #intro.gated .i-flash, #intro.gated .i-mid { visibility: hidden; }
+.i-enter:hover .ie-ring, .i-enter:focus-visible .ie-ring { border-color: var(--glow); }
+.i-enter:focus-visible { outline: none; }
+.i-enter.go { opacity: 0 !important; transform: translate(-50%, -50%) scale(1.08); pointer-events: none; animation: none; }
+@keyframes ipulse2 { 50% { transform: scale(1.12); opacity: .55; } }
+.i-logoimg { width: min(440px, 78vw); height: auto; opacity: 0; filter: blur(14px); transform: scale(.94); animation: ilogo 1.6s 1.3s cubic-bezier(.16, .8, .2, 1) forwards; }
+@keyframes ilogo { to { opacity: 1; filter: blur(0) drop-shadow(0 0 30px rgba(98,180,245,.45)); transform: none; } }
+.i-logoimg { box-sizing: content-box; background: #fff; padding: clamp(18px, 3vw, 30px) clamp(24px, 4vw, 44px); border-radius: 20px; width: min(420px, 62vw); box-shadow: 0 0 0 1px rgba(255,255,255,.4), 0 30px 90px rgba(98, 180, 245, .35); }
+@keyframes ilogo { to { opacity: 1; filter: blur(0); transform: none; } }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<script>
+/* decide before first paint whether the opening sequence plays */
+(function () { try { if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('intro-pending'); } catch (e) {} })();
+</script>
+<div id="intro" role="presentation">
+  <div class="i-half i-top" aria-hidden="true"></div>
+  <div class="i-half i-bot" aria-hidden="true"></div>
+  <div class="i-line" aria-hidden="true"></div>
+  <div class="i-mid" aria-hidden="true">
+    <img class="i-logoimg" src="img/logo-brand.png" alt="Haworth Dental">
+    <div class="i-tag">Family dentistry since 1966</div>
+  </div>
+  <div class="i-flash" aria-hidden="true"></div>
+  <button class="i-enter" type="button" aria-label="Enter Haworth Dental with sound"><span class="ie-ring"><span class="ie-t">Enter</span></span><span class="ie-s">Best with sound on</span></button>
+  <button class="i-skip" type="button">Skip intro</button>
+</div>
 <div class="progress" id="progress" aria-hidden="true"></div>
 
 <header class="site-head" id="top">
@@ -740,6 +820,111 @@ footer .legal a { font-weight: 400; }
   <a class="d-book" href="#book">Book a visit</a>
 </nav>
 
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  /* opening sequence */
+  const intro = $('#intro'), rootEl = document.documentElement;
+  if (intro) {
+    if (!rootEl.classList.contains('intro-pending')) { intro.remove(); }
+    else {
+      let t1, t2, done = false, started = false;
+      const reveal = () => rootEl.classList.remove('intro-pending');
+      const finish = fast => {
+        if (done) return; done = true; clearTimeout(t1); clearTimeout(t2);
+        if (fast) { intro.classList.add('skip'); reveal(); setTimeout(() => intro.remove(), 600); }
+        else { reveal(); }
+      };
+
+      /* ---- cinematic sound, synthesized live (no files). Browsers only allow it after a tap, so it starts on
+         the first touch if autoplay is refused, joining the sequence where it has got to. ---- */
+      const AC = window.AudioContext || window.webkitAudioContext;
+      let ac, master, soundOn = false, muted = false;
+      const label = () => {};
+      const playScore = off => {
+        const now = ac.currentTime, rate = ac.sampleRate;
+        const at = s => now + Math.max(s, off) - off;
+        const live = end => end > off;
+        master = ac.createGain(); master.gain.value = 0.0001;
+        const comp = ac.createDynamicsCompressor(); comp.threshold.value = -16; comp.ratio.value = 5;
+        master.connect(comp); comp.connect(ac.destination);
+        master.gain.exponentialRampToValueAtTime(muted ? 0.0001 : 0.7, now + 0.25);
+        const len = Math.floor(rate * 3), imp = ac.createBuffer(2, len, rate);
+        for (let c = 0; c < 2; c++) { const d = imp.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
+        const rev = ac.createConvolver(); rev.buffer = imp; const wet = ac.createGain(); wet.gain.value = 0.55; rev.connect(wet); wet.connect(master);
+        const nb = ac.createBuffer(1, rate * 2, rate), nd = nb.getChannelData(0); for (let i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1;
+        const out = (node, send) => { node.connect(master); if (send) { const g = ac.createGain(); g.gain.value = send; node.connect(g); g.connect(rev); } };
+        const noise = (s0, s1, f0, f1, peak, type, q, pan) => {
+          if (!live(s1)) return;
+          const src = ac.createBufferSource(); src.buffer = nb; src.loop = true;
+          const f = ac.createBiquadFilter(); f.type = type || 'bandpass'; f.Q.value = q || 1;
+          f.frequency.setValueAtTime(f0, at(s0)); f.frequency.exponentialRampToValueAtTime(f1, at(s1));
+          const g = ac.createGain(); g.gain.setValueAtTime(0.0001, at(s0));
+          g.gain.exponentialRampToValueAtTime(peak, at(s0 + (s1 - s0) * 0.7)); g.gain.exponentialRampToValueAtTime(0.0001, at(s1));
+          src.connect(f); f.connect(g);
+          let last = g; if (pan && ac.createStereoPanner) { const p = ac.createStereoPanner(); p.pan.setValueAtTime(pan[0], at(s0)); p.pan.linearRampToValueAtTime(pan[1], at(s1)); g.connect(p); last = p; }
+          out(last, 0.5); src.start(at(s0)); src.stop(at(s1) + 0.1);
+        };
+        const tone = (type, freq, s0, dur, peak, atk, lp, send, f1) => {
+          if (!live(s0 + dur)) return;
+          const o = ac.createOscillator(); o.type = type; o.frequency.setValueAtTime(freq, at(s0)); if (f1) o.frequency.exponentialRampToValueAtTime(f1, at(s0 + dur * 0.35));
+          const g = ac.createGain(); g.gain.setValueAtTime(0.0001, at(s0)); g.gain.exponentialRampToValueAtTime(peak, at(s0) + atk); g.gain.exponentialRampToValueAtTime(0.0001, at(s0 + dur));
+          let n = o; if (lp) { const f = ac.createBiquadFilter(); f.type = 'lowpass'; f.frequency.setValueAtTime(lp[0], at(s0)); f.frequency.exponentialRampToValueAtTime(lp[1], at(s0 + dur)); o.connect(f); n = f; }
+          n.connect(g); out(g, send); o.start(at(s0)); o.stop(at(s0 + dur) + 0.1);
+        };
+        /* soothing ocean: slow swells of filtered noise that rise, crest on the downbeat as the curtains part, then
+           slide back as fizzing foam */
+        const surf = (s0, rise, fall, peak, top, p0, p1) => {
+          const end = s0 + rise + fall; if (!live(end)) return;
+          const mk = (ftype, f0, f1, f2, pk, tPeak, tEnd, q) => {
+            const src = ac.createBufferSource(); src.buffer = nb; src.loop = true; src.playbackRate.value = 0.6 + Math.random() * 0.2;
+            const f = ac.createBiquadFilter(); f.type = ftype; f.Q.value = q;
+            f.frequency.setValueAtTime(f0, at(s0)); f.frequency.exponentialRampToValueAtTime(f1, at(tPeak)); f.frequency.exponentialRampToValueAtTime(f2, at(tEnd));
+            const g = ac.createGain(); g.gain.setValueAtTime(0.0001, at(s0));
+            g.gain.exponentialRampToValueAtTime(pk * 0.25, at(s0 + (tPeak - s0) * 0.6)); g.gain.exponentialRampToValueAtTime(pk, at(tPeak)); g.gain.exponentialRampToValueAtTime(0.0001, at(tEnd));
+            src.connect(f); f.connect(g);
+            let last = g; if (ac.createStereoPanner) { const pn = ac.createStereoPanner(); pn.pan.setValueAtTime(p0, at(s0)); pn.pan.linearRampToValueAtTime(p1, at(tEnd)); g.connect(pn); last = pn; }
+            out(last, 0.35); src.start(at(s0)); src.stop(at(tEnd) + 0.1);
+          };
+          mk('lowpass', 180, top, 260, peak, s0 + rise, end, 0.5);                                   /* the body of the swell */
+          mk('bandpass', 1800, 5200, 2400, peak * 0.16, s0 + rise * 1.05, s0 + rise + fall * 0.9, 0.6);   /* foam fizz on the break */
+          mk('highpass', 4200, 6500, 5200, peak * 0.07, s0 + rise * 1.1, s0 + rise + fall * 0.8, 0.7);    /* bubbles */
+        };
+        { const src = ac.createBufferSource(); src.buffer = nb; src.loop = true; src.playbackRate.value = 0.55;
+          const f = ac.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 480; f.Q.value = 0.5;
+          const g = ac.createGain(); g.gain.setValueAtTime(0.0001, at(0)); g.gain.linearRampToValueAtTime(0.07, at(0.7)); g.gain.setValueAtTime(0.07, at(4.4)); g.gain.linearRampToValueAtTime(0.0001, at(5.2));
+          src.connect(f); f.connect(g); out(g, 0.3); src.start(at(0)); src.stop(at(5.2) + 0.1); }   /* the sea underneath, always there */
+        surf(0.0, 1.2, 1.4, 0.6, 1400, -0.45, 0.4);
+        surf(1.85, 1.25, 2.1, 0.62, 2300, 0.35, -0.4);          /* the main swell crests at the downbeat */
+        surf(3.7, 0.85, 1.5, 0.45, 1300, -0.3, 0.45);
+        tone('sine', 52, 2.2, 2.8, 0.14, 1.0, null, 0.1, 44);   /* deep body under the big swell */
+        setTimeout(() => { try { master.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + 1.2); } catch (e) {} }, Math.max(300, 7000 - off * 1000));
+      };
+      const startSound = () => {
+        if (soundOn || !AC) return;
+        try { ac = ac || new AC(); } catch (e) { return; }
+        const go = () => { if (soundOn || ac.state !== 'running') return; soundOn = true; playScore(0); };
+        const r = ac.resume(); if (r && r.then) r.then(go).catch(() => {}); else go();
+        setTimeout(go, 60);
+      };
+      /* Browsers refuse sound until a user gesture, so (unless autoplay is already allowed) the intro waits on an
+         "Enter" card. The click is the gesture, which lets the score play from the very first frame, every time. */
+      const enter = $('.i-enter', intro);
+      const begin = () => {
+        if (started) return; started = true;
+        intro.classList.remove('gated'); enter.classList.add('go'); startSound();
+        t1 = setTimeout(() => { finish(false); t2 = setTimeout(() => intro.remove(), 1500); }, 4300);
+      };
+      let probe = null; try { probe = AC && new AC(); } catch (e) {}
+      if (probe && probe.state === 'running') { ac = probe; enter.remove(); begin(); }
+      else { if (probe) { try { probe.close(); } catch (e) {} } intro.classList.add('gated'); enter.addEventListener('click', begin); setTimeout(() => { try { enter.focus({ preventScroll: true }); } catch (e) {} }, 300); }
+      const stopSound = () => { if (soundOn && master) { try { master.gain.cancelScheduledValues(ac.currentTime); master.gain.setTargetAtTime(0.0001, ac.currentTime, 0.12); } catch (e) {} } };
+      $('.i-skip', intro).addEventListener('click', () => { stopSound(); finish(true); });
+      addEventListener('keydown', e => { if (e.key === 'Escape') { stopSound(); finish(true); } });
+    }
+  }
+})();
+</script>
 <script>
 (() => {
   const $ = (s, r = document) => r.querySelector(s);
