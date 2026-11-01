@@ -500,6 +500,14 @@ footer .notes p { margin: 8px 0 0; max-width: 60ch; }
 .more-quotes { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
 .more-quotes .quote blockquote { font-size: 1rem; }
 @media (min-width: 900px) { .more-quotes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* back to top */
+.to-top { position: fixed; right: max(18px, env(safe-area-inset-right, 0px)); bottom: max(22px, env(safe-area-inset-bottom, 0px)); z-index: 55; width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--white); background: var(--navy); color: var(--white); display: grid; place-items: center; cursor: pointer; box-shadow: 0 6px 20px rgba(10, 49, 87, .35); visibility: hidden; opacity: 0; transform: translateY(8px); transition: opacity .25s, transform .25s, visibility 0s .25s, background .2s; }
+.to-top.show { visibility: visible; opacity: 1; transform: none; transition: opacity .25s, transform .25s, visibility 0s, background .2s; }
+.to-top:hover { background: var(--navy-deep); }
+.to-top:focus-visible { outline: 3px solid #B6E0FF; outline-offset: 3px; }
+.to-top svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 760px) { .to-top { bottom: calc(86px + env(safe-area-inset-bottom, 0px)); width: 44px; height: 44px; } }
 </style>
 </head>
 <body>
@@ -798,6 +806,8 @@ footer .notes p { margin: 8px 0 0; max-width: 60ch; }
   <p class="legal wrap">Design concept by <a href="https://digitalcultureit.com" target="_blank" rel="noopener">Digital Culture IT Solutions</a> &middot; shared for review only, not for reuse. Practice name, details and imagery belong to their respective owners.</p>
 </footer>
 
+<button type="button" class="to-top" id="toTop" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
 <nav class="dock" id="dock" aria-label="Quick actions">
   <a class="d-call" data-evt="call_click" href="tel:+12013841717">Call now</a>
   <a class="d-book" data-evt="book_click" href="https://local.demandforce.com/b/tallebel/schedule?d3cp_key=2431246F6E64656D616E642433625564704F786F4F42673057436E5A644354473031&amp;d3cp_query=5165527D793E9DDFBB7B8B31556CCF0913EC1F2206B9AAA5F0464DD5C326E080364EBA127B9293002A35686FAE990887C719C4C83C0D704323D6FBD0A6ABB425D2E490A70FA88EC45380B78C1FD6AEDCEF0327B44B1871E3B0CDAFEE47467FE64EDEEEBA6AC09DE018032C3F5D94F239A70DD650BF99638E83AC377516176F27BA124E31D4019726E3E7240BC099E576162E8DDF8CCDD2D894EB765844D8A47C042FCA8A4FBFDB8B40E59E360F64AE8A2D1A2E6C1FAC3C5086F93B3CE6B6AF1B353B752759571B8C26A6BA7ACFD837D7E22C4A86F1194CA4B7AB04C2F0177D6DC0F324575C1711E9&amp;legacyCampaign=1#new_template" target="_blank" rel="noopener">Request appointment</a>
@@ -969,6 +979,19 @@ footer .notes p { margin: 8px 0 0; max-width: 60ch; }
       }
       window.dataLayer.push({ event: 'visit_type_select', visit_type: r.value });
     });
+  });
+})();
+</script>
+<script>
+(function () {
+  var b = document.getElementById('toTop');
+  if (!b) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function upd() { b.classList.toggle('show', (window.scrollY || document.documentElement.scrollTop) > 900); }
+  window.addEventListener('scroll', upd, { passive: true }); upd();
+  b.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    var s = document.querySelector('.logo-block'); if (s) s.focus({ preventScroll: true });
   });
 })();
 </script>
