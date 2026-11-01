@@ -478,13 +478,18 @@ footer .legal a { font-weight: 400; }
 @media (prefers-reduced-motion: reduce) { .qcard .qwords em { animation: none; } .qcard .qwords em:first-child { opacity: 1; } }
 .qcard .qline { width: 44px; height: 1px; background: rgba(255,255,255,.6); margin: 6px 0; }
 .qcard .qsub { font: 400 .78rem/1.5 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: #B9CCE0; max-width: 18ch; }
-.g-more { text-align: center; margin: clamp(28px, 3.5vw, 44px) 0 clamp(36px, 5vw, 64px); }
-.g-link { display: inline-flex; align-items: center; gap: 16px; padding: 6px 12px 6px 6px; border-radius: 999px; color: var(--slate-deep); text-decoration: none; transition: transform .4s cubic-bezier(.2,.7,.2,1), color .3s; }
-.g-badge { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: #EEF0F2; box-shadow: 0 8px 22px rgba(14,66,113,.14), inset 0 0 0 1px rgba(14,66,113,.06); transition: box-shadow .4s, transform .4s cubic-bezier(.2,.7,.2,1); }
-.g-badge svg { width: 28px; height: 28px; }
-.g-txt { font: 400 1.75rem/1 var(--sans); letter-spacing: .01em; }
+.g-more { text-align: center; margin: clamp(20px, 2.6vw, 32px) 0 clamp(32px, 4.5vw, 56px); }
+.g-link { display: inline-flex; align-items: center; gap: 12px; padding: 4px 10px 4px 4px; border-radius: 999px; color: var(--slate-deep); text-decoration: none; transition: transform .4s cubic-bezier(.2,.7,.2,1), color .3s; }
+.g-badge { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #EEF0F2; box-shadow: 0 8px 22px rgba(14,66,113,.14), inset 0 0 0 1px rgba(14,66,113,.06); transition: box-shadow .4s, transform .4s cubic-bezier(.2,.7,.2,1); }
+.g-badge svg { width: 20px; height: 20px; }
+.g-txt { font: 400 1.15rem/1 var(--sans); letter-spacing: .01em; }
 .g-link:hover, .g-link:focus-visible { color: var(--navy); }
 .g-link:hover .g-badge, .g-link:focus-visible .g-badge { transform: scale(1.06); box-shadow: 0 14px 30px rgba(14,66,113,.22), inset 0 0 0 1px rgba(14,66,113,.1); }
+footer a.g-link.g-foot { display: flex; width: fit-content; margin-top: 16px; padding: 3px 8px 3px 3px; gap: 10px; border: 0; color: #C9D8E8; font-weight: 400; }
+footer .g-foot .g-badge { width: 30px; height: 30px; box-shadow: none; }
+footer .g-foot .g-badge svg { width: 15px; height: 15px; }
+footer .g-foot .g-txt { font-size: .95rem; }
+footer a.g-link.g-foot:hover { color: var(--white); }
 /* floating flower background */
 #petals { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
 #petals .pf { position: absolute; left: 0; top: 0; display: block; aspect-ratio: 384 / 416; background: url(img/flower-blue.png) center / contain no-repeat; opacity: .08; will-change: transform; }
@@ -871,7 +876,7 @@ html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::
     </div>
     <div class="f-col"><h3>Visit</h3><p>141 Terrace St<br>Haworth, NJ 07641</p></div>
     <div class="f-col"><h3>Call</h3><p><a href="tel:+12013841717">(201) 384-1717</a><br>Insurance: <a href="tel:+15515002031">(551) 500-2031</a></p></div>
-    <div class="f-col"><h3>Explore</h3><p><a href="#care">Services</a> &middot; <a href="#about">Dr. Lebel</a><br><a href="#insurance">Insurance</a> &middot; <a href="#reviews">Reviews</a></p></div>
+    <div class="f-col"><h3>Explore</h3><p><a href="#care">Services</a> &middot; <a href="#about">Dr. Lebel</a><br><a href="#insurance">Insurance</a> &middot; <a href="#reviews">Reviews</a></p><a class="g-link g-foot" href="https://www.google.com/search?q=haworth+dental+nj&amp;oq=haworth+dental+nj&amp;aqs=chrome..69i57j69i61l2.3295j0j1&amp;sourceid=chrome&amp;ie=UTF-8#lrd=0x89c2efd161bcee1b:0x762efe460a3084b8,3," target="_blank" rel="noopener"><span class="g-badge"><svg viewBox="0 0 48 48" width="26" height="26" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.2 5.5-4.7 7.2l7.5 5.8c4.4-4.1 7-10.100 7-17.500z"/><path fill="#FBBC05" d="M10.500 28.700A14.500 14.500 0 0 1 9.500 24c0-1.600.3-3.200.8-4.700l-7.900-6.100A24 24 0 0 0 0 24c0 3.900.9 7.500 2.600 10.800l7.900-6.100z"/><path fill="#34A853" d="M24 48c6.500 0 11.900-2.100 15.900-5.800l-7.500-5.800c-2.100 1.400-4.800 2.300-8.400 2.300-6.300 0-11.600-4.100-13.500-9.800l-7.900 6.100C6.500 42.600 14.600 48 24 48z"/></svg></span><span class="g-txt">Write Review</span></a></div>
   </div>
   <p class="areas wrap">Serving Haworth, Dumont, Oradell, Westwood, Paramus, River Edge, Emerson and nearby Bergen County.</p>
   <div class="notes wrap">
