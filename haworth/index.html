@@ -478,6 +478,18 @@ footer .legal a { font-weight: 400; }
 @media (prefers-reduced-motion: reduce) { .qcard .qwords em { animation: none; } .qcard .qwords em:first-child { opacity: 1; } }
 .qcard .qline { width: 44px; height: 1px; background: rgba(255,255,255,.6); margin: 6px 0; }
 .qcard .qsub { font: 400 .78rem/1.5 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: #B9CCE0; max-width: 18ch; }
+/* floating flower background */
+#petals { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+#petals .pf { position: absolute; left: 0; top: 0; display: block; aspect-ratio: 384 / 416; background: url(img/flower-blue.png) center / contain no-repeat; opacity: .08; will-change: transform; animation: pf-drift var(--d) linear infinite; animation-delay: var(--dl); }
+.pf1 { width: 340px; --d: 150s; --dl: -20s; --x0: -10vw; --x1: 95vw; --y0: 70vh; --y1: 10vh; }
+.pf2 { width: 200px; --d: 120s; --dl: -70s; --x0: 100vw; --x1: -15vw; --y0: 20vh; --y1: 80vh; opacity: .08 !important; }
+.pf3 { width: 460px; --d: 190s; --dl: -110s; --x0: 30vw; --x1: 70vw; --y0: 105vh; --y1: -40vh; opacity: .06 !important; }
+.pf4 { width: 150px; --d: 100s; --dl: -40s; --x0: 85vw; --x1: 5vw; --y0: 95vh; --y1: 35vh; }
+.pf5 { width: 260px; --d: 170s; --dl: -130s; --x0: -15vw; --x1: 60vw; --y0: 30vh; --y1: 110vh; opacity: .07 !important; }
+.pf6 { width: 120px; --d: 90s; --dl: -15s; --x0: 50vw; --x1: 110vw; --y0: -10vh; --y1: 60vh; }
+@keyframes pf-drift { from { transform: translate(var(--x0), var(--y0)) rotate(0deg); } to { transform: translate(var(--x1), var(--y1)) rotate(360deg); } }
+.section.alt, .map-band { background: rgba(238,243,248,.72); }
+@media (prefers-reduced-motion: reduce) { #petals .pf { animation: none; transform: translate(var(--x1), var(--y1)); } }
 /* boutique restyle of banner card */
 .frame.qcard { max-width: 300px; justify-content: center; gap: 0; padding: 34px 26px; overflow: hidden; isolation: isolate;
   background: radial-gradient(120% 80% at 50% -10%, #1F6AA8 0%, rgba(31,106,168,0) 55%), radial-gradient(90% 60% at 50% 115%, rgba(125,181,230,.28), rgba(125,181,230,0) 60%), linear-gradient(180deg, #0C3A66 0%, #072644 100%);
@@ -565,6 +577,7 @@ html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div id="petals" aria-hidden="true"><i class="pf pf1"></i><i class="pf pf2"></i><i class="pf pf3"></i><i class="pf pf4"></i><i class="pf pf5"></i><i class="pf pf6"></i></div>
 <div id="veil" aria-hidden="true"><div class="v-card"><img src="img/logo-brand.png" alt="" width="416" height="104"></div><span class="v-line"></span></div>
 <div class="progress" id="progress" aria-hidden="true"></div>
 
