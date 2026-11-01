@@ -33,11 +33,20 @@
   "employee": {"@type": "Person", "name": "Tal Lebel, DMD", "jobTitle": "Dentist"}
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@400;500;600&display=swap">
-<script>document.documentElement.classList.add("js")</script>
+<link rel="preload" href="fonts/cormorant-garamond-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/jost-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/jost-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/seat-hd.jpg" as="image" fetchpriority="high">
+<script>document.documentElement.classList.add("js");(function(){try{var d=document.documentElement;if(matchMedia("(prefers-reduced-motion: reduce)").matches||location.hash||sessionStorage.getItem("hdv"))return;sessionStorage.setItem("hdv","1");d.classList.add("veil","veil-hold");}catch(e){}})();</script>
 <style>
+@font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/cormorant-garamond-latin-500-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 600; font-display: swap; src: url("fonts/cormorant-garamond-latin-600-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 700; font-display: swap; src: url("fonts/cormorant-garamond-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Cormorant Garamond"; font-style: italic; font-weight: 500; font-display: swap; src: url("fonts/cormorant-garamond-latin-500-italic.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Cormorant Garamond"; font-style: italic; font-weight: 600; font-display: swap; src: url("fonts/cormorant-garamond-latin-600-italic.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Jost"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/jost-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Jost"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/jost-latin-500-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Jost"; font-style: normal; font-weight: 600; font-display: swap; src: url("fonts/jost-latin-600-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 /* Layout inspired by classic navy-and-white family-practice sites: white logo block on a navy header,
    a full-width photo, navy statement bands, photo-topped service columns, navy contact band, slate footer. */
 :root {
@@ -108,7 +117,8 @@ p { margin: 0; }
 .hero-bg .fg { position: absolute; top: 0; right: 0; height: 100%; width: 66%; object-fit: cover; object-position: 50% 28%; transform-origin: 60% 40%;
   filter: none;
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 26%); mask-image: linear-gradient(90deg, transparent 0%, #000 26%); }
-.hero-bg .slide.on .fg { animation: none; }
+.hero-bg .slide.on .fg { animation: kb 18s cubic-bezier(.25, .6, .3, 1) both; will-change: scale; }
+@keyframes kb { from { scale: 1; } to { scale: 1.08; } }
 @keyframes push { from { transform: scale(1); } to { transform: scale(1.04); } }
 .hero-grade { position: absolute; inset: 0; z-index: -3;
   background: linear-gradient(90deg, rgba(5, 24, 46, .9) 0%, rgba(5, 24, 46, .66) 30%, rgba(5, 24, 46, .08) 56%, rgba(5, 24, 46, 0) 100%),
@@ -236,10 +246,12 @@ p { margin: 0; }
   .hero .cue { display: none; }
   /* mobile: the photo is a smaller stage, so the camera move is more visible */
   .hero-bg .main { transform-origin: 80% 45%; }
-  .hero-bg .slide.on .main, .hero-bg .slide.on .fg { animation: none; }
+  .hero-bg .slide.on .main, .hero-bg .slide.on .fg { animation: kb 18s cubic-bezier(.25, .6, .3, 1) both; will-change: scale; }
+@keyframes kb { from { scale: 1; } to { scale: 1.08; } }
   .hero-bg .fg { right: auto; left: -26px; width: calc(100% + 52px); max-width: none; height: auto; aspect-ratio: 3 / 2; top: 14px; object-position: 50% 50% !important;
     -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent 100%); mask-image: linear-gradient(180deg, #000 70%, transparent 100%); }
-  .hero-bg .slide.on .fg { animation: none; }
+  .hero-bg .slide.on .fg { animation: kb 18s cubic-bezier(.25, .6, .3, 1) both; will-change: scale; }
+@keyframes kb { from { scale: 1; } to { scale: 1.08; } }
   .hero-bg .fg { translate: 24px 0; }
   .hero-bg .bgblur { display: none; }
   .hero .bar { height: 9vh; }
@@ -508,10 +520,24 @@ footer .notes p { margin: 8px 0 0; max-width: 60ch; }
 .to-top:focus-visible { outline: 3px solid #B6E0FF; outline-offset: 3px; }
 .to-top svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
 @media (max-width: 760px) { .to-top { bottom: calc(86px + env(safe-area-inset-bottom, 0px)); width: 44px; height: 44px; } }
+
+/* opening veil: a short, automatic reveal (no click, no sound) */
+#veil { display: none; }
+html.veil #veil { display: grid; place-content: center; justify-items: center; gap: 26px; position: fixed; inset: 0; z-index: 100; background: radial-gradient(80% 70% at 50% 45%, #0E4271, #061C34); transition: transform .7s cubic-bezier(.77, 0, .18, 1); animation: vfs .01s 3.5s forwards; }
+html.veil #veil.lift { transform: translateY(-100%); }
+#veil .v-card { background: #fff; padding: clamp(16px, 2.6vw, 26px) clamp(22px, 3.4vw, 40px); border-radius: 2px; box-shadow: 0 30px 80px rgba(0, 0, 0, .35); opacity: 0; transform: translateY(10px) scale(.98); animation: vin .7s .1s cubic-bezier(.16, .8, .2, 1) forwards; }
+#veil img { display: block; width: min(340px, 62vw); height: auto; }
+#veil .v-line { width: min(340px, 62vw); height: 1px; background: linear-gradient(90deg, transparent, #9FC4E6, transparent); transform: scaleX(0); animation: vline .7s .3s cubic-bezier(.2, .7, .2, 1) forwards; }
+@keyframes vin { to { opacity: 1; transform: none; } }
+@keyframes vline { to { transform: none; } }
+@keyframes vfs { to { visibility: hidden; opacity: 0; pointer-events: none; } }
+html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::after { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) { html.veil #veil { display: none; } }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div id="veil" aria-hidden="true"><div class="v-card"><img src="img/logo-brand.png" alt="" width="416" height="104"></div><span class="v-line"></span></div>
 <div class="progress" id="progress" aria-hidden="true"></div>
 
 <header class="site-head" id="top">
@@ -993,6 +1019,15 @@ footer .notes p { margin: 8px 0 0; max-width: 60ch; }
     window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
     var s = document.querySelector('.logo-block'); if (s) s.focus({ preventScroll: true });
   });
+})();
+</script>
+<script>
+(function () {
+  var d = document.documentElement, v = document.getElementById('veil');
+  if (!v) return;
+  if (!d.classList.contains('veil')) { v.remove(); return; }
+  setTimeout(function () { d.classList.remove('veil-hold'); v.classList.add('lift'); }, 800);
+  setTimeout(function () { d.classList.remove('veil'); v.remove(); }, 1600);
 })();
 </script>
 </body>
