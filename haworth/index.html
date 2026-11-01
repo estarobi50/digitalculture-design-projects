@@ -480,14 +480,14 @@ footer .legal a { font-weight: 400; }
 .qcard .qsub { font: 400 .78rem/1.5 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: #B9CCE0; max-width: 18ch; }
 /* floating flower background */
 #petals { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-#petals .pf { position: absolute; left: 0; top: 0; display: block; aspect-ratio: 384 / 416; background: url(img/flower-blue.png) center / contain no-repeat; opacity: .08; will-change: transform; animation: pf-drift var(--d) linear infinite; animation-delay: var(--dl); }
-.pf1 { width: 340px; --d: 150s; --dl: -20s; --x0: -10vw; --x1: 95vw; --y0: 70vh; --y1: 10vh; }
-.pf2 { width: 200px; --d: 120s; --dl: -70s; --x0: 100vw; --x1: -15vw; --y0: 20vh; --y1: 80vh; opacity: .08 !important; }
-.pf3 { width: 460px; --d: 190s; --dl: -110s; --x0: 30vw; --x1: 70vw; --y0: 105vh; --y1: -40vh; opacity: .06 !important; }
-.pf4 { width: 150px; --d: 100s; --dl: -40s; --x0: 85vw; --x1: 5vw; --y0: 95vh; --y1: 35vh; }
-.pf5 { width: 260px; --d: 170s; --dl: -130s; --x0: -15vw; --x1: 60vw; --y0: 30vh; --y1: 110vh; opacity: .07 !important; }
-.pf6 { width: 120px; --d: 90s; --dl: -15s; --x0: 50vw; --x1: 110vw; --y0: -10vh; --y1: 60vh; }
-@keyframes pf-drift { from { transform: translate(var(--x0), var(--y0)) rotate(0deg); } to { transform: translate(var(--x1), var(--y1)) rotate(360deg); } }
+#petals .pf { position: absolute; left: 0; top: 0; display: block; aspect-ratio: 384 / 416; background: url(img/flower-blue.png) center / contain no-repeat; opacity: .08; will-change: transform; animation: pf-drift var(--d) ease-in-out infinite; animation-delay: var(--dl); }
+.pf1 { width: 340px; --d: 95s;  --dl: -20s; --x0: -10vw; --y0: 70vh; --x1: 40vw; --y1: 5vh;  --x2: 95vw; --y2: 55vh; --x3: 30vw; --y3: 95vh; }
+.pf2 { width: 200px; --d: 80s;  --dl: -50s; --x0: 100vw; --y0: 20vh; --x1: 55vw; --y1: 90vh; --x2: 5vw;  --y2: 30vh; --x3: 70vw; --y3: -5vh; opacity: .07 !important; }
+.pf3 { width: 460px; --d: 120s; --dl: -90s; --x0: 30vw;  --y0: 105vh; --x1: 80vw; --y1: 40vh; --x2: 20vw; --y2: -20vh; --x3: 60vw; --y3: 70vh; opacity: .05 !important; }
+.pf4 { width: 150px; --d: 70s;  --dl: -35s; --x0: 85vw;  --y0: 95vh; --x1: 10vw; --y1: 80vh; --x2: 45vw; --y2: 20vh; --x3: 100vw; --y3: 50vh; }
+.pf5 { width: 260px; --d: 85s;  --dl: -60s; --x0: -8vw;  --y0: 85vh; --x1: 60vw; --y1: 100vh; --x2: 35vw; --y2: 40vh; --x3: 5vw;  --y3: 0vh; opacity: .07 !important; }
+.pf6 { width: 120px; --d: 65s;  --dl: -15s; --x0: 50vw;  --y0: -10vh; --x1: 100vw; --y1: 70vh; --x2: 15vw; --y2: 90vh; --x3: 0vw;  --y3: 35vh; }
+@keyframes pf-drift { 0% { transform: translate(var(--x0), var(--y0)) rotate(0deg); } 25% { transform: translate(var(--x1), var(--y1)) rotate(120deg); } 50% { transform: translate(var(--x2), var(--y2)) rotate(200deg); } 75% { transform: translate(var(--x3), var(--y3)) rotate(290deg); } 100% { transform: translate(var(--x0), var(--y0)) rotate(360deg); } }
 .section.alt, .map-band { background: rgba(238,243,248,.72); }
 @media (prefers-reduced-motion: reduce) { #petals .pf { animation: none; transform: translate(var(--x1), var(--y1)); } }
 /* boutique restyle of banner card */
