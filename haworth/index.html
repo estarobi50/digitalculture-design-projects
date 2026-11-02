@@ -579,6 +579,100 @@ html.veil #veil.lift { transform: translateY(-100%); }
 @keyframes vfs { to { visibility: hidden; opacity: 0; pointer-events: none; } }
 html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::after { animation-play-state: paused !important; }
 @media (prefers-reduced-motion: reduce) { html.veil #veil { display: none; } }
+
+/* ===== luxury pass ===== */
+/* eyebrows */
+.eyebrow { display: inline-flex; align-items: center; gap: 14px; margin: 0 0 1.1rem; font: 500 .76rem/1.2 var(--sans); letter-spacing: .3em; text-transform: uppercase; color: var(--slate-deep); }
+.eyebrow::before { content: ""; width: 38px; height: 1px; background: currentColor; opacity: .6; }
+.section-head .eyebrow { justify-content: center; }
+.section-head p.eyebrow, .copy p.eyebrow, .contact-band p.eyebrow, .bleed p.eyebrow { margin: 0 0 1.1rem; font-size: .76rem; line-height: 1.2; }
+.section-head:not(.left) .eyebrow::after { content: ""; width: 38px; height: 1px; background: currentColor; opacity: .6; }
+.contact-band .eyebrow, .bleed .eyebrow { color: #BFD6EC; }
+.rule { display: none; }
+.section-head.left { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: end; gap: 16px clamp(28px, 5vw, 80px); max-width: none; text-align: left; }
+.section-head.left .eyebrow { justify-content: flex-start; }
+.section-head.left > p { margin: 0 0 .4rem; color: var(--text); }
+@media (max-width: 760px) { .section-head.left { grid-template-columns: minmax(0, 1fr); } }
+h2 { letter-spacing: -.018em; }
+
+/* header: transparent over hero, slim when scrolled */
+.site-head { transition: background-color .5s, box-shadow .5s; }
+.logo-block { background: transparent; }
+.logo-block img { transition: max-height .5s; }
+.nav { justify-content: flex-end; align-items: center; gap: 4px clamp(22px, 2.6vw, 40px); }
+.nav a { border-bottom: 0; background: linear-gradient(currentColor, currentColor) 0 calc(100% - 4px) / 0 1px no-repeat; transition: background-size .45s cubic-bezier(.2,.7,.2,1); }
+.nav a:hover, .nav a:focus-visible { background-size: 100% 1px; }
+.nav a.nav-cta { padding: 12px 22px; border: 1px solid rgba(255,255,255,.7); border-radius: 999px; background: none; transition: background-color .3s, color .3s, border-color .3s; }
+.nav a.nav-cta:hover, .nav a.nav-cta:focus-visible { background-color: var(--white); color: var(--navy); }
+@media (min-width: 901px) {
+  .head-info { max-height: 48px; overflow: hidden; transition: max-height .5s, opacity .4s, padding .5s, border-color .5s; border-bottom-color: rgba(255,255,255,.22); font-weight: 500; letter-spacing: .02em; }
+  .site-head.over { background-color: transparent; box-shadow: none; }
+  .site-head.over::before { content: ""; position: absolute; inset: 0 0 -60px; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(4,20,38,.6), rgba(4,20,38,0)); }
+  .site-head.solid { background-color: rgba(10,49,87,.96); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+  .site-head.solid .head-info { max-height: 0; opacity: 0; padding-bottom: 0; border-bottom-color: transparent; }
+  .site-head.solid .logo-block img { max-height: 52px; }
+  .site-head.solid .nav { padding-top: 0; }
+  main > .hero-track:first-child { margin-top: calc(-1 * var(--hh, 0px)); }
+  .hero { min-height: clamp(620px, 100svh, 940px); }
+  .hero-inner { padding-top: calc(var(--hh, 0px) + clamp(40px, 8vh, 90px)) !important; }
+}
+@media (max-width: 900px) { .nav a { background: none; } .nav a.nav-cta { margin-top: 14px; text-align: center; } }
+
+/* hero headline: two confident lines */
+@media (min-width: 1100px) {
+  .hero-copy { max-width: 1000px; }
+  .hero h1 { font-size: clamp(3.4rem, 4.9vw, 4.7rem); }
+}
+
+/* full-bleed band */
+.bleed { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: clamp(440px, 68vh, 720px); background: linear-gradient(160deg, #0E4271 0%, #072644 100%); color: var(--white); overflow: hidden; }
+.bleed-img { position: relative; overflow: hidden; }
+.bleed-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 55% 22%; filter: saturate(.88) contrast(1.04); transform: scale(1.06); transition: transform 2.4s cubic-bezier(.2,.7,.2,1); }
+.bleed-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,38,68,0) 60%, rgba(7,38,68,.55)); }
+.bleed.seen .bleed-img img { transform: none; }
+.bleed-copy { align-self: center; padding: clamp(48px, 7vw, 110px) clamp(24px, 6vw, 100px); max-width: 640px; }
+.bleed h2 { color: var(--white); font: italic 400 clamp(2.2rem, 3.6vw, 3.5rem)/1.12 var(--serif); }
+.bleed-copy > p:last-child { margin-top: 1.4rem; color: #C9DDF0; font-size: 1.1rem; max-width: 44ch; }
+@media (max-width: 760px) { .bleed { grid-template-columns: minmax(0, 1fr); } .bleed-img { aspect-ratio: 4 / 3.4; } }
+
+/* insurance, de-boxed */
+.ins-grid { border: 0; background: transparent; gap: clamp(24px, 5vw, 80px); }
+.ins-card { padding: 4px 0 4px clamp(18px, 2vw, 28px); border-left: 1px solid var(--slate); }
+.ins-card + .ins-card { border-left: 1px solid var(--slate); border-top: 0; }
+.carriers { background: transparent; border: 0; border-top: 1px solid var(--line); padding: clamp(28px, 3.5vw, 44px) 0 0; margin-top: clamp(36px, 4.5vw, 56px); }
+.carriers img { mix-blend-mode: multiply; filter: grayscale(1) contrast(1.05); opacity: .62; transition: filter .6s, opacity .6s; }
+.carriers:hover img { filter: none; opacity: 1; }
+.ins-note { text-align: left; }
+@media (max-width: 900px) { .ins-card + .ins-card { border-top: 0; } }
+
+/* reviews: featured quote + slim rail */
+.rv-feature { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: clamp(32px, 6vw, 100px); align-items: center; }
+.rv-feature .team-banner { margin: 0; }
+.rv-big { min-width: 0; }
+.rv-big .g-stars { margin-bottom: 1.4rem; }
+.rv-slides { display: grid; }
+.rv-slide { grid-area: 1 / 1; margin: 0; opacity: 0; transform: translateY(12px); transition: opacity 1.1s cubic-bezier(.2,.7,.2,1), transform 1.1s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
+.rv-slide.on { opacity: 1; transform: none; pointer-events: auto; }
+.rv-slide blockquote { margin: 0; font: italic 400 clamp(1.7rem, 2.7vw, 2.6rem)/1.28 var(--serif); color: var(--ink); text-wrap: pretty; }
+.rv-slide blockquote::before { content: "\201C"; margin-right: .04em; color: var(--slate); }
+.rv-slide blockquote::after { content: "\201D"; color: var(--slate); }
+.rv-slide figcaption { margin-top: 1.4rem; font: 500 .8rem/1.4 var(--sans); letter-spacing: .24em; text-transform: uppercase; color: var(--navy); }
+.rv-slide figcaption span { color: var(--slate-deep); letter-spacing: .16em; }
+.rv-dots { display: flex; gap: 4px; margin-top: 1.8rem; margin-left: -10px; }
+.rv-dots button { width: 40px; height: 32px; padding: 0; border: 0; background: none; cursor: pointer; position: relative; }
+.rv-dots button::after { content: ""; position: absolute; left: 10px; right: 10px; top: 50%; height: 2px; background: var(--line); transition: background .4s; }
+.rv-dots button.on::after { background: var(--navy); }
+.rv-rail { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(260px, 1fr); gap: clamp(14px, 2vw, 24px); margin-top: clamp(40px, 5vw, 64px); padding: 2px 2px 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+.rv-rail .quote { scroll-snap-align: start; }
+@media (max-width: 900px) {
+  .rv-feature { grid-template-columns: minmax(0, 1fr); }
+  .rv-feature .team-banner { margin-inline: auto; }
+  .rv-rail { grid-auto-columns: 82%; margin-inline: -20px; padding-inline: 20px; scroll-padding-inline: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .rv-slide, .bleed-img img, .carriers img { transition: none; } }
+
+/* mobile dock: clearer secondary button */
+@media (max-width: 760px) { .dock .d-book { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,.75); } }
 </style>
 </head>
 <body>
@@ -587,7 +681,7 @@ html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::
 <div class="progress" id="progress" aria-hidden="true"></div>
 
 <header class="site-head" id="top">
-  <a class="logo-block" href="#top" aria-label="Haworth Dental, home"><img src="img/logo-brand.png" alt="Haworth Dental" width="416" height="104"></a>
+  <a class="logo-block" href="#top" aria-label="Haworth Dental, home"><img src="img/logo-white.png" alt="Haworth Dental" width="416" height="104"></a>
   <div class="head-main">
     <div class="head-info">
       <span class="addr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>141 Terrace St | Haworth, NJ 07641</span>
@@ -595,14 +689,11 @@ html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::
     </div>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">
-      <a href="#top">Home</a>
       <a href="#care">Services</a>
-      <a href="#why">Why Haworth</a>
-      <a href="#about">About us</a>
-      <a href="#insurance">Insurance</a>
+      <a href="#about">About</a>
       <a href="#reviews">Reviews</a>
-      <a href="#articles">Good to know</a>
-      <a href="https://local.demandforce.com/b/tallebel/schedule?d3cp_key=2431246F6E64656D616E642433625564704F786F4F42673057436E5A644354473031&amp;d3cp_query=5165527D793E9DDFBB7B8B31556CCF0913EC1F2206B9AAA5F0464DD5C326E080364EBA127B9293002A35686FAE990887C719C4C83C0D704323D6FBD0A6ABB425D2E490A70FA88EC45380B78C1FD6AEDCEF0327B44B1871E3B0CDAFEE47467FE64EDEEEBA6AC09DE018032C3F5D94F239A70DD650BF99638E83AC377516176F27BA124E31D4019726E3E7240BC099E576162E8DDF8CCDD2D894EB765844D8A47C042FCA8A4FBFDB8B40E59E360F64AE8A2D1A2E6C1FAC3C5086F93B3CE6B6AF1B353B752759571B8C26A6BA7ACFD837D7E22C4A86F1194CA4B7AB04C2F0177D6DC0F324575C1711E9&amp;legacyCampaign=1#new_template" target="_blank" rel="noopener">Request appointment</a>
+      <a href="#insurance">Insurance</a>
+      <a class="nav-cta" data-evt="book_click" href="https://local.demandforce.com/b/tallebel/schedule?d3cp_key=2431246F6E64656D616E642433625564704F786F4F42673057436E5A644354473031&amp;d3cp_query=5165527D793E9DDFBB7B8B31556CCF0913EC1F2206B9AAA5F0464DD5C326E080364EBA127B9293002A35686FAE990887C719C4C83C0D704323D6FBD0A6ABB425D2E490A70FA88EC45380B78C1FD6AEDCEF0327B44B1871E3B0CDAFEE47467FE64EDEEEBA6AC09DE018032C3F5D94F239A70DD650BF99638E83AC377516176F27BA124E31D4019726E3E7240BC099E576162E8DDF8CCDD2D894EB765844D8A47C042FCA8A4FBFDB8B40E59E360F64AE8A2D1A2E6C1FAC3C5086F93B3CE6B6AF1B353B752759571B8C26A6BA7ACFD837D7E22C4A86F1194CA4B7AB04C2F0177D6DC0F324575C1711E9&amp;legacyCampaign=1#new_template">Book a visit</a>
     </nav>
   </div>
 </header>
@@ -646,8 +737,8 @@ html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::
   <section class="section" id="care" aria-labelledby="care-h">
     <div class="wrap">
       <div class="section-head" data-r>
+        <p class="eyebrow">Our care</p>
         <h2 id="care-h">Multi-specialty care, under one roof.</h2>
-        <hr class="rule">
         <p>Pediatric, orthodontic, restorative, implant and cosmetic dentistry in one Haworth practice.</p>
       </div>
       <div class="deck-wrap" id="deck">
@@ -687,6 +778,7 @@ html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::
     <div class="wrap split">
       <figure class="frame offset" style="max-width:560px;margin-inline:auto"><img src="img/office.jpg" alt="The Haworth Dental office at 141 Terrace Street, with a blue sign above the entrance and planters out front" width="1600" height="943" loading="lazy" style="aspect-ratio:4/3"></figure>
       <div class="copy">
+        <p class="eyebrow">Why Haworth</p>
         <h2 id="prac-h">Why choose Haworth Dental?</h2>
         <p>Haworth Dental has been a multi-specialty practice since 1966, so most of what you need can be done in one place, by people who know your history.</p>
         <ul class="checks">
@@ -702,7 +794,8 @@ html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::
     <div class="wrap split" style="align-items:start">
       <figure class="frame offset about-photo"><img src="img/dr-lebel.jpg" alt="Dr. Tal Lebel, smiling, arms crossed, in a dark blazer" width="312" height="352" loading="lazy"></figure>
       <div class="copy">
-        <h2 id="about-h">About us: Tal Lebel, DMD</h2>
+        <p class="eyebrow">Meet the dentist</p>
+        <h2 id="about-h">Tal Lebel, DMD</h2>
         <p>New to our practice in 2015, Dr. Lebel claims he&rsquo;s never worked a day in his life. That&rsquo;s because he enjoys helping patients achieve their healthiest smiles, and that just doesn&rsquo;t feel like work.</p>
         <p>Dr. Lebel completed his undergraduate studies at Brooklyn College and earned his Doctor of Dental Medicine at the University of Medicine and Dentistry of New Jersey. He then completed his dental residency at the prestigious VA Medical Center in San Diego, CA.</p>
         <p>Dedicated to lifelong learning, Dr. Lebel has additional training in Invisalign, dental implants, and advanced restoratives. To stay current and build a support network with his peers, he maintains memberships in various dental organizations.</p>
@@ -730,11 +823,20 @@ html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::
     </div>
   </section>
 
+  <section class="bleed" aria-labelledby="bleed-h">
+    <div class="bleed-img"><img src="img/why-patient.jpg" alt="A relaxed, smiling patient leaning back in the treatment chair" width="852" height="1066" loading="lazy"></div>
+    <div class="bleed-copy" data-r>
+      <p class="eyebrow">Since 1966</p>
+      <h2 id="bleed-h">Unhurried, honest care from people who know your name.</h2>
+      <p>Generations of Haworth families have trusted this practice with every stage of their smile.</p>
+    </div>
+  </section>
+
   <section class="section alt" id="insurance" aria-labelledby="ins-h">
     <div class="wrap">
-      <div class="section-head" data-r>
-        <h2 id="ins-h">Most major plans, accepted.</h2>
-        <hr class="rule">
+      <div class="section-head left" data-r>
+        <div><p class="eyebrow">Insurance</p>
+        <h2 id="ins-h">Most major plans, accepted.</h2></div>
         <p>We file the claims for you, and there are payment options if you don't have coverage.</p>
       </div>
       <div class="ins-grid">
@@ -748,26 +850,30 @@ html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::
 
   <section class="section" id="reviews" aria-labelledby="team-h">
     <div class="wrap">
-      <div class="section-head" data-r>
-        <h2 id="team-h">What patients say about Dr. Lebel.</h2>
-        <hr class="rule">
+      <div class="section-head left" data-r>
+        <div><p class="eyebrow">Patient stories</p>
+        <h2 id="team-h">What patients say about Dr. Lebel.</h2></div>
       </div>
       <!-- GBP_RATING_TBD: add the real Google rating and review count from the Business Profile, then remove the hidden attribute -->
       <p class="g-sum" hidden data-todo="GBP_RATING_TBD" style="text-align:center;margin:0 0 1.5rem"></p>
-      <div class="split team-split">
+      <div class="rv-feature">
         <figure class="frame offset team-banner qcard" aria-hidden="true"><span class="qmark"></span><span class="qtxt"><span class="q1">Care that feels</span><span class="qwords" aria-hidden="true"><em>Gentle.</em><em>Patient.</em><em>Honest.</em><em>Calm.</em></span></span><span class="qline"></span><span class="qsub">Families in Haworth &amp; Bergen County</span></figure>
-      <div class="quotes one">
-        <figure class="quote greview" data-r><div class="g-head"><span class="g-av" style="background:#1A73E8" aria-hidden="true">N</span><div class="g-who"><b>Nadezhda U.</b><span>Demarest, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>This is the real doctor, extremely skillful, courteous, not a &lsquo;business&rsquo; doctor.</blockquote></figure>
-        <figure class="quote greview" data-r><div class="g-head"><span class="g-av" style="background:#E8710A" aria-hidden="true">Y</span><div class="g-who"><b>Yelizaveta G.</b><span>Cresskill, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>&hellip;during a procedure you are not feeling a discomfort, but you feel calm and relaxed.</blockquote></figure>
+        <div class="rv-big" data-r>
+          <div class="g-stars" role="img" aria-label="5 out of 5 stars"></div>
+          <div class="rv-slides" id="rvSlides">
+          <figure class="rv-slide on"><blockquote>If you want to be treated as a partner, not just another patient, this should be your dental practice.</blockquote><figcaption>Amy S. <span>&middot; Haworth, NJ</span></figcaption></figure>
+          <figure class="rv-slide"><blockquote>It was my first time going to the dentist in a very long time, so I was, admittedly, very timid. But Dr. Lebel made me feel like I saw him just the other day.</blockquote><figcaption>Roberta M. <span>&middot; Harrington Park, NJ</span></figcaption></figure>
+          <figure class="rv-slide"><blockquote>He made me feel so comfortable and even rocked my baby&rsquo;s carseat when she got fussy and I was in the chair. I hate dentists and left very happy.</blockquote><figcaption>Sherry S. <span>&middot; Dumont, NJ</span></figcaption></figure>
+          <figure class="rv-slide"><blockquote>This is the real doctor, extremely skillful, courteous, not a &lsquo;business&rsquo; doctor.</blockquote><figcaption>Nadezhda U. <span>&middot; Demarest, NJ</span></figcaption></figure>
+          </div>
+          <div class="rv-dots" id="rvDots"><button type="button" class="on" aria-label="Show review 1 of 4" aria-current="true"></button><button type="button" class="" aria-label="Show review 2 of 4"></button><button type="button" class="" aria-label="Show review 3 of 4"></button><button type="button" class="" aria-label="Show review 4 of 4"></button></div>
+        </div>
       </div>
-      </div>
-      <div class="quotes more-quotes">
-        <figure class="quote greview" data-r><div class="g-head"><span class="g-av" style="background:#188038" aria-hidden="true">A</span><div class="g-who"><b>Amy S.</b><span>Haworth, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>If you want to be treated as a partner, not just another patient, this should be your dental practice.</blockquote></figure>
-        <figure class="quote greview" data-r><div class="g-head"><span class="g-av" style="background:#A142F4" aria-hidden="true">J</span><div class="g-who"><b>Joseph C.</b><span>Norwood, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>It was my daughter&rsquo;s first time to the dentist, and my wife and I worried quite a bit about it. But it was great! He has a great approach for young children.</blockquote></figure>
-        <figure class="quote greview" data-r><div class="g-head"><span class="g-av" style="background:#D93025" aria-hidden="true">J</span><div class="g-who"><b>Jada W.</b><span>Northvale, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>He patiently was able to calm the fears of both my 4 and 6 year old daughters, and they are still talking about him to this day.</blockquote></figure>
-        <figure class="quote greview" data-r><div class="g-head"><span class="g-av" style="background:#129EAF" aria-hidden="true">S</span><div class="g-who"><b>Sherry S.</b><span>Dumont, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>He made me feel so comfortable and even rocked my baby&rsquo;s carseat when she got fussy and I was in the chair. I hate dentists and left very happy.</blockquote></figure>
-        <figure class="quote greview" data-r><div class="g-head"><span class="g-av" style="background:#B06000" aria-hidden="true">R</span><div class="g-who"><b>Roberta M.</b><span>Harrington Park, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>It was my first time going to the dentist in a very long time, so I was, admittedly, very timid. But Dr. Lebel made me feel like I saw him just the other day.</blockquote></figure>
-        <figure class="quote greview" data-r><div class="g-head"><span class="g-av" style="background:#5F6368" aria-hidden="true">L</span><div class="g-who"><b>Liudmyla B.</b><span>New Milford, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>My teeth have never felt better, and I am so grateful to finally have found such an excellent dentist.</blockquote></figure>
+      <div class="rv-rail" tabindex="0" role="region" aria-label="More patient reviews">
+        <figure class="quote greview"><div class="g-head"><span class="g-av" style="background:#E8710A" aria-hidden="true">Y</span><div class="g-who"><b>Yelizaveta G.</b><span>Cresskill, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>&hellip;during a procedure you are not feeling a discomfort, but you feel calm and relaxed.</blockquote></figure>
+        <figure class="quote greview"><div class="g-head"><span class="g-av" style="background:#A142F4" aria-hidden="true">J</span><div class="g-who"><b>Joseph C.</b><span>Norwood, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>It was my daughter&rsquo;s first time to the dentist, and my wife and I worried quite a bit about it. But it was great! He has a great approach for young children.</blockquote></figure>
+        <figure class="quote greview"><div class="g-head"><span class="g-av" style="background:#D93025" aria-hidden="true">J</span><div class="g-who"><b>Jada W.</b><span>Northvale, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>He patiently was able to calm the fears of both my 4 and 6 year old daughters, and they are still talking about him to this day.</blockquote></figure>
+        <figure class="quote greview"><div class="g-head"><span class="g-av" style="background:#5F6368" aria-hidden="true">L</span><div class="g-who"><b>Liudmyla B.</b><span>New Milford, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>My teeth have never felt better, and I am so grateful to finally have found such an excellent dentist.</blockquote></figure>
       </div>
       <h3 class="subhead" id="art-h">Good to know</h3>
       <div class="quotes" id="articles">
@@ -783,6 +889,7 @@ html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::
     <div class="wrap split">
       <figure class="frame kids-art"><img src="img/kids-early.jpg" alt="A dentist gently examining a young child in a bright, welcoming treatment room" width="1380" height="1214" loading="lazy"></figure>
       <div class="copy">
+        <p class="eyebrow">For children</p>
         <h2 id="kids-h">Little smiles, early habits.</h2>
         <p>Good dental habits are best fostered and maintained early. Families are welcome to bring their children in to our comfortable office.</p>
         <dl class="dl">
@@ -796,7 +903,7 @@ html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::
 
   <section class="section alt" id="visit" aria-labelledby="visit-h">
     <div class="wrap">
-      <div class="section-head" data-r><h2 id="visit-h">Your first visit, made simple.</h2><hr class="rule"><p>No surprises, no rush. Here is what to expect.</p></div>
+      <div class="section-head" data-r><p class="eyebrow">Your first visit</p><h2 id="visit-h">Your first visit, made simple.</h2><p>No surprises, no rush. Here is what to expect.</p></div>
       <ol class="steps">
         <li data-r><span class="n">1</span><h3>Call or request a time</h3><p>Tell us what you need and when suits you. The front desk confirms by phone.</p></li>
         <li data-r><span class="n">2</span><h3>Meet Dr. Lebel</h3><p>An unhurried exam and a conversation about your goals, your history and any worries.</p></li>
@@ -807,7 +914,7 @@ html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::
 
   <section class="section" id="faq" aria-labelledby="faq-h">
     <div class="wrap">
-      <div class="section-head" data-r><h2 id="faq-h">Before you book.</h2><hr class="rule"></div>
+      <div class="section-head" data-r><p class="eyebrow">Questions</p><h2 id="faq-h">Before you book.</h2></div>
       <div class="faq">
         <details><summary>Do you accept my insurance?</summary><p>We accept every major insurance plan in the area, and we file the paperwork for you.</p></details>
         <details><summary>What if I don't have insurance?</summary><p>Low-interest payment plans are available through CareCredit.</p></details>
@@ -821,6 +928,7 @@ html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::
   <section class="contact-band" id="book" aria-labelledby="book-h">
     <div class="wrap">
       <div>
+        <p class="eyebrow">Appointments</p>
         <h2 id="book-h">Your visit starts here.</h2>
         <p class="lead">Tell us what you need and we&rsquo;ll find a time that works for you. New patients and families are always welcome.</p>
         <fieldset class="picker">
@@ -1073,6 +1181,36 @@ html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::
   if (!d.classList.contains('veil')) { v.remove(); return; }
   setTimeout(function () { d.classList.remove('veil-hold'); v.classList.add('lift'); }, 800);
   setTimeout(function () { d.classList.remove('veil'); v.remove(); }, 1600);
+})();
+</script>
+<script>
+(function () {
+  var h = document.querySelector('.site-head'), hero = document.querySelector('.hero'), root = document.documentElement;
+  if (!h) return;
+  function measure() { var was = h.classList.contains('solid'); h.classList.remove('solid'); root.style.setProperty('--hh', h.offsetHeight + 'px'); if (was) h.classList.add('solid'); }
+  function upd() { var s = scrollY > 40; h.classList.toggle('solid', s); h.classList.toggle('over', !s); }
+  measure(); upd();
+  addEventListener('scroll', upd, { passive: true });
+  addEventListener('resize', function () { measure(); upd(); });
+})();
+(function () {
+  var box = document.getElementById('rvSlides'), dots = document.getElementById('rvDots');
+  if (!box || !dots) return;
+  var sl = [].slice.call(box.children), bt = [].slice.call(dots.children), i = 0, t, paused = false;
+  function go(n) { sl[i].classList.remove('on'); bt[i].classList.remove('on'); bt[i].removeAttribute('aria-current'); i = (n + sl.length) % sl.length; sl[i].classList.add('on'); bt[i].classList.add('on'); bt[i].setAttribute('aria-current', 'true'); }
+  bt.forEach(function (b, n) { b.addEventListener('click', function () { go(n); restart(); }); });
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function restart() { clearInterval(t); if (!reduce) t = setInterval(function () { if (!paused && !document.hidden) go(i + 1); }, 7000); }
+  var wrap = box.parentNode;
+  wrap.addEventListener('mouseenter', function () { paused = true; }); wrap.addEventListener('mouseleave', function () { paused = false; });
+  wrap.addEventListener('focusin', function () { paused = true; }); wrap.addEventListener('focusout', function () { paused = false; });
+  restart();
+})();
+(function () {
+  var b = document.querySelector('.bleed');
+  if (!b) return;
+  if (!('IntersectionObserver' in window)) { b.classList.add('seen'); return; }
+  new IntersectionObserver(function (e, o) { if (e[0].isIntersecting) { b.classList.add('seen'); o.disconnect(); } }, { threshold: .25 }).observe(b);
 })();
 </script>
 </body>
