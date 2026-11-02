@@ -30,7 +30,8 @@
   "areaServed": ["Haworth", "Dumont", "Oradell", "Westwood", "Paramus", "River Edge", "Emerson"],
   "medicalSpecialty": "Dentistry",
   "sameAs": ["https://www.facebook.com/HaworthDental/"],
-  "employee": {"@type": "Person", "name": "Tal Lebel, DMD", "jobTitle": "Dentist"}
+  "employee": {"@type": "Person", "name": "Tal Lebel, DMD", "jobTitle": "Dentist"},
+  "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "08:00", "closes": "19:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "08:00", "closes": "17:30"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "08:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "08:00", "closes": "14:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "13:00"}]
 }
 </script>
 <link rel="preload" href="fonts/cormorant-garamond-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -366,6 +367,11 @@ p { margin: 0; }
 .contact p, .contact a { color: var(--white); text-decoration: none; }
 .contact .tel { font: 600 2.3rem/1.1 var(--serif); }
 .contact a.tel:hover { text-decoration: underline; }
+.contact .hours dl { margin: 0; display: grid; gap: 0; max-width: 340px; }
+.contact .hours dl div { display: flex; justify-content: space-between; gap: 20px; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,.14); font-size: .95rem; }
+.contact .hours dt { color: #B9CCE0; }
+.contact .hours dd { margin: 0; color: var(--white); font-variant-numeric: tabular-nums; }
+.contact .hours .off dd { color: #8FB0D3; }
 .panel { background: var(--white); color: var(--text); padding: clamp(22px, 3.4vw, 40px); }
 .form { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .field { display: grid; gap: 6px; min-width: 0; }
@@ -833,8 +839,7 @@ html.veil-hold .hero *, html.veil-hold .hero *::before, html.veil-hold .hero *::
         <div class="contact" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
           <div><h3>Phone</h3><a class="tel" href="tel:+12013841717" data-evt="call_click">(201) 384-1717</a></div>
           <div><h3>Insurance questions</h3><a class="tel" href="tel:+15515002031" style="font-size:1.4rem" data-evt="call_click">(551) 500-2031</a></div>
-          <!-- HOURS_TBD: get office hours from Dr. Lebel, replace the lines below, then delete the hidden attribute. Also add openingHoursSpecification to the JSON-LD in <head>. -->
-          <div class="hours" hidden data-todo="HOURS_TBD"><h3>Hours</h3><p>Monday to Thursday: TBD<br>Friday: TBD<br>Saturday: TBD</p></div>
+          <div class="hours"><h3>Office hours</h3><dl><div><dt>Monday</dt><dd>8:00 AM – 7:00 PM</dd></div><div><dt>Tuesday</dt><dd>8:00 AM – 5:30 PM</dd></div><div class="off"><dt>Wednesday</dt><dd>Closed</dd></div><div><dt>Thursday</dt><dd>8:00 AM – 6:00 PM</dd></div><div><dt>Friday</dt><dd>8:00 AM – 2:00 PM</dd></div><div><dt>Saturday</dt><dd>8:00 AM – 1:00 PM</dd></div><div class="off"><dt>Sunday</dt><dd>Closed</dd></div></dl></div>
         </div>
       </div>
     </div>
