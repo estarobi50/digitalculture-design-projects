@@ -693,6 +693,24 @@ h2 { letter-spacing: -.018em; }
 .parent-note::before { content: ""; display: block; width: 44px; height: 1px; margin: 0 auto 18px; background: var(--clay); }
 @media (max-width: 1000px) { .ages { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .ages { grid-template-columns: minmax(0, 1fr); } }
+
+/* Why choose Haworth: slow crossfading office photos */
+.frame.rot { aspect-ratio: 3 / 2; }
+.frame.rot .rot-stage { position: absolute; inset: 0; z-index: 0; overflow: hidden; background: #DCE5EE; }
+.frame.rot .rot-stage img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; opacity: 0; z-index: 0; transform: scale(1); will-change: opacity, transform; }
+.frame.rot .rot-stage img:nth-child(even) { transform-origin: 38% 58%; }
+.frame.rot .rot-stage img:nth-child(odd) { transform-origin: 62% 42%; }
+.frame.rot .rot-stage img.out { opacity: 1; z-index: 1; }
+.frame.rot .rot-stage img.on { opacity: 1; z-index: 2; transition: opacity 2s ease-in-out; }
+.frame.rot .rot-stage img.on, .frame.rot .rot-stage img.out { animation: whyDrift 11s linear forwards; }
+@keyframes whyDrift { from { transform: scale(1); } to { transform: scale(1.07); } }
+.rot-dots { position: absolute; left: 0; right: 0; bottom: 24px; z-index: 3; display: flex; justify-content: center; gap: 2px; }
+.rot-dots button { width: 24px; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+.rot-dots button::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, .55); box-shadow: 0 0 0 1px rgba(10, 49, 87, .35); transition: background .3s, transform .3s; }
+.rot-dots button[aria-current="true"]::before { background: #fff; transform: scale(1.3); }
+@media (prefers-reduced-motion: reduce) {
+  .frame.rot .rot-stage img.on, .frame.rot .rot-stage img.out { animation: none; transition: none; }
+}
 </style>
 </head>
 <body>
@@ -813,7 +831,15 @@ h2 { letter-spacing: -.018em; }
 
   <section class="section alt" id="why" aria-labelledby="prac-h">
     <div class="wrap split">
-      <figure class="frame offset" style="max-width:560px;margin-inline:auto"><img src="img/office.jpg" alt="The Haworth Dental office at 141 Terrace Street, with a blue sign above the entrance and planters out front" width="1600" height="943" loading="lazy" style="aspect-ratio:4/3"></figure>
+      <figure class="frame offset rot" id="whyRot" style="max-width:560px;margin-inline:auto" role="group" aria-roledescription="carousel" aria-label="Photos of the Haworth Dental office">
+        <div class="rot-stage">
+        <img class="on" src="img/office.jpg" alt="The Haworth Dental office at 141 Terrace Street, with a blue sign above the entrance and planters out front" width="1600" height="943" loading="lazy" decoding="async" style="object-position:50% 50%">
+        <img src="img/office-reception.jpg" alt="The reception window and open door at Haworth Dental, with a carpeted hallway leading back to the treatment rooms" width="1800" height="850" loading="lazy" decoding="async" style="object-position:55% 50%">
+        <img src="img/office-desk.jpg" alt="The front desk at Haworth Dental, with a bright work area and patient records neatly shelved behind it" width="1800" height="874" loading="lazy" decoding="async" style="object-position:45% 50%">
+        <img src="img/office-hallway.jpg" alt="A treatment room doorway and the hallway beyond at Haworth Dental, with clean white cabinetry and an imaging station" width="1800" height="871" loading="lazy" decoding="async" style="object-position:45% 50%">
+        </div>
+        <div class="rot-dots" role="group" aria-label="Choose a photo"><button type="button" aria-label="Show photo 1 of 4" aria-current="true"></button><button type="button" aria-label="Show photo 2 of 4"></button><button type="button" aria-label="Show photo 3 of 4"></button><button type="button" aria-label="Show photo 4 of 4"></button></div>
+      </figure>
       <div class="copy">
         <p class="eyebrow">Why Haworth</p>
         <h2 id="prac-h">Why choose Haworth Dental?</h2>
@@ -1260,6 +1286,34 @@ document.querySelectorAll('[data-visit]').forEach(function (a) {
     if (r) { r.checked = true; r.dispatchEvent(new Event('change', { bubbles: true })); }
   });
 });
+</script>
+<script>
+(function () {
+  /* Why choose Haworth: slowly rotate the office photos */
+  var fig = document.getElementById('whyRot'); if (!fig) return;
+  var imgs = [].slice.call(fig.querySelectorAll('.rot-stage img')), dots = [].slice.call(fig.querySelectorAll('.rot-dots button'));
+  if (imgs.length < 2) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cur = 0, timer = null, HOLD = 7000, FADE = 2000, inView = false, hover = false, focus = false;
+  function show(n) {
+    if (n === cur) return;
+    var prev = imgs[cur]; prev.classList.remove('on'); prev.classList.add('out');
+    imgs[n].classList.remove('out'); imgs[n].classList.add('on');
+    dots.forEach(function (d, i) { if (i === n) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
+    cur = n;
+    setTimeout(function () { prev.classList.remove('out'); }, FADE + 150);
+  }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  function go() { stop(); if (reduce || !inView || hover || focus || document.hidden) return; timer = setInterval(function () { show((cur + 1) % imgs.length); }, HOLD + FADE); }
+  dots.forEach(function (d, i) { d.addEventListener('click', function () { show(i); go(); }); });
+  fig.addEventListener('mouseenter', function () { hover = true; go(); });
+  fig.addEventListener('mouseleave', function () { hover = false; go(); });
+  fig.addEventListener('focusin', function () { focus = true; go(); });
+  fig.addEventListener('focusout', function () { focus = false; go(); });
+  document.addEventListener('visibilitychange', go);
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { inView = e[0].isIntersecting; go(); }, { threshold: 0.25 }).observe(fig);
+  else { inView = true; go(); }
+})();
 </script>
 </body>
 </html>
