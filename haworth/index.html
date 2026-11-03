@@ -700,9 +700,10 @@ h2 { letter-spacing: -.018em; }
 .frame.rot .rot-stage img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; opacity: 0; z-index: 0; transform: scale(1); will-change: opacity, transform; }
 .frame.rot .rot-stage img:nth-child(even) { transform-origin: 38% 58%; }
 .frame.rot .rot-stage img:nth-child(odd) { transform-origin: 62% 42%; }
-.frame.rot .rot-stage img.out { opacity: 1; z-index: 1; }
-.frame.rot .rot-stage img.on { opacity: 1; z-index: 2; transition: opacity 1.8s ease-in-out !important; }
-.frame.rot .rot-stage img.on, .frame.rot .rot-stage img.out { animation: whyDrift 8s linear forwards; }
+.frame.rot .rot-stage img.out { opacity: 1; z-index: 1; animation: whyDrift 8s linear forwards, whyOut 1.5s cubic-bezier(.6,0,.4,1) forwards; }
+.frame.rot .rot-stage img.on { opacity: 1; z-index: 2; transition: none !important; animation: whyDrift 8s linear forwards, whyIn 1.5s cubic-bezier(.77,0,.18,1) both; }
+@keyframes whyIn { from { clip-path: inset(0 0 0 100%); scale: 1.35; filter: brightness(1.7) saturate(.6) blur(8px); } 60% { filter: brightness(1.15) blur(1px); } to { clip-path: inset(0 0 0 0); scale: 1; filter: none; } }
+@keyframes whyOut { from { scale: 1; filter: none; } to { scale: 1.14; filter: brightness(.35) blur(4px); } }
 @keyframes whyDrift { from { transform: scale(1); } to { transform: scale(1.1); } }
 /* the rotator keeps its slow fade and zoom even when the OS asks for reduced motion (the page-wide rule would otherwise freeze it) */
 
@@ -860,6 +861,8 @@ h2 { letter-spacing: -.018em; }
         <img src="img/office-reception.jpg" alt="The reception window and open door at Haworth Dental, with a carpeted hallway leading back to the treatment rooms" width="1800" height="850" loading="lazy" decoding="async" style="object-position:55% 50%">
         <img src="img/office-desk.jpg" alt="The front desk at Haworth Dental, with a bright work area and patient records neatly shelved behind it" width="1800" height="874" loading="lazy" decoding="async" style="object-position:45% 50%">
         <img src="img/office-hallway.jpg" alt="A treatment room doorway and the hallway beyond at Haworth Dental, with clean white cabinetry and an imaging station" width="1800" height="871" loading="lazy" decoding="async" style="object-position:45% 50%">
+        <img src="img/office-treatment.jpg" alt="A treatment room at Haworth Dental with a reclining patient chair, overhead light and wall-mounted imaging" width="1800" height="858" loading="lazy" decoding="async" style="object-position:40% 50%">
+        <img src="img/office-corridor.jpg" alt="The long carpeted corridor at Haworth Dental leading from the treatment rooms toward the reception area" width="1800" height="882" loading="lazy" decoding="async" style="object-position:50% 50%">
         </div>
       </figure>
       <div class="copy">
@@ -1315,7 +1318,7 @@ document.querySelectorAll('[data-visit]').forEach(function (a) {
   var fig = document.getElementById('whyRot'); if (!fig) return;
   var imgs = [].slice.call(fig.querySelectorAll('.rot-stage img'));
   if (imgs.length < 2) return;
-  var cur = 0, timer = null, HOLD = 4500, FADE = 1800, inView = false;
+  var cur = 0, timer = null, HOLD = 3000, FADE = 1500, inView = false;
   function show(n) {
     if (n === cur) return;
     var prev = imgs[cur]; prev.classList.remove('on'); prev.classList.add('out');
