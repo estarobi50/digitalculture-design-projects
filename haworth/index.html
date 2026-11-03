@@ -721,13 +721,10 @@ h2 { letter-spacing: -.018em; }
 }
 @media (max-width: 400px) { .hero-hello { letter-spacing: .16em !important; font-size: .68rem !important; gap: 10px !important; white-space: nowrap; } .hero-hello::before { width: 20px !important; flex: 0 0 20px; } }
 @media (max-width: 760px) {
-  .hero { min-height: 0; align-items: flex-start; }
-  .hero-bg { bottom: auto; height: max(58svh, 440px); }
-  .hero-bg .fg { top: 0; left: 0; right: 0; width: 100%; height: 100%; max-width: none; aspect-ratio: auto; object-fit: cover; object-position: 6% 40% !important; translate: none; -webkit-mask-image: none; mask-image: none; }
-  .hero-grade { inset: 0 0 auto 0; height: max(58svh, 440px);
-    background: linear-gradient(0deg, #061C34 0%, rgba(6, 28, 52, .92) 16%, rgba(6, 28, 52, .55) 40%, rgba(6, 28, 52, 0) 72%),
-                linear-gradient(180deg, rgba(5, 24, 46, .5) 0%, rgba(5, 24, 46, 0) 26%); }
-  .hero-inner { padding-block: max(43svh, 330px) 48px; }
+  /* keep the original full-chair photo stage, now starting under the transparent header */
+  .hero-bg .fg { top: calc(var(--hh, 60px) + 6px); }
+  .hero-grade { background: linear-gradient(0deg, #061C34 0%, #061C34 40%, rgba(6, 28, 52, .75) 52%, rgba(6, 28, 52, 0) 72%), linear-gradient(180deg, rgba(5, 24, 46, .55) 0%, rgba(5, 24, 46, 0) 14%); }
+  .hero-inner { padding-block: calc(var(--hh, 60px) + 38vh) 52px; }
   .hero .lede { font-size: 1.0625rem; margin-top: 1.1rem; }
   .hero .actions { margin-top: 1.5rem; }
 }
