@@ -724,9 +724,12 @@ h2 { letter-spacing: -.018em; }
 @media (max-width: 760px) {
   /* keep the original full-chair photo stage, now starting under the transparent header */
   /* phone: header is the same navy as the scrolled state from the first paint; photo starts right beneath it */
-  .site-head.over { background-color: rgba(10, 49, 87, .96); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+  .site-head.over { background-color: transparent; box-shadow: none; }
   .site-head.over::before { display: none; }
-  .hero-bg .fg { top: var(--hh, 60px); }
+  .site-head.over .head-main { background: rgba(10, 49, 87, .7); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  .site-head.over:has(.nav.open) .head-main { background: transparent; }
+  .site-head.over:has(.nav.open) { background-color: var(--navy); }
+  .hero-bg .fg { top: 0; }
   /* refined phone header: airy spacing, hairline phone, minimal two-line menu mark */
   .site-head { box-shadow: inset 0 -1px 0 rgba(255,255,255,.1), 0 2px 14px rgba(4,20,38,.25); }
   .logo-block { width: 168px; padding: 10px 16px; }
@@ -740,7 +743,7 @@ h2 { letter-spacing: -.018em; }
   .nav-toggle[aria-expanded="true"]::before { top: 27px; transform: rotate(45deg); }
   .nav-toggle[aria-expanded="true"]::after { top: 27px; right: 17px; transform: rotate(-45deg); }
   .hero-grade { background: linear-gradient(0deg, #061C34 0%, #061C34 40%, rgba(6, 28, 52, .75) 52%, rgba(6, 28, 52, 0) 72%), linear-gradient(180deg, rgba(5, 24, 46, 0) 0%, rgba(5, 24, 46, 0) 100%); }
-  .hero-inner { padding-block: calc(var(--hh, 60px) + (100vw + 52px) * .6667 + 14px) 52px; }
+  .hero-inner { padding-block: calc((100vw + 52px) * .6667 + 14px) 52px; }
   .hero .lede { font-size: 1.0625rem; margin-top: 1.1rem; }
   .hero .actions { margin-top: 1.5rem; }
 }
