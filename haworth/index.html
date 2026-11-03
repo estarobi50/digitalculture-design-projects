@@ -726,16 +726,19 @@ h2 { letter-spacing: -.018em; }
   /* phone: header is the same navy as the scrolled state from the first paint; photo starts right beneath it */
   .site-head.over { background-color: transparent; box-shadow: none; }
   .site-head.over::before { display: none; }
-  .site-head.over .head-main { background: linear-gradient(180deg, rgba(8, 56, 112, .74), rgba(8, 56, 112, .46)); -webkit-backdrop-filter: saturate(1.5) brightness(.76); backdrop-filter: saturate(1.5) brightness(.76); }
+  .site-head.over .head-main { background: none; }
+  .site-head.over .head-main::before, .site-head.over .nav { background: linear-gradient(180deg, rgba(8, 56, 112, .74), rgba(8, 56, 112, .46)); -webkit-backdrop-filter: saturate(1.5) brightness(.76); backdrop-filter: saturate(1.5) brightness(.76); }
+  .site-head.over .head-main::before { content: ""; position: absolute; left: 168px; right: 0; top: 0; bottom: 0; z-index: -1; pointer-events: none; }
+  .site-head.over .nav { background: rgba(8, 56, 112, .5); }
+  .site-head.over .nav a { text-shadow: 0 1px 8px rgba(4, 20, 40, .55); }
   .site-head.over .head-info a, .site-head.over .nav-toggle { text-shadow: 0 1px 8px rgba(4, 20, 40, .55); }
-  .site-head.over:has(.nav.open) .head-main { background: transparent; }
-  .site-head.over:has(.nav.open) { background-color: var(--navy); }
+  .site-head.over:has(.nav.open) { background-color: transparent; }
   .hero-bg .fg { top: 0; }
   /* refined phone header: airy spacing, hairline phone, minimal two-line menu mark */
   .site-head { box-shadow: inset 0 -1px 0 rgba(255,255,255,.1), 0 2px 14px rgba(4,20,38,.25); }
   .logo-block { width: 168px; padding: 10px 16px; }
   .logo-block img { max-height: 46px; }
-  .head-main { justify-content: center; padding: 0 56px 0 0; gap: 8px; position: relative; }
+  .head-main { justify-content: center; padding: 0 56px 0 0; gap: 8px; }
   .head-main .nav-toggle { position: absolute; right: 6px; top: 50%; translate: 0 -50%; }
   .head-info a[href^="tel:"] { font-size: .875rem; letter-spacing: .08em; padding-bottom: 8px; }
   .nav-toggle { font-size: 0; position: relative; width: 56px; min-width: 56px; height: 56px; min-height: 56px; margin-left: 4px; border: 0; background: transparent; }
