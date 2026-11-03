@@ -701,16 +701,14 @@ h2 { letter-spacing: -.018em; }
 .frame.rot .rot-stage img:nth-child(even) { transform-origin: 38% 58%; }
 .frame.rot .rot-stage img:nth-child(odd) { transform-origin: 62% 42%; }
 .frame.rot .rot-stage img.out { opacity: 1; z-index: 1; }
-.frame.rot .rot-stage img.on { opacity: 1; z-index: 2; transition: opacity 2s ease-in-out; }
-.frame.rot .rot-stage img.on, .frame.rot .rot-stage img.out { animation: whyDrift 11s linear forwards; }
-@keyframes whyDrift { from { transform: scale(1); } to { transform: scale(1.07); } }
+.frame.rot .rot-stage img.on { opacity: 1; z-index: 2; transition: opacity 1.8s ease-in-out !important; }
+.frame.rot .rot-stage img.on, .frame.rot .rot-stage img.out { animation: whyDrift 8s linear forwards; }
+@keyframes whyDrift { from { transform: scale(1); } to { transform: scale(1.1); } }
 .rot-dots { position: absolute; left: 0; right: 0; bottom: 24px; z-index: 3; display: flex; justify-content: center; gap: 2px; }
 .rot-dots button { width: 24px; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
 .rot-dots button::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, .55); box-shadow: 0 0 0 1px rgba(10, 49, 87, .35); transition: background .3s, transform .3s; }
 .rot-dots button[aria-current="true"]::before { background: #fff; transform: scale(1.3); }
-@media (prefers-reduced-motion: reduce) {
-  .frame.rot .rot-stage img.on, .frame.rot .rot-stage img.out { animation: none; transition: none; }
-}
+/* the rotator keeps its slow fade and zoom even when the OS asks for reduced motion (the page-wide rule would otherwise freeze it) */
 </style>
 </head>
 <body>
@@ -1293,8 +1291,7 @@ document.querySelectorAll('[data-visit]').forEach(function (a) {
   var fig = document.getElementById('whyRot'); if (!fig) return;
   var imgs = [].slice.call(fig.querySelectorAll('.rot-stage img')), dots = [].slice.call(fig.querySelectorAll('.rot-dots button'));
   if (imgs.length < 2) return;
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var cur = 0, timer = null, HOLD = 7000, FADE = 2000, inView = false, hover = false, focus = false;
+  var cur = 0, timer = null, HOLD = 4500, FADE = 1800, inView = false;
   function show(n) {
     if (n === cur) return;
     var prev = imgs[cur]; prev.classList.remove('on'); prev.classList.add('out');
@@ -1304,12 +1301,8 @@ document.querySelectorAll('[data-visit]').forEach(function (a) {
     setTimeout(function () { prev.classList.remove('out'); }, FADE + 150);
   }
   function stop() { if (timer) { clearInterval(timer); timer = null; } }
-  function go() { stop(); if (reduce || !inView || hover || focus || document.hidden) return; timer = setInterval(function () { show((cur + 1) % imgs.length); }, HOLD + FADE); }
+  function go() { stop(); if (!inView || document.hidden) return; timer = setInterval(function () { show((cur + 1) % imgs.length); }, HOLD + FADE); }
   dots.forEach(function (d, i) { d.addEventListener('click', function () { show(i); go(); }); });
-  fig.addEventListener('mouseenter', function () { hover = true; go(); });
-  fig.addEventListener('mouseleave', function () { hover = false; go(); });
-  fig.addEventListener('focusin', function () { focus = true; go(); });
-  fig.addEventListener('focusout', function () { focus = false; go(); });
   document.addEventListener('visibilitychange', go);
   if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { inView = e[0].isIntersecting; go(); }, { threshold: 0.25 }).observe(fig);
   else { inView = true; go(); }
