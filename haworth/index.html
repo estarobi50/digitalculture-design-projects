@@ -722,9 +722,9 @@ h2 { letter-spacing: -.018em; }
 @media (max-width: 400px) { .hero-hello { letter-spacing: .16em !important; font-size: .68rem !important; gap: 10px !important; white-space: nowrap; } .hero-hello::before { width: 20px !important; flex: 0 0 20px; } }
 @media (max-width: 760px) {
   /* keep the original full-chair photo stage, now starting under the transparent header */
-  .hero-bg .fg { top: calc(var(--hh, 60px) + 6px); }
-  .hero-grade { background: linear-gradient(0deg, #061C34 0%, #061C34 40%, rgba(6, 28, 52, .75) 52%, rgba(6, 28, 52, 0) 72%), linear-gradient(180deg, rgba(5, 24, 46, .55) 0%, rgba(5, 24, 46, 0) 14%); }
-  .hero-inner { padding-block: calc(var(--hh, 60px) + 38vh) 52px; }
+  .hero-bg .fg { top: 0; }
+  .hero-grade { background: linear-gradient(0deg, #061C34 0%, #061C34 40%, rgba(6, 28, 52, .75) 52%, rgba(6, 28, 52, 0) 72%), linear-gradient(180deg, rgba(5, 24, 46, .34) 0%, rgba(5, 24, 46, 0) 17%); }
+  .hero-inner { padding-block: calc((100vw + 52px) * .6667 + 14px) 52px; }
   .hero .lede { font-size: 1.0625rem; margin-top: 1.1rem; }
   .hero .actions { margin-top: 1.5rem; }
 }
