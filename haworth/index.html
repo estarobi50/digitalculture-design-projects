@@ -674,6 +674,25 @@ h2 { letter-spacing: -.018em; }
 
 /* mobile dock: clearer secondary button */
 @media (max-width: 760px) { .dock .d-book { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,.75); } }
+
+/* family orientation */
+:root { --sand: #F6EFE5; --clay: #C7A27C; }
+.family { background: linear-gradient(180deg, #FBF7F1 0%, var(--white) 100%); }
+.ages { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(14px, 2vw, 26px); }
+.age { position: relative; display: flex; flex-direction: column; gap: 10px; padding: clamp(24px, 2.6vw, 34px); background: var(--white); border-top: 2px solid var(--clay); box-shadow: 0 10px 34px rgba(60,40,20,.06); text-decoration: none; color: var(--text); transition: transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s, background-color .5s; }
+.age:hover, .age:focus-visible { transform: translateY(-6px); box-shadow: 0 22px 48px rgba(60,40,20,.12); background: var(--sand); }
+.a-tag { font: 500 .74rem/1.2 var(--sans); letter-spacing: .26em; text-transform: uppercase; color: #9A7650; }
+.age h3 { font: 500 1.7rem/1.15 var(--serif); color: var(--ink); }
+.age p { font-size: 1rem; line-height: 1.6; }
+.a-go { margin-top: auto; padding-top: 14px; font: 500 .8rem/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--navy); background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .45s; align-self: flex-start; padding-bottom: 6px; }
+.a-go::after { content: "\2192"; margin-left: 10px; }
+.age:hover .a-go, .age:focus-visible .a-go { background-size: 100% 1px; }
+.fam-cta { margin-top: clamp(28px, 3.5vw, 44px); text-align: center; font: italic 400 1.5rem/1.3 var(--serif); color: var(--ink); }
+.fam-cta a { color: var(--navy); text-decoration-thickness: 1px; text-underline-offset: 5px; }
+.parent-note { margin-top: clamp(24px, 3vw, 40px); text-align: center; font: italic 400 1.35rem/1.4 var(--serif); color: var(--ink); }
+.parent-note::before { content: ""; display: block; width: 44px; height: 1px; margin: 0 auto 18px; background: var(--clay); }
+@media (max-width: 1000px) { .ages { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .ages { grid-template-columns: minmax(0, 1fr); } }
 </style>
 </head>
 <body>
@@ -713,9 +732,9 @@ h2 { letter-spacing: -.018em; }
       <div class="hero-copy">
         <p class="hero-hello">Haworth, New Jersey &middot; Since 1966</p>
         <h1 id="h1"><span class="ln"><span>Care your family can trust,</span></span> <span class="ln"><span>right here in Haworth.</span></span></h1>
-        <p class="lede">Family dentistry in Haworth since 1966. Children&rsquo;s care, braces, root canals, implants and cosmetic work, with people who know your history.</p>
+        <p class="lede">Family dentistry in Haworth since 1966. From a child&rsquo;s first tooth to the years that follow, with people who know your history.</p>
         <div class="actions">
-          <a class="btn btn-light" data-evt="book_click" href="https://local.demandforce.com/b/tallebel/schedule?d3cp_key=2431246F6E64656D616E642433625564704F786F4F42673057436E5A644354473031&amp;d3cp_query=5165527D793E9DDFBB7B8B31556CCF0913EC1F2206B9AAA5F0464DD5C326E080364EBA127B9293002A35686FAE990887C719C4C83C0D704323D6FBD0A6ABB425D2E490A70FA88EC45380B78C1FD6AEDCEF0327B44B1871E3B0CDAFEE47467FE64EDEEEBA6AC09DE018032C3F5D94F239A70DD650BF99638E83AC377516176F27BA124E31D4019726E3E7240BC099E576162E8DDF8CCDD2D894EB765844D8A47C042FCA8A4FBFDB8B40E59E360F64AE8A2D1A2E6C1FAC3C5086F93B3CE6B6AF1B353B752759571B8C26A6BA7ACFD837D7E22C4A86F1194CA4B7AB04C2F0177D6DC0F324575C1711E9&amp;legacyCampaign=1#new_template" target="_blank" rel="noopener">Request appointment</a>
+          <a class="btn btn-light" data-evt="book_click" href="https://local.demandforce.com/b/tallebel/schedule?d3cp_key=2431246F6E64656D616E642433625564704F786F4F42673057436E5A644354473031&amp;d3cp_query=5165527D793E9DDFBB7B8B31556CCF0913EC1F2206B9AAA5F0464DD5C326E080364EBA127B9293002A35686FAE990887C719C4C83C0D704323D6FBD0A6ABB425D2E490A70FA88EC45380B78C1FD6AEDCEF0327B44B1871E3B0CDAFEE47467FE64EDEEEBA6AC09DE018032C3F5D94F239A70DD650BF99638E83AC377516176F27BA124E31D4019726E3E7240BC099E576162E8DDF8CCDD2D894EB765844D8A47C042FCA8A4FBFDB8B40E59E360F64AE8A2D1A2E6C1FAC3C5086F93B3CE6B6AF1B353B752759571B8C26A6BA7ACFD837D7E22C4A86F1194CA4B7AB04C2F0177D6DC0F324575C1711E9&amp;legacyCampaign=1#new_template" target="_blank" rel="noopener">Book your family&rsquo;s visit</a>
           <a class="btn btn-line" data-evt="call_click" href="tel:+12013841717">Call us</a>
         </div>
         <p class="fine">New patients welcome &middot; Most major insurance accepted</p>
@@ -732,6 +751,23 @@ h2 { letter-spacing: -.018em; }
       <div class="stat" data-r><b data-count="5">5</b><span>Years in a row in America&rsquo;s Top Dentists guide</span></div>
       <div class="stat" data-r><b data-count="7">7</b><span>Specialties under one roof</span></div>
       <div class="stat" data-r><b>Invisalign</b><span>Certified provider</span></div>
+    </div>
+  </section>
+
+  <section class="section family" id="family" aria-labelledby="fam-h">
+    <div class="wrap">
+      <div class="section-head left" data-r>
+        <div><p class="eyebrow">For every age</p>
+        <h2 id="fam-h">One practice for the whole family.</h2></div>
+        <p>Parents, children and grandparents can all see the same dentist, in the same calm room.</p>
+      </div>
+      <div class="ages">
+        <a class="age" data-r data-visit="child" href="#book"><span class="a-tag">Little ones</span><h3>A gentle first visit.</h3><p>Routine check-ups, cleanings and fillings, at a child&rsquo;s pace.</p><span class="a-go">Plan a visit</span></a>
+        <a class="age" data-r data-visit="invisalign" href="#book"><span class="a-tag">Teens</span><h3>Straighter smiles.</h3><p>Braces and Invisalign, with a plan that fits real life.</p><span class="a-go">Ask about braces</span></a>
+        <a class="age" data-r data-visit="checkup" href="#book"><span class="a-tag">Adults</span><h3>Care that fits your week.</h3><p>Check-ups, cleanings, restorative and cosmetic dentistry.</p><span class="a-go">Book a check-up</span></a>
+        <a class="age" data-r data-visit="checkup" href="#book"><span class="a-tag">Later years</span><h3>A dentist who knows you.</h3><p>Implants and restorative care, from someone who knows your history.</p><span class="a-go">Plan a visit</span></a>
+      </div>
+      <p class="fam-cta" data-r>Coming together? <a href="#book" data-visit="family">Plan a family visit</a></p>
     </div>
   </section>
 
@@ -862,18 +898,18 @@ h2 { letter-spacing: -.018em; }
         <div class="rv-big" data-r>
           <div class="g-stars" role="img" aria-label="5 out of 5 stars"></div>
           <div class="rv-slides" id="rvSlides">
-          <figure class="rv-slide on"><blockquote>If you want to be treated as a partner, not just another patient, this should be your dental practice.</blockquote><figcaption>Amy S. <span>&middot; Haworth, NJ</span></figcaption></figure>
-          <figure class="rv-slide"><blockquote>It was my first time going to the dentist in a very long time, so I was, admittedly, very timid. But Dr. Lebel made me feel like I saw him just the other day.</blockquote><figcaption>Roberta M. <span>&middot; Harrington Park, NJ</span></figcaption></figure>
-          <figure class="rv-slide"><blockquote>He made me feel so comfortable and even rocked my baby&rsquo;s carseat when she got fussy and I was in the chair. I hate dentists and left very happy.</blockquote><figcaption>Sherry S. <span>&middot; Dumont, NJ</span></figcaption></figure>
-          <figure class="rv-slide"><blockquote>This is the real doctor, extremely skillful, courteous, not a &lsquo;business&rsquo; doctor.</blockquote><figcaption>Nadezhda U. <span>&middot; Demarest, NJ</span></figcaption></figure>
+          <figure class="rv-slide on"><blockquote>He made me feel so comfortable and even rocked my baby&rsquo;s carseat when she got fussy and I was in the chair. I hate dentists and left very happy.</blockquote><figcaption>Sherry S. <span>&middot; Dumont, NJ</span></figcaption></figure>
+          <figure class="rv-slide"><blockquote>He patiently was able to calm the fears of both my 4 and 6 year old daughters, and they are still talking about him to this day.</blockquote><figcaption>Jada W. <span>&middot; Northvale, NJ</span></figcaption></figure>
+          <figure class="rv-slide"><blockquote>It was my daughter&rsquo;s first time to the dentist, and my wife and I worried quite a bit about it. But it was great! He has a great approach for young children.</blockquote><figcaption>Joseph C. <span>&middot; Norwood, NJ</span></figcaption></figure>
+          <figure class="rv-slide"><blockquote>If you want to be treated as a partner, not just another patient, this should be your dental practice.</blockquote><figcaption>Amy S. <span>&middot; Haworth, NJ</span></figcaption></figure>
           </div>
           <div class="rv-dots" id="rvDots"><button type="button" class="on" aria-label="Show review 1 of 4" aria-current="true"></button><button type="button" class="" aria-label="Show review 2 of 4"></button><button type="button" class="" aria-label="Show review 3 of 4"></button><button type="button" class="" aria-label="Show review 4 of 4"></button></div>
         </div>
       </div>
       <div class="rv-rail" tabindex="0" role="region" aria-label="More patient reviews">
+        <figure class="quote greview"><div class="g-head"><span class="g-av" style="background:#1A73E8" aria-hidden="true">N</span><div class="g-who"><b>Nadezhda U.</b><span>Demarest, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>This is the real doctor, extremely skillful, courteous, not a &lsquo;business&rsquo; doctor.</blockquote></figure>
         <figure class="quote greview"><div class="g-head"><span class="g-av" style="background:#E8710A" aria-hidden="true">Y</span><div class="g-who"><b>Yelizaveta G.</b><span>Cresskill, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>&hellip;during a procedure you are not feeling a discomfort, but you feel calm and relaxed.</blockquote></figure>
-        <figure class="quote greview"><div class="g-head"><span class="g-av" style="background:#A142F4" aria-hidden="true">J</span><div class="g-who"><b>Joseph C.</b><span>Norwood, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>It was my daughter&rsquo;s first time to the dentist, and my wife and I worried quite a bit about it. But it was great! He has a great approach for young children.</blockquote></figure>
-        <figure class="quote greview"><div class="g-head"><span class="g-av" style="background:#D93025" aria-hidden="true">J</span><div class="g-who"><b>Jada W.</b><span>Northvale, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>He patiently was able to calm the fears of both my 4 and 6 year old daughters, and they are still talking about him to this day.</blockquote></figure>
+        <figure class="quote greview"><div class="g-head"><span class="g-av" style="background:#B06000" aria-hidden="true">R</span><div class="g-who"><b>Roberta M.</b><span>Harrington Park, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>It was my first time going to the dentist in a very long time, so I was, admittedly, very timid. But Dr. Lebel made me feel like I saw him just the other day.</blockquote></figure>
         <figure class="quote greview"><div class="g-head"><span class="g-av" style="background:#5F6368" aria-hidden="true">L</span><div class="g-who"><b>Liudmyla B.</b><span>New Milford, NJ</span></div></div><div class="g-stars" role="img" aria-label="5 out of 5 stars"></div><blockquote>My teeth have never felt better, and I am so grateful to finally have found such an excellent dentist.</blockquote></figure>
       </div>
       <h3 class="subhead" id="art-h">Good to know</h3>
@@ -904,12 +940,13 @@ h2 { letter-spacing: -.018em; }
 
   <section class="section alt" id="visit" aria-labelledby="visit-h">
     <div class="wrap">
-      <div class="section-head" data-r><p class="eyebrow">Your first visit</p><h2 id="visit-h">Your first visit, made simple.</h2><p>No surprises, no rush. Here is what to expect.</p></div>
+      <div class="section-head" data-r><p class="eyebrow">Your first visit</p><h2 id="visit-h">Your first visit, made simple.</h2><p>No surprises, no rush, for you or for your children. Here is what to expect.</p></div>
       <ol class="steps">
-        <li data-r><span class="n">1</span><h3>Call or request a time</h3><p>Tell us what you need and when suits you. The front desk confirms by phone.</p></li>
-        <li data-r><span class="n">2</span><h3>Meet Dr. Lebel</h3><p>An unhurried exam and a conversation about your goals, your history and any worries.</p></li>
+        <li data-r><span class="n">1</span><h3>Call or request a time</h3><p>Tell us who is coming and when suits you. The front desk confirms by phone.</p></li>
+        <li data-r><span class="n">2</span><h3>Meet Dr. Lebel</h3><p>An unhurried exam and a conversation about your goals, your history and any worries. With children, we go at their pace.</p></li>
         <li data-r><span class="n">3</span><h3>Leave with a clear plan</h3><p>Your options in plain language. We file your insurance claims and discuss payment plans.</p></li>
       </ol>
+      <p class="parent-note" data-r>Bringing a nervous little one? Tell us when you book and we will take it slowly.</p>
     </div>
   </section>
 
@@ -938,6 +975,7 @@ h2 { letter-spacing: -.018em; }
             <label class="chip"><input type="radio" name="visit" value="new"><span>New patient</span></label>
             <label class="chip"><input type="radio" name="visit" value="checkup"><span>Check-up &amp; cleaning</span></label>
             <label class="chip"><input type="radio" name="visit" value="child"><span>Child&rsquo;s visit</span></label>
+            <label class="chip"><input type="radio" name="visit" value="family"><span>Whole family</span></label>
             <label class="chip"><input type="radio" name="visit" value="invisalign"><span>Invisalign consult</span></label>
             <label class="chip"><input type="radio" name="visit" value="urgent"><span>Tooth pain or a broken tooth</span></label>
           </div>
@@ -1144,6 +1182,7 @@ h2 { letter-spacing: -.018em; }
     'new': 'Welcome. Your first visit is an unhurried exam and a conversation about your goals.',
     'checkup': 'A routine visit keeps small problems small. Request a time and we will confirm by phone.',
     'child': 'Little ones are welcome. Request a time and we will confirm by phone.',
+    'family': 'Tell us who is coming and we will help find times that work. Request a time and we will confirm by phone.',
     'invisalign': 'Dr. Lebel is an Invisalign certified provider. Request a time for a consultation.',
     'urgent': 'Please call us now so we can help as quickly as we can.'
   };
@@ -1213,6 +1252,14 @@ h2 { letter-spacing: -.018em; }
   if (!('IntersectionObserver' in window)) { b.classList.add('seen'); return; }
   new IntersectionObserver(function (e, o) { if (e[0].isIntersecting) { b.classList.add('seen'); o.disconnect(); } }, { threshold: .25 }).observe(b);
 })();
+</script>
+<script>
+document.querySelectorAll('[data-visit]').forEach(function (a) {
+  a.addEventListener('click', function () {
+    var r = document.querySelector('input[name="visit"][value="' + a.getAttribute('data-visit') + '"]');
+    if (r) { r.checked = true; r.dispatchEvent(new Event('change', { bubbles: true })); }
+  });
+});
 </script>
 </body>
 </html>
