@@ -744,6 +744,12 @@ h2 { letter-spacing: -.018em; }
   .site-head:has(.nav.open) .logo-block { background-color: rgba(255, 255, 255, 0); box-shadow: none; }
   .site-head:has(.nav.open) .logo-block img { opacity: 0; }
   .site-head:has(.nav.open) .logo-block::after { opacity: 1; }
+  /* menu open: logo collapses, so the bar tint spans edge to edge and the number sits dead centre */
+  .logo-block { transition: width .18s ease, padding .18s ease, background-color .18s ease; overflow: hidden; }
+  .site-head:has(.nav.open) .logo-block { width: 0; padding-inline: 0; }
+  .site-head:has(.nav.open) .logo-block img { width: 136px; max-width: none; flex: none; }
+  .site-head:has(.nav.open) .head-main { padding: 0 56px; }
+  .site-head:has(.nav.open) .head-main::before { left: 0 !important; }
   .site-head.solid:has(.nav.open) .logo-block::after { background: rgba(10, 49, 87, .82); -webkit-backdrop-filter: blur(12px) saturate(1.5); backdrop-filter: blur(12px) saturate(1.5); }
   .site-head.over .head-info a, .site-head.over .nav-toggle { text-shadow: 0 1px 8px rgba(4, 20, 40, .55); }
   .site-head.over:has(.nav.open) { background-color: transparent; }
