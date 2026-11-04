@@ -731,6 +731,11 @@ h2 { letter-spacing: -.018em; }
   .site-head.over .head-main::before { content: ""; position: absolute; left: 168px; right: 0; top: 0; bottom: 0; z-index: -1; pointer-events: none; }
   .site-head.over .nav { background: rgba(8, 56, 112, .5); }
   .site-head.over .nav a { text-shadow: 0 1px 8px rgba(4, 20, 40, .55); }
+  /* scrolled: same see-through idea, deeper tint so it reads over page text */
+  .site-head.solid { background-color: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; }
+  .site-head.solid .head-main::before { content: ""; position: absolute; left: 168px; right: 0; top: 0; bottom: 0; z-index: -1; pointer-events: none; }
+  .site-head.solid .head-main::before, .site-head.solid .nav { background: rgba(10, 49, 87, .82); -webkit-backdrop-filter: blur(12px) saturate(1.5); backdrop-filter: blur(12px) saturate(1.5); }
+  .site-head.solid .nav a { text-shadow: 0 1px 8px rgba(4, 20, 40, .5); }
   .site-head.over .head-info a, .site-head.over .nav-toggle { text-shadow: 0 1px 8px rgba(4, 20, 40, .55); }
   .site-head.over:has(.nav.open) { background-color: transparent; }
   .hero-bg .fg { top: 0; }
