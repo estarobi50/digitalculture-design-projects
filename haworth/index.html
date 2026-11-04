@@ -737,6 +737,14 @@ h2 { letter-spacing: -.018em; }
   .site-head.solid .head-main::before { content: ""; position: absolute; left: 168px; right: 0; top: 0; bottom: 0; z-index: -1; pointer-events: none; }
   .site-head.solid .head-main::before, .site-head.solid .nav { background: rgba(10, 49, 87, .82); -webkit-backdrop-filter: blur(12px) saturate(1.5); backdrop-filter: blur(12px) saturate(1.5); }
   .site-head.solid .nav a { text-shadow: 0 1px 8px rgba(4, 20, 40, .5); }
+  /* menu open: the see-through blue also covers the logo until the menu closes */
+  .logo-block { position: relative; transition: background-color .45s ease; }
+  .logo-block img { transition: opacity .45s ease; }
+  .logo-block::after { content: ""; position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity .45s ease; background: linear-gradient(180deg, rgba(8, 56, 112, .74), rgba(8, 56, 112, .46)); -webkit-backdrop-filter: saturate(1.5) brightness(.76); backdrop-filter: saturate(1.5) brightness(.76); }
+  .site-head:has(.nav.open) .logo-block { background-color: rgba(255, 255, 255, 0); box-shadow: none; }
+  .site-head:has(.nav.open) .logo-block img { opacity: .3; }
+  .site-head:has(.nav.open) .logo-block::after { opacity: 1; }
+  .site-head.solid:has(.nav.open) .logo-block::after { background: rgba(10, 49, 87, .82); -webkit-backdrop-filter: blur(12px) saturate(1.5); backdrop-filter: blur(12px) saturate(1.5); }
   .site-head.over .head-info a, .site-head.over .nav-toggle { text-shadow: 0 1px 8px rgba(4, 20, 40, .55); }
   .site-head.over:has(.nav.open) { background-color: transparent; }
   .hero-bg .fg { top: 0; }
