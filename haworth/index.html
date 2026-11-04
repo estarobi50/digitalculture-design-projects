@@ -205,15 +205,6 @@ p { margin: 0; }
 .team-banner img { aspect-ratio: 320 / 600; }
 .quotes.one { grid-template-columns: minmax(0, 1fr); }
 @media (max-width: 900px) { .frame.team-banner { max-width: 260px; margin-inline: auto; } }
-/* ---------- scroll-driven chair video (only active when img/chair-orbit video exists) ---------- */
-.orbit-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; max-width: none; opacity: 0; transition: opacity 1s ease; z-index: 2; }
-.hero.has-orbit .orbit-video { opacity: 1; }
-.hero.has-orbit .hero-bg .slide { opacity: 0; transition-duration: 1s; }
-.hero-track.pinned { height: calc(var(--vh-h, 100svh) * 2.6); position: relative; }
-.hero-track.pinned .hero { position: sticky; top: 0; }
-.hero.has-orbit .hero-copy { transition: opacity .4s ease; }
-.hero.has-orbit.late .hero-copy { opacity: .0; }
-@media (prefers-reduced-motion: reduce) { .orbit-video { display: none; } }
 /* ---------- map ---------- */
 .map-band { background: var(--mist); padding-block: clamp(48px, 7vw, 88px); }
 .map-wrap { position: relative; }
@@ -683,7 +674,7 @@ h2 { letter-spacing: -.018em; }
 .ages { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(14px, 2vw, 26px); }
 .age { position: relative; display: flex; flex-direction: column; gap: 10px; padding: clamp(24px, 2.6vw, 34px); background: var(--white); border-top: 2px solid var(--clay); box-shadow: 0 10px 34px rgba(60,40,20,.06); text-decoration: none; color: var(--text); transition: transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s, background-color .5s; }
 .age:hover, .age:focus-visible { transform: translateY(-6px); box-shadow: 0 22px 48px rgba(60,40,20,.12); background: var(--sand); }
-.a-tag { font: 500 .74rem/1.2 var(--sans); letter-spacing: .26em; text-transform: uppercase; color: #9A7650; }
+.a-tag { font: 500 .74rem/1.2 var(--sans); letter-spacing: .26em; text-transform: uppercase; color: #85623C; }
 .age h3 { font: 500 1.7rem/1.15 var(--serif); color: var(--ink); }
 .age p { font-size: 1rem; line-height: 1.6; }
 .a-go { margin-top: auto; padding-top: 14px; font: 500 .8rem/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--navy); background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .45s; align-self: flex-start; padding-bottom: 6px; }
@@ -707,7 +698,10 @@ h2 { letter-spacing: -.018em; }
 @keyframes whyIn { from { clip-path: inset(0 0 0 100%); scale: 1.35; filter: brightness(1.7) saturate(.6) blur(8px); } 60% { filter: brightness(1.15) blur(1px); } to { clip-path: inset(0 0 0 0); scale: 1; filter: none; } }
 @keyframes whyOut { from { scale: 1; filter: none; } to { scale: 1.14; filter: brightness(.35) blur(4px); } }
 @keyframes whyDrift { from { transform: scale(1); } to { transform: scale(1.1); } }
-/* the rotator keeps its slow fade and zoom even when the OS asks for reduced motion (the page-wide rule would otherwise freeze it) */
+/* reduced motion: the rotator becomes a plain, gentle cross-fade (no wipe, zoom, drift or blur) */
+@media (prefers-reduced-motion: reduce) {
+  .frame.rot .rot-stage img { animation: none !important; clip-path: none !important; scale: none !important; filter: none !important; transform: none !important; transition: opacity 1.2s ease !important; }
+}
 
 /* Mobile top matches desktop: transparent header over a full-bleed hero photo with the headline overlaid */
 @media (max-width: 900px) {
@@ -824,7 +818,6 @@ h2 { letter-spacing: -.018em; }
   <div class="hero-track" id="heroTrack">
   <section class="hero" aria-labelledby="h1">
     <div class="hero-bg" id="heroBg">
-      <video class="orbit-video" id="orbit" muted playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
       <div class="slide on"><img class="bgblur" src="img/seat-hd.jpg" alt=""><img class="fg" src="img/seat-hd.jpg" alt="A calm, modern treatment room at Haworth Dental with a reclined patient chair and overhead light" width="1600" height="1066" style="object-position:30% 50%"></div>
     </div>
     <div class="hero-grade" aria-hidden="true"></div>
@@ -1209,31 +1202,6 @@ h2 { letter-spacing: -.018em; }
   stack.addEventListener('pointerup', function (e) { if (sx !== null && Math.abs(e.clientX - sx) > 50) { show(e.clientX < sx ? active + 1 : active - 1); stack.dataset.swiped = '1'; setTimeout(function () { delete stack.dataset.swiped; }, 50); } sx = null; });
   stack.addEventListener('click', function (e) { if (stack.dataset.swiped) e.stopPropagation(); }, true);
   show(0, true);
-})();
-
-(function () {
-  var track = document.getElementById('heroTrack'), hero = track && track.querySelector('.hero'), v = document.getElementById('orbit');
-  if (!track || !hero || !v || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var srcs = ['img/chair-orbit.mp4', 'img/chair-orbit.webm'], k = 0, target = 0, cur = 0, ready = false;
-  function sizes() { var h = hero.offsetHeight; track.style.setProperty('--vh-h', h + 'px'); }
-  function onScroll() {
-    if (!ready) return;
-    var total = track.offsetHeight - hero.offsetHeight, y = Math.min(Math.max(-track.getBoundingClientRect().top + (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 0) * 0, 0), total);
-    target = total > 0 ? y / total : 0; hero.classList.toggle('late', target > .9);
-  }
-  function tick() {
-    if (!ready) return;
-    cur += (target - cur) * .12;
-    var t = cur * (v.duration || 0); if (isFinite(t) && Math.abs(v.currentTime - t) > .02) { try { v.currentTime = t; } catch (e) {} }
-    requestAnimationFrame(tick);
-  }
-  v.addEventListener('loadedmetadata', function () {
-    if (!(v.duration > 0.5)) return;
-    ready = true; sizes(); track.classList.add('pinned'); hero.classList.add('has-orbit'); v.pause(); v.currentTime = 0;
-    window.addEventListener('scroll', onScroll, { passive: true }); window.addEventListener('resize', function () { sizes(); onScroll(); }); onScroll(); tick();
-  });
-  v.addEventListener('error', function () { k += 1; if (k < srcs.length) { v.src = srcs[k]; v.load(); } });
-  v.src = srcs[0]; v.load();
 })();
 
 (function () {
