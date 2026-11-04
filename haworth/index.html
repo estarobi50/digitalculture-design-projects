@@ -738,15 +738,17 @@ h2 { letter-spacing: -.018em; }
   .site-head.solid .head-main::before, .site-head.solid .nav { background: rgba(10, 49, 87, .82); -webkit-backdrop-filter: blur(12px) saturate(1.5); backdrop-filter: blur(12px) saturate(1.5); }
   .site-head.solid .nav a { text-shadow: 0 1px 8px rgba(4, 20, 40, .5); }
   /* menu open: the see-through blue also covers the logo until the menu closes */
-  .logo-block { position: relative; transition: background-color .18s ease; }
-  .logo-block img { transition: opacity .15s ease; }
-  .logo-block::after { content: ""; position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity .15s ease; background: linear-gradient(180deg, rgba(8, 56, 112, .74), rgba(8, 56, 112, .46)); -webkit-backdrop-filter: saturate(1.5) brightness(.76); backdrop-filter: saturate(1.5) brightness(.76); }
+  .logo-block { position: relative; }
+  .logo-block img { transition: none !important; }
+  .logo-block::after { content: ""; position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: none; background: linear-gradient(180deg, rgba(8, 56, 112, .74), rgba(8, 56, 112, .46)); -webkit-backdrop-filter: saturate(1.5) brightness(.76); backdrop-filter: saturate(1.5) brightness(.76); }
   .site-head:has(.nav.open) .logo-block { background-color: rgba(255, 255, 255, 0); box-shadow: none; }
   .site-head:has(.nav.open) .logo-block img { opacity: 0; }
   .site-head:has(.nav.open) .logo-block::after { opacity: 1; }
+  .nav-toggle, .nav a, .logo-block, .head-info a { -webkit-tap-highlight-color: transparent; }
   /* menu open: logo collapses, so the bar tint spans edge to edge and the number sits dead centre */
-  .logo-block { transition: width .18s ease, padding .18s ease, background-color .18s ease; overflow: hidden; }
-  .site-head:has(.nav.open) .logo-block { width: 0; padding-inline: 0; }
+  .logo-block { transition: none !important; overflow: hidden; }
+  .site-head:has(.nav.open) .logo-block { width: 0; padding-inline: 0; border: 0; box-shadow: none !important; background: transparent !important; }
+  .site-head:has(.nav.open) .logo-block::after { display: none; }
   .site-head:has(.nav.open) .logo-block img { width: 136px; max-width: none; flex: none; }
   .site-head:has(.nav.open) .head-main { padding: 0 56px; }
   .site-head:has(.nav.open) .head-main::before { left: 0 !important; }
