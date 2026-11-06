@@ -818,10 +818,13 @@ h2 { letter-spacing: -.018em; }
 .bene p { margin: 0; font: 400 .95rem/1.55 var(--sans); color: #DCE8F4; }
 .bene .n { font-variant-numeric: lining-nums; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--white); color: #0A3157; font: 600 1.55rem/1 var(--serif); box-shadow: 0 0 0 3px #0E4271, 0 0 0 5px #7DB5E6; flex: none; }
 .fam-photo { position: relative; margin: 0; max-width: 380px; margin-inline: auto; width: 100%; }
-.fp-card { background: #F0F7FF; border-radius: 999px 999px 26px 26px; overflow: hidden; box-shadow: 0 34px 60px -30px rgba(10,49,87,.4); aspect-ratio: 904 / 1400; }
+.fam-photo { padding: 20px; }
+.fp-card { position: relative; background: #F0F7FF; border-radius: 999px 999px 26px 26px; overflow: hidden; box-shadow: 0 0 0 7px #fff, 0 0 0 8px #0E4271, 0 38px 64px -28px rgba(10,49,87,.5); aspect-ratio: 904 / 1400; }
+.fp-card::after { content: ""; position: absolute; inset: 11px; border: 1px solid rgba(255,255,255,.8); border-radius: 999px 999px 16px 16px; pointer-events: none; }
+.fam-photo::before { content: ""; position: absolute; inset: 0; border: 1px solid #C8A45E; border-radius: 999px 999px 44px 44px; pointer-events: none; opacity: .9; }
 .fp-card img { width: 100%; height: 100%; object-fit: cover; display: block; transform-origin: 50% 70%; animation: famDrift 20s ease-in-out infinite alternate; }
 @keyframes famDrift { from { transform: scale(1); } to { transform: scale(1.035); } }
-.fp-badge { position: absolute; left: -16px; top: 12%; display: grid; justify-items: center; gap: 2px; width: 108px; aspect-ratio: 1; align-content: center; border-radius: 50%; background: #0A3157; color: var(--white); box-shadow: 0 12px 28px -10px rgba(7,41,74,.6), 0 0 0 4px var(--white); text-align: center; }
+.fp-badge { position: absolute; left: -2px; top: 12%; z-index: 2; display: grid; justify-items: center; gap: 2px; width: 108px; aspect-ratio: 1; align-content: center; border-radius: 50%; background: #0A3157; color: var(--white); box-shadow: 0 12px 28px -10px rgba(7,41,74,.6), 0 0 0 4px var(--white); text-align: center; }
 .fp-badge img { width: 24px; height: auto; margin-bottom: 2px; }
 .fp-badge b { font: 600 1.05rem/1 var(--serif); }
 .fp-badge span { font: 400 .6rem/1.2 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: #9FBBD6; }
@@ -829,7 +832,7 @@ h2 { letter-spacing: -.018em; }
   .fam-bene { grid-template-columns: minmax(0, 1fr); }
   .fam-photo { order: -1; max-width: 300px; }
   .bene li:nth-child(even) { margin-right: 0; }
-  .fp-badge { left: -6px; width: 92px; }
+  .fp-badge { left: 4px; width: 96px; } .fp-badge span { font-size: .52rem; letter-spacing: .1em; }
 }
 @media (max-width: 520px) { .bene li { padding: 16px 16px 16px 22px; gap: 14px; border-radius: 18px 60px 60px 18px; } .bene .n { width: 44px; height: 44px; font-size: 1.3rem; } .bene h4 { font-size: 1.25rem; } }
 @media (prefers-reduced-motion: reduce) { .fp-card img { animation: none; } .bene li:hover { transform: none; } }
