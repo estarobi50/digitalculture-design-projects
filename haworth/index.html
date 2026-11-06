@@ -789,6 +789,13 @@ h2 { letter-spacing: -.018em; }
 @keyframes phoneDotSoft { 0%, 100% { box-shadow: 0 0 4px 0 rgba(160,215,255,.35); transform: translateX(-50%) rotate(45deg) scale(1); } 50% { box-shadow: 0 0 11px 3px rgba(170,220,255,.85); transform: translateX(-50%) rotate(45deg) scale(1.5); } }
 @keyframes phoneLineSoft { 0% { background-position: -40% 100%, 0 100%; } 60%, 100% { background-position: 140% 100%, 0 100%; } }
 @media (prefers-reduced-motion: reduce) { .head-info a[href^="tel:"], .head-info a[href^="tel:"]::after { animation: none !important; } }
+
+/* trust photo (reviews) */
+.frame.trust-photo { max-width: 300px; background: #0A3157; }
+.trust-photo picture, .trust-photo img { display: block; width: 100%; }
+.trust-photo img { aspect-ratio: 504 / 760; height: auto; object-fit: cover; }
+.frame.trust-photo::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(10,49,87,0) 62%, rgba(10,49,87,.38) 100%), radial-gradient(120% 90% at 50% 40%, transparent 62%, rgba(10,49,87,.22) 100%); }
+.frame.trust-photo::after { z-index: 2; }
 </style>
 </head>
 <body>
@@ -996,7 +1003,7 @@ h2 { letter-spacing: -.018em; }
       <!-- GBP_RATING_TBD: add the real Google rating and review count from the Business Profile, then remove the hidden attribute -->
       <p class="g-sum" hidden data-todo="GBP_RATING_TBD" style="text-align:center;margin:0 0 1.5rem"></p>
       <div class="rv-feature">
-        <figure class="frame offset team-banner qcard" aria-hidden="true"><span class="qmark"></span><span class="qtxt"><span class="q1">Care that feels</span><span class="qwords" aria-hidden="true"><em>Gentle.</em><em>Patient.</em><em>Honest.</em><em>Calm.</em></span></span><span class="qline"></span><span class="qsub">Families in Haworth &amp; Bergen County</span></figure>
+        <figure class="frame offset team-banner trust-photo"><picture><source media="(prefers-reduced-motion: reduce)" srcset="img/trust-poster.jpg"><img src="img/trust-banner.webp" alt="A smiling patient beneath a badge reading: The dental team Bergen County families trust" width="504" height="760" loading="lazy" decoding="async"></picture></figure>
         <div class="rv-big" data-r>
           <div class="g-stars" role="img" aria-label="5 out of 5 stars"></div>
           <div class="rv-slides" id="rvSlides">
