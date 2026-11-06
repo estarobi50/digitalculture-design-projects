@@ -806,6 +806,33 @@ h2 { letter-spacing: -.018em; }
   transform: translate(-50%, -50%) scale(.7); opacity: 0; animation: logoPulse 4.2s ease-in-out infinite; animation-delay: 1.2s; }
 @keyframes logoPulse { 0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(.7); } 50% { opacity: .62; transform: translate(-50%, -50%) scale(1.3); } }
 @media (prefers-reduced-motion: reduce) { .logo-art::after { animation: none; } }
+
+/* family benefits */
+.fam-bene { display: grid; grid-template-columns: minmax(0, 1.28fr) minmax(0, .72fr); gap: clamp(28px, 5vw, 80px); align-items: center; margin-bottom: clamp(44px, 6vw, 80px); }
+.bene-title { font: 500 clamp(1.5rem, 2.2vw, 2rem)/1.2 var(--serif); color: var(--ink); margin: 0 0 20px; }
+.bene { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.bene li { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 22px; background: linear-gradient(100deg, #07294A 0%, #0E4271 100%); color: var(--white); padding: 20px 22px 20px 32px; border-radius: 22px 96px 96px 22px; box-shadow: 0 14px 30px -18px rgba(7,41,74,.55); transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s; }
+.bene li:nth-child(even) { margin-right: clamp(0px, 3.4vw, 44px); }
+.bene li:hover { transform: translateX(6px); box-shadow: 0 20px 36px -16px rgba(7,41,74,.6); }
+.bene h4 { font: 600 1.4rem/1.15 var(--serif); color: #A9D6F8; margin: 0 0 4px; }
+.bene p { margin: 0; font: 400 .95rem/1.55 var(--sans); color: #DCE8F4; }
+.bene .n { font-variant-numeric: lining-nums; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--white); color: #0A3157; font: 600 1.55rem/1 var(--serif); box-shadow: 0 0 0 3px #0E4271, 0 0 0 5px #7DB5E6; flex: none; }
+.fam-photo { position: relative; margin: 0; max-width: 380px; margin-inline: auto; width: 100%; }
+.fp-card { background: #F0F7FF; border-radius: 999px 999px 26px 26px; overflow: hidden; box-shadow: 0 34px 60px -30px rgba(10,49,87,.4); aspect-ratio: 904 / 1400; }
+.fp-card img { width: 100%; height: 100%; object-fit: cover; display: block; transform-origin: 50% 70%; animation: famDrift 20s ease-in-out infinite alternate; }
+@keyframes famDrift { from { transform: scale(1); } to { transform: scale(1.035); } }
+.fp-badge { position: absolute; left: -16px; top: 12%; display: grid; justify-items: center; gap: 2px; width: 108px; aspect-ratio: 1; align-content: center; border-radius: 50%; background: #0A3157; color: var(--white); box-shadow: 0 12px 28px -10px rgba(7,41,74,.6), 0 0 0 4px var(--white); text-align: center; }
+.fp-badge img { width: 24px; height: auto; margin-bottom: 2px; }
+.fp-badge b { font: 600 1.05rem/1 var(--serif); }
+.fp-badge span { font: 400 .6rem/1.2 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: #9FBBD6; }
+@media (max-width: 900px) {
+  .fam-bene { grid-template-columns: minmax(0, 1fr); }
+  .fam-photo { order: -1; max-width: 300px; }
+  .bene li:nth-child(even) { margin-right: 0; }
+  .fp-badge { left: -6px; width: 92px; }
+}
+@media (max-width: 520px) { .bene li { padding: 16px 16px 16px 22px; gap: 14px; border-radius: 18px 60px 60px 18px; } .bene .n { width: 44px; height: 44px; font-size: 1.3rem; } .bene h4 { font-size: 1.25rem; } }
+@media (prefers-reduced-motion: reduce) { .fp-card img { animation: none; } .bene li:hover { transform: none; } }
 </style>
 </head>
 <body>
@@ -871,6 +898,22 @@ h2 { letter-spacing: -.018em; }
         <div><p class="eyebrow">For every age</p>
         <h2 id="fam-h">One practice for the whole family.</h2></div>
         <p>Parents, children and grandparents can all see the same dentist, in the same calm room.</p>
+      </div>
+      <div class="fam-bene">
+        <div class="bene-wrap">
+          <h3 class="bene-title" data-r>Why families stay with one dentist</h3>
+          <ol class="bene">
+            <li data-r><div><h4>One place, one schedule</h4><p>Everyone can see the same dentist, so back-to-back appointments are easy and the whole family saves time.</p></div><span class="n" aria-hidden="true">1</span></li>
+            <li data-r><div><h4>Care that knows your history</h4><p>We follow each patient&rsquo;s dental health over the years, from a child&rsquo;s first visit well into adulthood.</p></div><span class="n" aria-hidden="true">2</span></li>
+            <li data-r><div><h4>Everything under one roof</h4><p>Children&rsquo;s care, braces, root canals, implants and cosmetic dentistry, all in the same familiar office.</p></div><span class="n" aria-hidden="true">3</span></li>
+            <li data-r><div><h4>Prevention first</h4><p>Check-ups, cleanings and plain-spoken guidance that help you avoid problems before they start.</p></div><span class="n" aria-hidden="true">4</span></li>
+            <li data-r><div><h4>A calm, welcoming room</h4><p>An unhurried atmosphere where patients of every age feel at ease and receive care tailored to them.</p></div><span class="n" aria-hidden="true">5</span></li>
+          </ol>
+        </div>
+        <figure class="fam-photo" data-r>
+          <div class="fp-card"><img src="img/family.jpg" alt="A smiling family of four, with two children on their parents&rsquo; shoulders, in front of a large model tooth" width="904" height="1400" loading="lazy" decoding="async"></div>
+          <figcaption class="fp-badge"><img src="img/flower-light.png" alt="" width="34" height="37"><b>Since 1966</b><span>Haworth, NJ</span></figcaption>
+        </figure>
       </div>
       <div class="ages">
         <a class="age" data-r data-visit="child" href="#book"><span class="a-tag">Little ones</span><h3>A gentle first visit.</h3><p>Routine check-ups, cleanings and fillings, at a child&rsquo;s pace.</p><span class="a-go">Plan a visit</span></a>
