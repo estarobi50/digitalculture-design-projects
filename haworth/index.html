@@ -792,8 +792,10 @@ h2 { letter-spacing: -.018em; }
 
 /* trust photo (reviews) */
 .frame.trust-photo { max-width: 300px; background: #0A3157; }
-.trust-photo picture, .trust-photo img { display: block; width: 100%; }
-.trust-photo img { aspect-ratio: 504 / 760; height: auto; object-fit: cover; }
+.tp-clip { overflow: hidden; display: block; }
+.trust-photo img { display: block; width: 100%; aspect-ratio: 756 / 1140; height: auto; object-fit: cover; transform-origin: 50% 38%; animation: tpDrift 22s ease-in-out infinite alternate; }
+@keyframes tpDrift { from { transform: scale(1); } to { transform: scale(1.045); } }
+@media (prefers-reduced-motion: reduce) { .trust-photo img { animation: none; } }
 .frame.trust-photo::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(10,49,87,0) 62%, rgba(10,49,87,.38) 100%), radial-gradient(120% 90% at 50% 40%, transparent 62%, rgba(10,49,87,.22) 100%); }
 .frame.trust-photo::after { z-index: 2; }
 </style>
@@ -1003,7 +1005,7 @@ h2 { letter-spacing: -.018em; }
       <!-- GBP_RATING_TBD: add the real Google rating and review count from the Business Profile, then remove the hidden attribute -->
       <p class="g-sum" hidden data-todo="GBP_RATING_TBD" style="text-align:center;margin:0 0 1.5rem"></p>
       <div class="rv-feature">
-        <figure class="frame offset team-banner trust-photo"><picture><source media="(prefers-reduced-motion: reduce)" srcset="img/trust-poster.jpg"><img src="img/trust-banner.webp" alt="A smiling patient beneath a badge reading: The dental team Bergen County families trust" width="504" height="760" loading="lazy" decoding="async"></picture></figure>
+        <figure class="frame offset team-banner trust-photo"><div class="tp-clip"><img src="img/trust-still.jpg" alt="A smiling patient beneath a badge reading: The dental team Bergen County families trust" width="756" height="1140" loading="lazy" decoding="async"></div></figure>
         <div class="rv-big" data-r>
           <div class="g-stars" role="img" aria-label="5 out of 5 stars"></div>
           <div class="rv-slides" id="rvSlides">
