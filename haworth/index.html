@@ -916,15 +916,80 @@ h2 { letter-spacing: -.018em; }
 .rv-rail .g-who b { font: 500 .74rem/1.4 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--navy); }
 .rv-rail .g-who span { font: 400 .88rem var(--sans); color: #5F7FA0; }
 @media (max-width:1000px) { .rv-rail { grid-auto-columns: 78%; } }
+
+/* ===== one-system pass (test): gold hairline + editorial panels ===== */
+.eyebrow::before, .section-head:not(.left) .eyebrow::after { background: #C8A45E; opacity: 1; }
+.eyebrow { color: #5F7FA0; }
+.section-head h2, .copy h2 { text-wrap: balance; }
+
+/* hero details */
+.hero-hello { display: inline-flex; align-items: center; gap: 14px; letter-spacing: .3em; }
+.hero-hello::before { content: ""; width: 38px; height: 1px; background: #C8A45E; flex: none; }
+.hero .fine { display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap; letter-spacing: .06em; }
+.hero .fine::before { content: ""; width: 7px; height: 7px; background: #C8A45E; transform: rotate(45deg); flex: none; }
+
+/* stats band */
+.stats::after { content: ""; position: absolute; left: 50%; top: 0; width: 120px; height: 2px; transform: translateX(-50%); background: linear-gradient(90deg, rgba(200,164,94,0), #C8A45E, rgba(200,164,94,0)); }
+.stat + .stat { border-left: 1px solid rgba(255,255,255,.14); position: relative; }
+.stat + .stat::before { content: ""; position: absolute; left: -4px; top: 50%; width: 7px; height: 7px; margin-top: -4px; background: #C8A45E; transform: rotate(45deg); box-shadow: 0 0 0 5px #0C3A66; }
+.stat b { font-weight: 400; }
+.stat span { font: 500 .72rem/1.6 var(--sans); letter-spacing: .24em; text-transform: uppercase; color: #A9C0D8; }
+.stat b::after { content: ""; display: block; width: 24px; height: 1px; margin: 12px auto 0; background: #C8A45E; }
+
+/* services deck */
+.deck-count { color: #A07F3A; display: flex; align-items: center; gap: 12px; font-weight: 500; letter-spacing: .26em; }
+.deck-count::before { content: ""; width: 24px; height: 1px; background: #C8A45E; }
+.deck-text h3 { color: var(--ink); text-wrap: balance; }
+.deck-nav button { border: 1px solid #C8A45E !important; color: var(--navy); background: transparent; transition: background .4s, color .4s; }
+.deck-nav button:hover { background: var(--navy); color: #fff; border-color: var(--navy) !important; }
+.dcard::after { border-color: rgba(200,164,94,.85) !important; }
+
+/* photo frames: white mat + gold hairline instead of navy offset block */
+.frame.offset { box-shadow: 0 0 0 10px #fff, 0 0 0 11px #C8A45E, 0 40px 60px -34px rgba(10,49,87,.5); }
+.frame.offset:hover { transform: none; box-shadow: 0 0 0 10px #fff, 0 0 0 11px #C8A45E, 0 44px 66px -34px rgba(10,49,87,.55); }
+.frame.offset::after { border-color: rgba(255,255,255,.7); }
+
+/* lists */
+.checks { border-top-color: rgba(14,66,113,.12); }
+.checks li { border-bottom-color: rgba(14,66,113,.1); }
+.checks li::before { width: 7px; height: 7px; border: 0; background: #C8A45E; transform: rotate(45deg); left: 6px; top: 1.3rem; }
+.cred .checks li::before { top: 1.15rem; }
+.cred h3 { color: var(--ink); font-weight: 500; }
+
+/* insurance */
+.ins-grid { position: relative; border: 1px solid rgba(14,66,113,.12); border-radius: 2px; background: linear-gradient(180deg,#fff,#FBFCFE); box-shadow: 0 40px 70px -46px rgba(10,49,87,.45); }
+.ins-grid::before { content: ""; position: absolute; left: 50%; top: -1px; width: 84px; height: 2px; transform: translateX(-50%); background: linear-gradient(90deg, rgba(200,164,94,0), #C8A45E, rgba(200,164,94,0)); }
+.ins-card { padding: clamp(30px,3.2vw,48px) clamp(22px,3vw,44px); position: relative; }
+.ins-card { border-left: 0; } .ins-card + .ins-card { border-left: 1px solid rgba(14,66,113,.1); }
+.ins-card + .ins-card::before { content: ""; position: absolute; left: -4px; top: clamp(40px,4vw,58px); width: 7px; height: 7px; background: #C8A45E; transform: rotate(45deg); box-shadow: 0 0 0 5px #fff; }
+.ins-card h3 { font: 500 clamp(1.6rem,2vw,1.95rem)/1.12 var(--serif); color: var(--ink); }
+.carriers { border: 1px solid rgba(14,66,113,.12); border-radius: 2px; background: #fff; position: relative; }
+.carriers::before { content: ""; position: absolute; left: 50%; top: -1px; width: 56px; height: 2px; transform: translateX(-50%); background: linear-gradient(90deg, rgba(200,164,94,0), #C8A45E, rgba(200,164,94,0)); }
+
+/* footer */
+footer::before { background: linear-gradient(90deg, transparent, #C8A45E, transparent); height: 1px; opacity: .8; }
+footer h3 { display: flex; align-items: center; gap: 12px; letter-spacing: .26em; color: #A9C0D8; }
+footer h3::before { content: ""; width: 20px; height: 1px; background: #C8A45E; }
+footer img { border-radius: 0; outline: 1px solid #C8A45E; outline-offset: 3px; }
+footer a { border-bottom-color: rgba(200,164,94,.45); }
+footer a:hover { border-bottom-color: #C8A45E; }
+footer .legal { border-top-color: rgba(200,164,94,.22); }
+
+@media (max-width: 760px) {
+  .stat + .stat::before { display: none; }
+  .ins-card + .ins-card::before { display: none; }
+  .frame.offset, .frame.offset:hover { box-shadow: 0 0 0 7px #fff, 0 0 0 8px #C8A45E, 0 30px 50px -30px rgba(10,49,87,.5); }
+}
+@media (max-width:900px){ .ins-card, .ins-card + .ins-card { border-left:0; padding: 28px 24px; } .ins-card + .ins-card { border-top:1px solid rgba(14,66,113,.1); } .ins-card + .ins-card::before { display:none; } }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div id="veil" aria-hidden="true"><div class="v-card"><img src="img/logo-brand.png" alt="" width="416" height="104"></div><span class="v-line"></span></div>
+<div id="veil" aria-hidden="true"><div class="v-card"><img src="img/logo-brand.svg" alt="" width="416" height="104"></div><span class="v-line"></span></div>
 <div class="progress" id="progress" aria-hidden="true"></div>
 
 <header class="site-head" id="top">
-  <a class="logo-block" href="#top" aria-label="Haworth Dental, home"><span class="logo-art"><img src="img/logo-brand.png" alt="Haworth Dental" width="416" height="104"></span></a>
+  <a class="logo-block" href="#top" aria-label="Haworth Dental, home"><span class="logo-art"><img src="img/logo-brand.svg" alt="Haworth Dental" width="416" height="104"></span></a>
   <div class="head-main">
     <div class="head-info">
       <span class="addr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>141 Terrace St | Haworth, NJ 07641</span>
@@ -1254,7 +1319,7 @@ h2 { letter-spacing: -.018em; }
 <footer>
   <div class="wrap">
     <div class="f-brand">
-      <img src="img/logo-brand.png" alt="Haworth Dental" width="416" height="104">
+      <img src="img/logo-brand.svg" alt="Haworth Dental" width="416" height="104">
       <p>Family dentistry in Haworth since 1966.</p>
     </div>
     <div class="f-col"><h3>Visit</h3><p>141 Terrace St<br>Haworth, NJ 07641</p></div>
