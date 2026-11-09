@@ -981,6 +981,16 @@ footer .legal { border-top-color: rgba(200,164,94,.22); }
   .frame.offset, .frame.offset:hover { box-shadow: 0 0 0 7px #fff, 0 0 0 8px #C8A45E, 0 30px 50px -30px rgba(10,49,87,.5); }
 }
 @media (max-width:900px){ .ins-card, .ins-card + .ins-card { border-left:0; padding: 28px 24px; } .ins-card + .ins-card { border-top:1px solid rgba(14,66,113,.1); } .ins-card + .ins-card::before { display:none; } }
+
+/* benefit pills: pop on hover, number swaps to flower mark */
+.bene li { position: relative; }
+.bene li:hover { transform: translateX(10px) scale(1.03); z-index: 2; box-shadow: 0 0 0 1px rgba(200,164,94,.6), 0 30px 46px -18px rgba(7,41,74,.7); background: linear-gradient(100deg, #0A3560 0%, #14548C 100%); }
+.bene li:nth-child(even):hover { transform: translateX(-10px) scale(1.03); }
+.bene .n { position: relative; transition: color .3s, box-shadow .5s; }
+.bene .n::after { content: ""; position: absolute; inset: 8px; background: url(img/flower-mark.svg) center / contain no-repeat; opacity: 0; transform: scale(.5) rotate(-40deg); transition: opacity .4s, transform .7s cubic-bezier(.2,.8,.2,1); }
+.bene li:hover .n { color: transparent; box-shadow: 0 0 0 3px #14548C, 0 0 0 5px #C8A45E; }
+.bene li:hover .n::after { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .bene li:hover, .bene li:nth-child(even):hover { transform: none; } .bene .n::after { transition: opacity .2s; transform: none; } }
 </style>
 </head>
 <body>
