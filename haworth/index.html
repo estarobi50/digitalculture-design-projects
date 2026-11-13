@@ -634,9 +634,9 @@ h2 { letter-spacing: -.018em; }
 /* full-bleed band */
 .bleed { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: clamp(440px, 68vh, 720px); background: linear-gradient(160deg, #0E4271 0%, #072644 100%); color: var(--white); overflow: hidden; }
 .bleed-img { position: relative; overflow: hidden; background: radial-gradient(120% 90% at 40% 20%, #F7FAFD 0%, #E3ECF5 60%, #CFDDEB 100%); }
-.bleed-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; mix-blend-mode: multiply; filter: saturate(.95) contrast(1.03); transform: scale(1.06); transition: transform 2.4s cubic-bezier(.2,.7,.2,1); }
+.bleed-img img, .bleed-img video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; mix-blend-mode: multiply; filter: saturate(.95) contrast(1.03); transform: scale(1.06); transition: transform 2.4s cubic-bezier(.2,.7,.2,1); }
 .bleed-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,38,68,0) 78%, rgba(7,38,68,.28)); }
-.bleed.seen .bleed-img img { transform: none; }
+.bleed.seen .bleed-img img, .bleed.seen .bleed-img video { transform: none; }
 .bleed-copy { align-self: center; padding: clamp(48px, 7vw, 110px) clamp(24px, 6vw, 100px); max-width: 640px; }
 .bleed h2 { color: var(--white); font: italic 400 clamp(2.2rem, 3.6vw, 3.5rem)/1.12 var(--serif); }
 .bleed-copy > p:last-child { margin-top: 1.4rem; color: #C9DDF0; font-size: 1.1rem; max-width: 44ch; }
@@ -652,7 +652,7 @@ h2 { letter-spacing: -.018em; }
 @media (max-width: 900px) { .ins-card + .ins-card { border-top: 0; } }
 
 /* reviews: featured quote + slim rail */
-.rv-feature { display: grid; grid-template-columns: 380px minmax(0, 1fr); gap: clamp(32px, 6vw, 100px); align-items: center; }
+.rv-feature { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: clamp(32px, 6vw, 100px); align-items: center; }
 .rv-feature .team-banner { margin: 0; }
 .rv-big { min-width: 0; }
 .rv-big .g-stars { margin-bottom: 1.4rem; }
@@ -1039,13 +1039,6 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; point
 .gbadge:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
 @media (max-width: 520px) { .gbadge { gap: 14px; padding: 12px 22px 12px 16px; } .gbadge .gb-g { width: 32px; height: 32px; } .gbadge .gb-note { font-size: .74rem; } }
 @media (prefers-reduced-motion: reduce) { .gbadge, .js .gbadge[data-r].in:hover { transform: none; } }
-
-/* trust video (replaces still) */
-.frame.trust-photo { max-width: 380px; background: #F4F5F7; }
-.trust-photo .tp-video { display: block; width: 100%; height: auto; aspect-ratio: 618 / 542; object-fit: cover; }
-.frame.trust-photo::before { display: none; }
-.frame.trust-photo::after { border-color: rgba(200,164,94,.55); }
-@media (max-width: 900px) { .frame.trust-photo { max-width: 340px; } }
 </style>
 </head>
 <body>
@@ -1251,7 +1244,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; point
   </section>
 
   <section class="bleed" aria-labelledby="bleed-h">
-    <div class="bleed-img"><img src="img/handshake.jpg?v=3" alt="The dentist warmly shaking hands with a smiling patient" width="1236" height="1086" loading="lazy"></div>
+    <div class="bleed-img"><video poster="img/trust-video-poster.jpg" width="618" height="542" autoplay muted loop playsinline preload="metadata" aria-label="The dentist warmly shaking hands with a smiling patient"><source src="img/trust-video.webm" type="video/webm"><source src="img/trust-video.mp4" type="video/mp4"></video></div>
     <div class="bleed-copy" data-r>
       <p class="eyebrow">Our promise</p>
       <h2 id="bleed-h">Unhurried, honest care from people who know your name.</h2>
@@ -1287,7 +1280,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; point
         <span class="gb-txt"><b>Google Reviews</b><span class="g-stars" role="img" aria-label="5 out of 5 stars"></span><em class="gb-note">5.0 stars &middot; 395 reviews</em></span>
       </a>
       <div class="rv-feature">
-        <figure class="frame offset team-banner trust-photo"><div class="tp-clip"><video class="tp-video" poster="img/trust-video-poster.jpg" width="618" height="542" autoplay muted loop playsinline preload="metadata" aria-label="Dr. Lebel greeting a patient with a handshake and a warm conversation"><source src="img/trust-video.webm" type="video/webm"><source src="img/trust-video.mp4" type="video/mp4"></video></div></figure>
+        <figure class="frame offset team-banner trust-photo"><div class="tp-clip"><img src="img/trust-still.jpg" alt="A smiling patient beneath a badge reading: The dental team Bergen County families trust" width="756" height="1140" loading="lazy" decoding="async"></div></figure>
         <div class="rv-big" data-r>
           <div class="g-stars" role="img" aria-label="5 out of 5 stars"></div>
           <div class="rv-slides" id="rvSlides">
@@ -1654,8 +1647,5 @@ document.querySelectorAll('[data-visit]').forEach(function (a) {
 })();
 </script>
 <script>(function(){if(location.hash)return;function top(){scrollTo(0,0)}top();addEventListener("load",function(){top();setTimeout(top,60)})})();</script>
-<script>
-(function(){try{var v=document.querySelector('.tp-video');if(v&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause();}}catch(e){}})();
-</script>
 </body>
 </html>
