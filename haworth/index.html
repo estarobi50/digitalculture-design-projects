@@ -1064,9 +1064,8 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; point
 /* ===== hero impact (TEST) ===== */
 @media (min-width: 761px) {
   .hero-bg .bgblur { display: none; }
-  .hero-bg .fg { left: 0; right: 0; width: 100%; max-width: none; -webkit-mask-image: none; mask-image: none; object-position: 62% 42%; transform-origin: 68% 46%; }
-  .hero-bg .slide.on .fg { animation: heroZoom 28s cubic-bezier(.22,.5,.28,1) both; will-change: scale, translate; }
-  @keyframes heroZoom { from { scale: 1.02; translate: 0 0; } to { scale: 1.16; translate: -1.4% -0.8%; } }
+  .hero-bg .fg { left: 0; right: 0; width: 100%; max-width: none; -webkit-mask-image: none; mask-image: none; object-position: 62% 42%; transform-origin: 60% 40%; }
+  .hero-bg .slide.on .fg { animation: kb 18s cubic-bezier(.25, .6, .3, 1) both; will-change: scale; }
   .hero-grade { background: linear-gradient(90deg, rgba(4,20,40,.94) 0%, rgba(4,20,40,.78) 30%, rgba(4,20,40,.28) 58%, rgba(4,20,40,0) 82%), linear-gradient(0deg, rgba(4,20,40,.6) 0%, rgba(4,20,40,0) 34%), linear-gradient(180deg, rgba(4,20,40,.5) 0%, rgba(4,20,40,0) 28%); }
   .hero { align-items: center; }
   .hero-inner { padding-block: clamp(72px, 14vh, 150px); }
