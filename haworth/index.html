@@ -806,6 +806,7 @@ h2 { letter-spacing: -.018em; }
 /* trust photo (reviews) */
 .frame.trust-photo { max-width: 300px; background: #0A3157; }
 .tp-clip { overflow: hidden; display: block; }
+.trust-photo video { display: block; width: 100%; aspect-ratio: 756 / 1140; height: auto; object-fit: cover; object-position: 60% 50%; }
 .trust-photo img { display: block; width: 100%; aspect-ratio: 756 / 1140; height: auto; object-fit: cover; transform-origin: 50% 38%; animation: tpDrift 22s ease-in-out infinite alternate; }
 @keyframes tpDrift { from { transform: scale(1); } to { transform: scale(1.045); } }
 @media (prefers-reduced-motion: reduce) { .trust-photo img { animation: none; } }
@@ -1336,7 +1337,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visibl
         <span class="gb-txt"><b>Google Reviews</b><span class="g-stars" role="img" aria-label="5 out of 5 stars"></span><em class="gb-note">5.0 stars &middot; 395 reviews</em></span>
       </a>
       <div class="rv-feature">
-        <figure class="frame offset team-banner trust-photo"><div class="tp-clip"><img src="img/trust-still.jpg" alt="A smiling patient beneath a badge reading: The dental team Bergen County families trust" width="756" height="1140" loading="lazy" decoding="async"></div></figure>
+        <figure class="frame offset team-banner trust-photo"><div class="tp-clip"><video id="reviewVid" class="vid-still" poster="img/review-video-poster.jpg" width="1000" height="880" autoplay muted loop playsinline preload="auto" disablepictureinpicture aria-label="A friendly dentist checks a smiling child in the exam chair"><source src="img/review-video.mp4" type="video/mp4"><source src="img/review-video.webm" type="video/webm"></video></div></figure>
         <div class="rv-big" data-r>
           <div class="g-stars" role="img" aria-label="5 out of 5 stars"></div>
           <div class="rv-slides" id="rvSlides">
@@ -1705,14 +1706,14 @@ document.querySelectorAll('[data-visit]').forEach(function (a) {
 <script>(function(){if(location.hash)return;function top(){scrollTo(0,0)}top();addEventListener("load",function(){top();setTimeout(top,60)})})();</script>
 <script>
 (function(){try{
-var v=document.getElementById('promiseVid'); if(!v) return;
+['promiseVid','reviewVid'].forEach(function(id){var v=document.getElementById(id); if(!v) return;
 v.muted=true; v.defaultMuted=true; v.setAttribute('muted',''); v.setAttribute('playsinline','');
 var go=function(){var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){});};
 go(); v.addEventListener('loadeddata',go); v.addEventListener('canplay',go);
 if('IntersectionObserver' in window){new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)go();else v.pause();});},{threshold:.15}).observe(v);}
 ['touchstart','click','scroll'].forEach(function(ev){window.addEventListener(ev,function once(){go();window.removeEventListener(ev,once);},{passive:true});});
 if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause();v.addEventListener('play',function(){v.pause();});}
-}catch(e){}})();
+});}catch(e){}})();
 </script>
 </body>
 </html>
