@@ -342,6 +342,7 @@ p { margin: 0; }
 .dl dt { display: inline; font-weight: 700; color: var(--ink); }
 .dl dd { display: inline; margin: 0; }
 .kids-art { max-width: 440px; margin-inline: auto; background: #C9E5FA; }
+.kids-art video { display: block; width: 100%; height: auto; }
 
 /* faq */
 .faq { max-width: 860px; margin-inline: auto; border-top: 1px solid var(--line); }
@@ -806,7 +807,6 @@ h2 { letter-spacing: -.018em; }
 /* trust photo (reviews) */
 .frame.trust-photo { max-width: 300px; background: #0A3157; }
 .tp-clip { overflow: hidden; display: block; }
-.trust-photo video { display: block; width: 100%; aspect-ratio: 756 / 1140; height: auto; object-fit: cover; object-position: 60% 50%; }
 .trust-photo img { display: block; width: 100%; aspect-ratio: 756 / 1140; height: auto; object-fit: cover; transform-origin: 50% 38%; animation: tpDrift 22s ease-in-out infinite alternate; }
 @keyframes tpDrift { from { transform: scale(1); } to { transform: scale(1.045); } }
 @media (prefers-reduced-motion: reduce) { .trust-photo img { animation: none; } }
@@ -1337,7 +1337,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visibl
         <span class="gb-txt"><b>Google Reviews</b><span class="g-stars" role="img" aria-label="5 out of 5 stars"></span><em class="gb-note">5.0 stars &middot; 395 reviews</em></span>
       </a>
       <div class="rv-feature">
-        <figure class="frame offset team-banner trust-photo"><div class="tp-clip"><video id="reviewVid" class="vid-still" poster="img/review-video-poster.jpg" width="1000" height="880" autoplay muted loop playsinline preload="auto" disablepictureinpicture aria-label="A friendly dentist checks a smiling child in the exam chair"><source src="img/review-video.mp4" type="video/mp4"><source src="img/review-video.webm" type="video/webm"></video></div></figure>
+        <figure class="frame offset team-banner trust-photo"><div class="tp-clip"><img src="img/trust-still.jpg" alt="A smiling patient beneath a badge reading: The dental team Bergen County families trust" width="756" height="1140" loading="lazy" decoding="async"></div></figure>
         <div class="rv-big" data-r>
           <div class="g-stars" role="img" aria-label="5 out of 5 stars"></div>
           <div class="rv-slides" id="rvSlides">
@@ -1367,7 +1367,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visibl
 
   <section class="section alt" id="kids" aria-labelledby="kids-h">
     <div class="wrap split">
-      <figure class="frame kids-art"><img src="img/kids-early.jpg" alt="A dentist gently examining a young child in a bright, welcoming treatment room" width="1380" height="1214" loading="lazy"></figure>
+      <figure class="frame kids-art"><video id="reviewVid" poster="img/review-video-poster.jpg" width="1000" height="880" autoplay muted loop playsinline preload="auto" disablepictureinpicture aria-label="A friendly dentist checks a smiling child in the exam chair"><source src="img/review-video.mp4" type="video/mp4"><source src="img/review-video.webm" type="video/webm"></video></figure>
       <div class="copy">
         <p class="eyebrow">For children</p>
         <h2 id="kids-h">Little smiles, early habits.</h2>
