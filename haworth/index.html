@@ -727,7 +727,7 @@ h2 { letter-spacing: -.018em; }
 @media (min-width: 761px) and (max-width: 900px) {
   .hero-inner { padding-top: calc(var(--hh, 0px) + clamp(28px, 6vh, 60px)) !important; }
 }
-@media (max-width: 400px) { .hero-hello { letter-spacing: .16em !important; font-size: .68rem !important; gap: 10px !important; white-space: nowrap; } .hero-hello::before { width: 20px !important; flex: 0 0 20px; } }
+@media (max-width: 400px) { .hero-hello { letter-spacing: .1em !important; font-size: 12px !important; gap: 10px !important; white-space: nowrap; } .hero-hello::before { width: 20px !important; flex: 0 0 20px; } }
 @media (max-width: 760px) {
   /* keep the original full-chair photo stage, now starting under the transparent header */
   /* phone: header is the same navy as the scrolled state from the first paint; photo starts right beneath it */
@@ -1060,6 +1060,51 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; point
 .stat b::after { animation: goldPulse 4.2s ease-in-out infinite; }
 .stat:nth-child(even) b::after { animation-delay: -2.1s; }
 @media (prefers-reduced-motion: reduce) { .stat b::after { animation: none; } }
+
+/* ===== hero impact (TEST) ===== */
+@media (min-width: 761px) {
+  .hero-bg .bgblur { display: none; }
+  .hero-bg .fg { left: 0; right: 0; width: 100%; max-width: none; -webkit-mask-image: none; mask-image: none; object-position: 62% 42%; transform-origin: 68% 46%; }
+  .hero-bg .slide.on .fg { animation: heroZoom 28s cubic-bezier(.22,.5,.28,1) both; will-change: scale, translate; }
+  @keyframes heroZoom { from { scale: 1.02; translate: 0 0; } to { scale: 1.16; translate: -1.4% -0.8%; } }
+  .hero-grade { background: linear-gradient(90deg, rgba(4,20,40,.94) 0%, rgba(4,20,40,.78) 30%, rgba(4,20,40,.28) 58%, rgba(4,20,40,0) 82%), linear-gradient(0deg, rgba(4,20,40,.6) 0%, rgba(4,20,40,0) 34%), linear-gradient(180deg, rgba(4,20,40,.5) 0%, rgba(4,20,40,0) 28%); }
+  .hero { align-items: center; }
+  .hero-inner { padding-block: clamp(72px, 14vh, 150px); }
+}
+.hero h1 { font-size: clamp(2.8rem, 6.2vw, 5.6rem); font-weight: 500; letter-spacing: -.025em; }
+.hero h1 .ln > span { transform: translateY(115%); filter: blur(8px); letter-spacing: .02em; opacity: 0; animation: heroLine 1.5s cubic-bezier(.16,.8,.2,1) forwards; }
+.hero h1 .ln:nth-child(1) > span { animation-delay: .7s; }
+.hero h1 .ln:nth-child(2) > span { animation-delay: 1.05s; }
+@keyframes heroLine { to { transform: none; filter: blur(0); letter-spacing: -.025em; opacity: 1; } }
+.hero .hero-hello { animation-delay: .35s; }
+.hero-rule { display: block; width: 0; height: 1px; margin: 1.6rem 0 0; background: linear-gradient(90deg, #C8A45E, rgba(200,164,94,0)); animation: heroRule 1.4s 1.9s cubic-bezier(.2,.7,.2,1) forwards; }
+@keyframes heroRule { to { width: min(260px, 40vw); } }
+.hero .lede { margin-top: 1.4rem; animation-delay: 2.1s; }
+.hero .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 26px; margin-top: 2rem; animation-delay: 2.4s; }
+.btn-hero { min-height: 58px; padding: 0 2.6rem; font-size: .95rem; letter-spacing: .1em; box-shadow: 0 0 0 1px rgba(200,164,94,.7), 0 18px 40px -14px rgba(0,0,0,.55); }
+.btn-hero:hover { box-shadow: 0 0 0 1px #C8A45E, 0 22px 44px -14px rgba(0,0,0,.65); transform: translateY(-2px); }
+.hero-call { color: #DCE8F4; text-decoration: none; font: 400 .98rem/1 var(--sans); letter-spacing: .02em; padding: 14px 0; border-bottom: 1px solid rgba(200,164,94,.6); }
+.hero-call:hover { color: #fff; border-bottom-color: #C8A45E; }
+.hero .hero-trust { display: inline-flex; align-items: center; gap: 12px; margin-top: 1.8rem; color: #C9D9EA; text-decoration: none; font: 400 .9rem/1.2 var(--sans); letter-spacing: .03em; animation-delay: 2.7s; }
+.hero .hero-trust .g-stars { width: 90px; height: 18px; background-size: 18px 18px; flex: none; }
+.hero .hero-trust:hover { color: #fff; }
+@media (max-width: 760px) { .hero .hide-m { display: none; } .hero-rule { margin-top: 1.2rem; } .hero .lede { margin-top: 1.1rem; } .hero .actions { margin-top: 1.5rem; gap: 6px 22px; } .hero .actions .btn-hero { width: 100%; } .hero .hero-trust { margin-top: 1.3rem; } }
+@media (prefers-reduced-motion: reduce) { .hero h1 .ln > span { animation: none; transform: none; filter: none; opacity: 1; letter-spacing: -.025em; } .hero-rule { animation: none; width: min(260px, 40vw); } .hero-bg .slide.on .fg { animation: none !important; } }
+
+/* ===== finishing touches (TEST) ===== */
+::selection { background: #0E4271; color: #fff; text-shadow: none; }
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+p, li, blockquote { text-wrap: pretty; }
+.btn:active, .btn-hero:active { transform: translateY(1px) scale(.985); transition-duration: .08s; }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid #C8A45E; outline-offset: 3px; border-radius: 4px; }
+/* legible small text (12px floor) */
+.stat span, .a-tag, .st-tag, .quote figcaption, .rv-rail .g-who b, .gbadge .gb-note { font-size: max(.75rem, 12px); }
+.hero .hero-hello { font-size: 12px; }
+.fp-badge span { font-size: 11px; }
+/* tap targets */
+.f-col a, .notes summary, footer .legal a { display: inline-flex; align-items: center; min-height: 32px; }
+.hero .hero-trust { min-height: 32px; }
+@media (max-width: 760px) { .f-col a, .notes summary { min-height: 44px; } .hero .hero-trust { min-height: 44px; } }
 </style>
 </head>
 <body>
@@ -1102,7 +1147,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; point
   <div class="hero-track" id="heroTrack">
   <section class="hero" aria-labelledby="h1">
     <div class="hero-bg" id="heroBg">
-      <div class="slide on"><img class="bgblur" src="img/seat-hd.jpg" alt=""><img class="fg" src="img/seat-hd.jpg" alt="A calm, modern treatment room at Haworth Dental with a reclined patient chair and overhead light" width="1600" height="1066" style="object-position:30% 50%"></div>
+      <div class="slide on"><img width="1600" height="1066" class="bgblur" src="img/seat-hd.jpg" alt=""><img class="fg" fetchpriority="high" decoding="async" src="img/seat-hd.jpg" alt="A calm, modern treatment room at Haworth Dental with a reclined patient chair and overhead light" width="1600" height="1066" style="object-position:30% 50%"></div>
     </div>
     <div class="hero-grade" aria-hidden="true"></div>
     <div class="hero-light" aria-hidden="true"></div>
@@ -1111,12 +1156,13 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; point
       <div class="hero-copy">
         <p class="hero-hello">Haworth, New Jersey &middot; Since 1966</p>
         <h1 id="h1"><span class="ln"><span>Care your family can trust,</span></span> <span class="ln"><span>right here in Haworth.</span></span></h1>
+        <i class="hero-rule" aria-hidden="true"></i>
         <p class="lede">From a child&rsquo;s first tooth to the years that follow, cared for by people who know your family&rsquo;s history.</p>
         <div class="actions">
-          <a class="btn btn-light" data-evt="book_click" href="https://local.demandforce.com/b/tallebel/schedule?d3cp_key=2431246F6E64656D616E642433625564704F786F4F42673057436E5A644354473031&amp;d3cp_query=5165527D793E9DDFBB7B8B31556CCF0913EC1F2206B9AAA5F0464DD5C326E080364EBA127B9293002A35686FAE990887C719C4C83C0D704323D6FBD0A6ABB425D2E490A70FA88EC45380B78C1FD6AEDCEF0327B44B1871E3B0CDAFEE47467FE64EDEEEBA6AC09DE018032C3F5D94F239A70DD650BF99638E83AC377516176F27BA124E31D4019726E3E7240BC099E576162E8DDF8CCDD2D894EB765844D8A47C042FCA8A4FBFDB8B40E59E360F64AE8A2D1A2E6C1FAC3C5086F93B3CE6B6AF1B353B752759571B8C26A6BA7ACFD837D7E22C4A86F1194CA4B7AB04C2F0177D6DC0F324575C1711E9&amp;legacyCampaign=1#new_template" target="_blank" rel="noopener">Book your family&rsquo;s visit</a>
-          <a class="btn btn-line" data-evt="call_click" href="tel:+12013841717">Call us</a>
+          <a class="btn btn-light btn-hero" data-evt="book_click" href="https://local.demandforce.com/b/tallebel/schedule?d3cp_key=2431246F6E64656D616E642433625564704F786F4F42673057436E5A644354473031&amp;d3cp_query=5165527D793E9DDFBB7B8B31556CCF0913EC1F2206B9AAA5F0464DD5C326E080364EBA127B9293002A35686FAE990887C719C4C83C0D704323D6FBD0A6ABB425D2E490A70FA88EC45380B78C1FD6AEDCEF0327B44B1871E3B0CDAFEE47467FE64EDEEEBA6AC09DE018032C3F5D94F239A70DD650BF99638E83AC377516176F27BA124E31D4019726E3E7240BC099E576162E8DDF8CCDD2D894EB765844D8A47C042FCA8A4FBFDB8B40E59E360F64AE8A2D1A2E6C1FAC3C5086F93B3CE6B6AF1B353B752759571B8C26A6BA7ACFD837D7E22C4A86F1194CA4B7AB04C2F0177D6DC0F324575C1711E9&amp;legacyCampaign=1#new_template" target="_blank" rel="noopener">Book your family&rsquo;s visit</a>
+          <a class="hero-call" data-evt="call_click" href="tel:+12013841717">or call (201) 384-1717</a>
         </div>
-        <p class="fine">New patients welcome &middot; Most major insurance accepted</p>
+        <a class="hero-trust fine" href="#reviews" aria-label="5.0 stars from 395 Google reviews. Read patient reviews"><span class="g-stars" role="img" aria-label="5 out of 5 stars"></span><span>5.0 &middot; 395 Google reviews<span class="hide-m"> &middot; New patients welcome</span></span></a>
       </div>
     </div>
     <i class="bar top" aria-hidden="true"></i><i class="bar bot" aria-hidden="true"></i>
@@ -1175,19 +1221,19 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; point
       <div class="deck-wrap" id="deck">
         <div class="deck" id="deckStack" role="group" aria-label="Services, shown as a stack of cards. Choose a card to bring it to the front.">
           <button type="button" class="dcard" data-i="0" data-title="Pediatric dentistry" data-reason="kids" data-text="Good dental habits are best fostered early. Routine check-ups, cleanings, fillings and caps for children, in a welcoming environment.">
-            <img src="img/pediatric-care.jpg" alt="" loading="lazy" style="object-position:50% 50%"><span class="dtitle">Pediatric dentistry</span></button>
+            <img width="800" height="532" src="img/pediatric-care.jpg" alt="" loading="lazy" style="object-position:50% 50%"><span class="dtitle">Pediatric dentistry</span></button>
           <button type="button" class="dcard" data-i="1" data-title="Orthodontics" data-reason="ortho" data-text="Braces, retainers and Invisalign for crooked teeth and improper bites.">
-            <img src="img/braces.jpg" alt="" loading="lazy" style="object-position:50% 55%"><span class="dtitle">Orthodontics</span></button>
+            <img width="720" height="900" src="img/braces.jpg" alt="" loading="lazy" style="object-position:50% 55%"><span class="dtitle">Orthodontics</span></button>
           <button type="button" class="dcard" data-i="2" data-title="Root canals" data-reason="root" data-text="When a filling or a cap cannot fix decay, a root canal saves the natural tooth.">
-            <img src="img/cluster.jpg" alt="" loading="lazy"><span class="dtitle">Root canals</span></button>
+            <img width="800" height="543" src="img/cluster.jpg" alt="" loading="lazy"><span class="dtitle">Root canals</span></button>
           <button type="button" class="dcard" data-i="3" data-title="Dental implants" data-reason="implant" data-text="Metal rods placed in the jawbone that anchor bridges and dentures on a stable foundation.">
-            <img src="img/implant.jpg" alt="" loading="lazy" style="object-position:50% 42%"><span class="dtitle">Dental implants</span></button>
+            <img width="600" height="750" src="img/implant.jpg" alt="" loading="lazy" style="object-position:50% 42%"><span class="dtitle">Dental implants</span></button>
           <button type="button" class="dcard" data-i="4" data-title="Cosmetic dentistry" data-reason="cosmetic" data-text="Teeth straightening, whitening, porcelain crowns and porcelain veneers.">
-            <img src="img/cosmetic-smile.jpg" alt="" loading="lazy" style="object-position:30% 30%"><span class="dtitle">Cosmetic dentistry</span></button>
+            <img width="800" height="1000" src="img/cosmetic-smile.jpg" alt="" loading="lazy" style="object-position:30% 30%"><span class="dtitle">Cosmetic dentistry</span></button>
           <button type="button" class="dcard" data-i="5" data-title="Check-ups, cleanings and fillings" data-reason="checkup" data-text="Routine exams, cleanings, fillings and caps for the whole family.">
             <img src="img/card-checkup.jpg" alt="" width="1003" height="1254" loading="lazy" style="object-position:50% 50%"><span class="dtitle">Check-ups, cleanings and fillings</span></button>
           <button type="button" class="dcard" data-i="6" data-title="Sleep apnea therapy" data-reason="sleep" data-text="Dental therapy for sleep apnea, offered alongside general care. Call to ask whether it fits you.">
-            <img src="img/sleep-appliance.jpg" alt="" loading="lazy" style="object-position:50% 35%"><span class="dtitle">Sleep apnea therapy</span></button>
+            <img width="680" height="852" src="img/sleep-appliance.jpg" alt="" loading="lazy" style="object-position:50% 35%"><span class="dtitle">Sleep apnea therapy</span></button>
         </div>
         <div class="deck-info">
           <p class="deck-count" id="deckCount" aria-hidden="true">1 / 7</p>
