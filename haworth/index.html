@@ -1052,21 +1052,14 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; point
 }
 @media (prefers-reduced-motion: reduce) { .deck-icon { animation: none; } }
 
-/* gold accents: gentle pulse */
+/* gold accents: gentle pulse (stats lines only) */
 @keyframes goldPulse {
   0%, 100% { filter: brightness(1) drop-shadow(0 0 0 rgba(200,164,94,0)); }
   50% { filter: brightness(1.28) saturate(1.15) drop-shadow(0 0 5px rgba(200,164,94,.65)); }
 }
-.steps li::before, .steps li:not(:last-child)::after, .fam-photo::before, .subhead-gold::after, #articles::before, #articles::after, #articles .tip figcaption::before,
-.ages::before, .ages .age:not(:last-child)::after, .ages .a-tag::before, .rv-rail .quote.greview:not(:last-child)::after, .rv-rail .quote.greview blockquote::before, .rv-rail .quote.greview blockquote::after, .rv-rail .g-head::before,
-.eyebrow::before, .section-head:not(.left) .eyebrow::after, .hero-hello::before, .hero .fine::before, .stats::after, .stat + .stat::before, .stat b::after, .deck-count::before,
-.checks li::before, .ins-grid::before, .ins-card + .ins-card::before, .carriers::before, footer::before, footer h3::before { animation: goldPulse 4.2s ease-in-out infinite; }
-.ages .age:nth-child(even)::after, .rv-rail .quote.greview:nth-child(even)::after, .stat:nth-child(even)::before, .ins-card + .ins-card::before, .checks li:nth-child(even)::before, .steps li:nth-child(even)::before, .steps li:nth-child(even)::after { animation-delay: -2.1s; }
-.eyebrow::before, .hero-hello::before, .deck-count::before { animation-delay: -1s; }
-@media (prefers-reduced-motion: reduce) { .steps li::before, .steps li:not(:last-child)::after, .fam-photo::before, .subhead-gold::after, #articles::before, #articles::after, #articles .tip figcaption::before,
-.ages::before, .ages .age:not(:last-child)::after, .ages .a-tag::before, .rv-rail .quote.greview:not(:last-child)::after, .rv-rail .quote.greview blockquote::before, .rv-rail .quote.greview blockquote::after, .rv-rail .g-head::before,
-.eyebrow::before, .section-head:not(.left) .eyebrow::after, .hero-hello::before, .hero .fine::before, .stats::after, .stat + .stat::before, .stat b::after, .deck-count::before,
-.checks li::before, .ins-grid::before, .ins-card + .ins-card::before, .carriers::before, footer::before, footer h3::before { animation: none; } }
+.stat b::after { animation: goldPulse 4.2s ease-in-out infinite; }
+.stat:nth-child(even) b::after { animation-delay: -2.1s; }
+@media (prefers-reduced-motion: reduce) { .stat b::after { animation: none; } }
 </style>
 </head>
 <body>
