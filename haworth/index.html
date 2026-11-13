@@ -1244,7 +1244,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; point
   </section>
 
   <section class="bleed" aria-labelledby="bleed-h">
-    <div class="bleed-img"><video poster="img/trust-video-poster.jpg" width="1236" height="1084" autoplay muted loop playsinline preload="metadata" aria-label="The dentist warmly shaking hands with a smiling patient"><source src="img/trust-video.webm" type="video/webm"><source src="img/trust-video.mp4" type="video/mp4"></video></div>
+    <div class="bleed-img"><video id="promiseVid" poster="img/trust-video-poster.jpg" width="1236" height="1084" autoplay muted loop playsinline preload="auto" disablepictureinpicture aria-label="The dentist warmly shaking hands with a smiling patient"><source src="img/trust-video.mp4" type="video/mp4"><source src="img/trust-video.webm" type="video/webm"></video></div>
     <div class="bleed-copy" data-r>
       <p class="eyebrow">Our promise</p>
       <h2 id="bleed-h">Unhurried, honest care from people who know your name.</h2>
@@ -1647,5 +1647,16 @@ document.querySelectorAll('[data-visit]').forEach(function (a) {
 })();
 </script>
 <script>(function(){if(location.hash)return;function top(){scrollTo(0,0)}top();addEventListener("load",function(){top();setTimeout(top,60)})})();</script>
+<script>
+(function(){try{
+var v=document.getElementById('promiseVid'); if(!v) return;
+v.muted=true; v.defaultMuted=true; v.setAttribute('muted',''); v.setAttribute('playsinline','');
+var go=function(){var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){});};
+go(); v.addEventListener('loadeddata',go); v.addEventListener('canplay',go);
+if('IntersectionObserver' in window){new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)go();else v.pause();});},{threshold:.15}).observe(v);}
+['touchstart','click','scroll'].forEach(function(ev){window.addEventListener(ev,function once(){go();window.removeEventListener(ev,once);},{passive:true});});
+if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause();v.addEventListener('play',function(){v.pause();});}
+}catch(e){}})();
+</script>
 </body>
 </html>
