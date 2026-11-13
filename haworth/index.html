@@ -1061,15 +1061,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; point
 .stat:nth-child(even) b::after { animation-delay: -2.1s; }
 @media (prefers-reduced-motion: reduce) { .stat b::after { animation: none; } }
 
-/* ===== hero impact (TEST) ===== */
-@media (min-width: 761px) {
-  .hero-bg .bgblur { display: none; }
-  .hero-bg .fg { left: 0; right: 0; width: 100%; max-width: none; -webkit-mask-image: none; mask-image: none; object-position: 62% 42%; transform-origin: 60% 40%; }
-  .hero-bg .slide.on .fg { animation: kb 18s cubic-bezier(.25, .6, .3, 1) both; will-change: scale; }
-  .hero-grade { background: linear-gradient(90deg, rgba(4,20,40,.94) 0%, rgba(4,20,40,.78) 30%, rgba(4,20,40,.28) 58%, rgba(4,20,40,0) 82%), linear-gradient(0deg, rgba(4,20,40,.6) 0%, rgba(4,20,40,0) 34%), linear-gradient(180deg, rgba(4,20,40,.5) 0%, rgba(4,20,40,0) 28%); }
-  .hero { align-items: center; }
-  .hero-inner { padding-block: clamp(72px, 14vh, 150px); }
-}
+/* ===== hero impact ===== */
 .hero h1 { font-size: clamp(2.8rem, 6.2vw, 5.6rem); font-weight: 500; letter-spacing: -.025em; }
 .hero h1 .ln > span { transform: translateY(115%); filter: blur(8px); letter-spacing: .02em; opacity: 0; animation: heroLine 1.5s cubic-bezier(.16,.8,.2,1) forwards; }
 .hero h1 .ln:nth-child(1) > span { animation-delay: .7s; }
