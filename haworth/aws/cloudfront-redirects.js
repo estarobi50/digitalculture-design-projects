@@ -1,5 +1,5 @@
 // CloudFront Function (cloudfront-js-2.0), event type: Viewer request.
-// 1) www -> apex  2) every old *.php page of the previous site -> the matching
+// 1) www -> apex  2) every *.php address search engines already know -> the matching
 // section of the new single-page site (301 keeps search rankings)
 // 3) any other extension-less or .php URL -> home page.
 // Real files (/img/..., /fonts/..., *.html, *.xml, *.txt, *.ico, ...) pass through.

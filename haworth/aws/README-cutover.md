@@ -12,10 +12,10 @@ Upload to S3 (bucket root): everything in `haworth-s3-upload.zip` (it already co
 
 ## 2. Verify
 - `https://www.haworthdental.com/` goes to `https://haworthdental.com/`
-- `https://haworthdental.com/estimate.php` goes to `/#insurance`; `/meet-the-doctors.php` goes to `/#about` (the old site used .php URLs; all 38 are listed in `old-site-urls.txt`)
+- `https://haworthdental.com/estimate.php` goes to `/#insurance`; `/meet-the-doctors.php` goes to `/#about` (every known `.php` address is listed in `redirect-urls.txt`)
 - `https://haworthdental.com/sitemap.xml` and `/robots.txt` load.
 
 ## 3. Google
 - Search Console: add the domain property, submit `https://haworthdental.com/sitemap.xml`, watch Pages/crawl errors for 4 weeks.
 - Google Business Profile: confirm the website field is `https://haworthdental.com/`.
-- Add more old URLs to the `MAP` in the function if Search Console shows 404s that used to rank.
+- Add more addresses to the `MAP` in the function if Search Console shows 404s that used to rank.
