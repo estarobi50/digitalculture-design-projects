@@ -1097,6 +1097,33 @@ a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visibl
 .f-col a, .notes summary, footer .legal a { display: inline-flex; align-items: center; min-height: 32px; }
 .hero .hero-trust { min-height: 32px; }
 @media (max-width: 760px) { .f-col a, .notes summary { min-height: 44px; } .hero .hero-trust { min-height: 44px; } }
+
+/* ===== hero motion: slow push-and-drift, full-bleed (after anchoragemgmt.com) ===== */
+@keyframes heroPush {
+  0%   { transform: scale(1.02) translate3d(0, 0, 0) rotate(0deg); }
+  50%  { transform: scale(1.22) translate3d(-4%, -1%, 0) rotate(-1.1deg); }
+  100% { transform: scale(1.02) translate3d(0, 0, 0) rotate(0deg); }
+}
+@keyframes heroPushM {
+  0%   { transform: scale(1.02) translate3d(0, 0, 0); }
+  50%  { transform: scale(1.12) translate3d(-3%, -1%, 0); }
+  100% { transform: scale(1.02) translate3d(0, 0, 0); }
+}
+@keyframes heroIn { from { opacity: 0; } to { opacity: 1; } }
+.hero-bg::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: .09; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+@media (min-width: 761px) {
+  .hero-grade { background: linear-gradient(90deg, rgba(5,24,46,.92) 0%, rgba(5,24,46,.74) 36%, rgba(5,24,46,.2) 62%, rgba(5,24,46,0) 100%), linear-gradient(0deg, rgba(5,24,46,.5) 0%, rgba(5,24,46,0) 30%); }
+  .hero-bg .bgblur { display: none; }
+  .hero-bg .fg { left: 0; right: 0; width: 100%; max-width: none; -webkit-mask-image: none; mask-image: none;
+    object-position: 68% 48%; transform-origin: 72% 62%; translate: none; scale: none;
+    filter: saturate(1.08) contrast(1.05) brightness(1.02); will-change: transform; }
+  .hero-bg .slide.on .fg { animation: heroIn 1.6s ease-out both, heroPush 56s ease-in-out 0s infinite; }
+}
+@media (max-width: 760px) {
+  .hero-bg .slide.on .fg { animation: heroIn 1.4s ease-out both, heroPushM 56s ease-in-out 0s infinite; scale: none; will-change: transform; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-bg .slide.on .fg { animation: none !important; transform: none; } }
 </style>
 </head>
 <body>
