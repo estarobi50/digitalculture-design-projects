@@ -12,7 +12,7 @@ Upload to S3 (bucket root): everything in `haworth-s3-upload.zip` (it already co
 
 ## 2. Verify
 - `https://www.haworthdental.com/` goes to `https://haworthdental.com/`
-- `https://haworthdental.com/estimate` goes to `/#insurance`; `/meet-the-doctors` goes to `/#about`
+- `https://haworthdental.com/estimate.php` goes to `/#insurance`; `/meet-the-doctors.php` goes to `/#about` (the old site used .php URLs; all 37 are listed in `old-site-urls.txt`)
 - `https://haworthdental.com/sitemap.xml` and `/robots.txt` load.
 
 ## 3. Google
